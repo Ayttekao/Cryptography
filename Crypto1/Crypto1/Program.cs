@@ -19,7 +19,7 @@ namespace Crypto1
                 {Convert.ToByte("01", 2), Convert.ToByte("11", 2)},
                 {Convert.ToByte("00", 2), Convert.ToByte("11", 2)}
             };
-            var result2 = Replacement(Convert.ToUInt64("0110", 2), dictionary, 2);
+            var result2 = Replacement(Convert.ToUInt64("1110", 2), dictionary, 2);
             Console.WriteLine(Convert.ToString((long)result2, 2));
         }
     }

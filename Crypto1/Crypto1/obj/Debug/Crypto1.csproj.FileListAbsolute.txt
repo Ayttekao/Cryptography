@@ -4,3 +4,9 @@ C:\Users\Ayttekao\Desktop\ALL\Crypto1\Crypto1\obj\Debug\Crypto1.csproj.AssemblyR
 C:\Users\Ayttekao\Desktop\ALL\Crypto1\Crypto1\obj\Debug\Crypto1.csproj.CoreCompileInputs.cache
 C:\Users\Ayttekao\Desktop\ALL\Crypto1\Crypto1\obj\Debug\Crypto1.exe
 C:\Users\Ayttekao\Desktop\ALL\Crypto1\Crypto1\obj\Debug\Crypto1.pdb
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto1\bin\Debug\Crypto1.exe
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto1\bin\Debug\Crypto1.pdb
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto1\obj\Debug\Crypto1.csproj.AssemblyReference.cache
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto1\obj\Debug\Crypto1.csproj.CoreCompileInputs.cache
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto1\obj\Debug\Crypto1.exe
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto1\obj\Debug\Crypto1.pdb
