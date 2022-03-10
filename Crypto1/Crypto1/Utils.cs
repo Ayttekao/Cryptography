@@ -56,6 +56,8 @@ namespace Crypto1
         /// <returns>Replaced array</returns>
         /// <exception cref="ArgumentNullException">Occurs when a null permutationRule has been received</exception>
         /// <exception cref="ArgumentException">Occurs when the number of groups in the value is not a multiple group size</exception>
+        /// <exception cref="KeyNotFoundException">Occurs when the value not found in permutation rule</exception>
+
         public static UInt64 Replacement(UInt64 src, Dictionary<Byte, Byte> permutationRule, Byte groupSize)
         {
             UInt64 result = 0;
@@ -81,8 +83,8 @@ namespace Crypto1
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException(Convert.ToString((long)bitsToPermute, 2) +
-                                                          " value not found in permutation rule");
+                    throw new KeyNotFoundException(Convert.ToString((long)bitsToPermute, 2) +
+                                                   " value not found in permutation rule");
                 }
             }
             
