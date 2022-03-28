@@ -4,7 +4,7 @@ namespace Crypto1.Interfaces
 {
     public interface ICypherAlgorithm
     {
-        Byte[] Encrypt(Byte[] encryptBlock);
-        Byte[] Decrypt(Byte[] decryptBlock);
+        Byte[] Encrypt(Byte[] inputBlock);
+        Byte[] Decrypt(Byte[] inputBlock);
     }
 }

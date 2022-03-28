@@ -4,6 +4,6 @@ namespace Crypto1.Interfaces
 {
     public interface IRoundKeyGen
     {
-        Byte[] Generate(Byte[] inputKey);
+        Byte[,] Generate(Byte[] inputKey);
     }
 }

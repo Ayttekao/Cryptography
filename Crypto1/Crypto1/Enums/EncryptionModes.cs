@@ -1,4 +1,4 @@
-namespace Crypto1
+namespace Crypto1.Enums
 {
     public enum EncryptionModes
     {
