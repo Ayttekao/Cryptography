@@ -1,6 +1,6 @@
 namespace Crypto1.Enums
 {
-    public enum EncryptionModes
+    public enum EncryptionMode
     {
         ECB,
         CBC,

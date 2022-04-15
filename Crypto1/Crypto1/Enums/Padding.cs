@@ -1,6 +1,6 @@
 namespace Crypto1.Enums
 {
-    public enum Paddings
+    public enum Padding
     {
         PKCS7,
         NONE

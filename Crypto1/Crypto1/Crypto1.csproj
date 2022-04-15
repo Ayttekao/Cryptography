@@ -39,8 +39,8 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Enums\EncryptionModes.cs" />
-        <Compile Include="Enums\Paddings.cs" />
+        <Compile Include="Enums\EncryptionMode.cs" />
+        <Compile Include="Enums\Padding.cs" />
         <Compile Include="Interfaces\ICypherAlgorithm.cs" />
         <Compile Include="Interfaces\IEncryptionTransformation.cs" />
         <Compile Include="Interfaces\IRoundKeyGen.cs" />
