@@ -149,9 +149,9 @@ namespace Crypto1
                     var previousBlock = new Byte[BlockSize];
                     var currentBlock = new Byte[BlockSize];
                     Array.Copy(_initializationVector, previousBlock, previousBlock.Length);
-                    for (var i = 0; i < inputBlock.Length / BlockSize; i++)
+                    for (var count = 0; count < inputBlock.Length / BlockSize; count++)
                     {
-                        Array.Copy(inputBlock, i * BlockSize, currentBlock, 0, BlockSize);
+                        Array.Copy(inputBlock, count * BlockSize, currentBlock, 0, BlockSize);
                         blocks.Add(Xor(previousBlock, Algorithm.Decrypt(currentBlock)));
                         Array.Copy(currentBlock, previousBlock, BlockSize);
                     }
@@ -162,9 +162,9 @@ namespace Crypto1
                     var previousBlock = new Byte[BlockSize];
                     var currentBlock = new Byte[BlockSize];
                     Array.Copy(_initializationVector, previousBlock, previousBlock.Length);
-                    for (var i = 0; i < inputBlock.Length / BlockSize; i++)
+                    for (var count = 0; count < inputBlock.Length / BlockSize; count++)
                     {
-                        Array.Copy(inputBlock, i * BlockSize, currentBlock, 0, BlockSize);
+                        Array.Copy(inputBlock, count * BlockSize, currentBlock, 0, BlockSize);
                         blocks.Add(Xor(Algorithm.Encrypt(previousBlock), currentBlock));
                         Array.Copy(currentBlock, previousBlock, BlockSize);
                     }
