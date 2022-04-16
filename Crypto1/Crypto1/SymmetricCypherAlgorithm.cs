@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Crypto1.Enums;
 using Crypto1.Interfaces;
 
@@ -10,16 +11,27 @@ namespace Crypto1
         private const Int32 BlockSize = 8;
         private readonly EncryptionMode _encryptionMode;
         private readonly Byte[] _initializationVector;
+        private readonly String _valueForHash;
         private ICypherAlgorithm Algorithm { get; set; }
 
-        public SymmetricCypherAlgorithm(EncryptionMode encryptionMode, Byte[] initializationVector, ICypherAlgorithm algorithm)
+        public SymmetricCypherAlgorithm(EncryptionMode encryptionMode, Byte[] initializationVector,
+            ICypherAlgorithm algorithm)
         {
             _encryptionMode = encryptionMode;
             _initializationVector = initializationVector;
             Algorithm = algorithm;
         }
         
-        public SymmetricCypherAlgorithm(Byte[] key, EncryptionMode mode, Byte[] initializationVector = null,
+        public SymmetricCypherAlgorithm(EncryptionMode encryptionMode, Byte[] initializationVector,
+            ICypherAlgorithm algorithm, String valueForHash)
+        {
+            _valueForHash = valueForHash;
+            _encryptionMode = encryptionMode;
+            _initializationVector = initializationVector;
+            Algorithm = algorithm;
+        }
+        
+        public SymmetricCypherAlgorithm(Byte[] key, EncryptionMode mode, Byte[] initializationVector, 
             params object[] list)
         {
             
@@ -145,7 +157,26 @@ namespace Crypto1
                     break;
                 }
                 case EncryptionMode.RD_H:
+                {
+                    var curBlock = new byte[BlockSize];
+                    var deltaArr = new byte[8];
+                    Array.Copy(_initializationVector, 8, deltaArr, 0, BlockSize);
+                    var copyInitializationVector = new byte[8];
+                    Array.Copy(_initializationVector, 0, copyInitializationVector, 0, BlockSize);
+                    var initializationVector = BitConverter.ToUInt64(copyInitializationVector, 0);
+                    var delta = BitConverter.ToUInt64(deltaArr, 0);
+                    blocks.Add(Algorithm.Encrypt(copyInitializationVector));
+                    blocks.Add(Xor(copyInitializationVector, PadBuffer(BitConverter.GetBytes(_valueForHash.GetHashCode()))));
+                    
+                    for (var count = 0; count < result.Length / BlockSize; count++)
+                    {
+                        initializationVector += delta;
+                        copyInitializationVector = BitConverter.GetBytes(initializationVector);
+                        Array.Copy(result, count * BlockSize, curBlock, 0, BlockSize);
+                        blocks.Add(Algorithm.Encrypt(Xor(copyInitializationVector, curBlock)));
+                    }
                     break;
+                }
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -248,7 +279,29 @@ namespace Crypto1
                     break;
                 }
                 case EncryptionMode.RD_H:
+                {
+                    var curBlock = new byte[BlockSize];
+                    var deltaArr = new byte[8];
+                    Array.Copy(_initializationVector, _initializationVector.Length / 2, deltaArr, 0, BlockSize);
+                    var delta = BitConverter.ToUInt64(deltaArr, 0);
+                    Array.Copy(inputBlock, 0, curBlock, 0, BlockSize);
+                    var copyInitializationVector = Algorithm.Decrypt(curBlock);
+                    var initializationVector = BitConverter.ToUInt64(copyInitializationVector, 0);
+                    Array.Copy(inputBlock, 8, curBlock, 0, BlockSize);
+                    if (Xor(copyInitializationVector,
+                                PadBuffer(BitConverter.GetBytes(_valueForHash.GetHashCode())))
+                            .SequenceEqual(curBlock))
+                    {
+                        for (var count = 2; count < inputBlock.Length / BlockSize; count++)
+                        {
+                            initializationVector += delta;
+                            copyInitializationVector = BitConverter.GetBytes(initializationVector);
+                            Array.Copy(inputBlock, count * BlockSize, curBlock, 0, BlockSize);
+                            blocks.Add(Xor(Algorithm.Decrypt(curBlock), copyInitializationVector));
+                        }
+                    }
                     break;
+                }
                 default:
                     throw new ArgumentOutOfRangeException();
             }
