@@ -55,6 +55,7 @@ namespace Crypto1
                 case EncryptionMode.ECB:
                 {
                     Byte[] block = new Byte[BlockSize];
+                    
                     for (var count = 0; count < result.Length / BlockSize; count++)
                     {
                         Array.Copy(result, count * BlockSize, block, 0, BlockSize);
@@ -68,6 +69,7 @@ namespace Crypto1
                     var previousBlock = new Byte[BlockSize];
                     var currentBlock = new Byte[BlockSize];
                     Array.Copy(_initializationVector, previousBlock, previousBlock.Length);
+                    
                     for (var count = 0; count < result.Length / BlockSize; count++)
                     {
                         Array.Copy(result, count * BlockSize, currentBlock, 0, BlockSize);
@@ -81,6 +83,7 @@ namespace Crypto1
                     var previousBlock = new Byte[BlockSize];
                     var currentBlock = new Byte[BlockSize];
                     Array.Copy(_initializationVector, previousBlock, previousBlock.Length);
+                    
                     for (var count = 0; count < result.Length / BlockSize; count++)
                     {
                         Array.Copy(result, count * BlockSize, currentBlock, 0, BlockSize);
@@ -94,6 +97,7 @@ namespace Crypto1
                     var previousBlock = new Byte[BlockSize];
                     var currentBlock = new Byte[BlockSize];
                     Array.Copy(_initializationVector, previousBlock, previousBlock.Length);
+                    
                     for (var count = 0; count < result.Length / BlockSize; count++)
                     {
                         Array.Copy(result, count * BlockSize, currentBlock, 0, BlockSize);
@@ -109,6 +113,7 @@ namespace Crypto1
                     _initializationVector.CopyTo(copyInitializationVector, 0);
                     var counter = BitConverter.ToUInt64(copyInitializationVector, 0);
                     var currentBlock = new Byte[BlockSize];
+                    
                     for (var count = 0; count < result.Length / BlockSize; count++)
                     {
                         Array.Copy(result, count * BlockSize, currentBlock, 0, BlockSize);
@@ -119,7 +124,26 @@ namespace Crypto1
                     break;
                 }
                 case EncryptionMode.RD:
+                {
+                    var curBlock = new byte[BlockSize];
+                    const int numberLowBits = 8;
+                    var deltaArr = new byte[numberLowBits];
+                    Array.Copy(_initializationVector, numberLowBits, deltaArr, 0, BlockSize);
+                    var copyInitializationVector = new byte[numberLowBits];
+                    Array.Copy(_initializationVector, 0, copyInitializationVector, 0, BlockSize);
+                    var initializationVector = BitConverter.ToUInt64(copyInitializationVector, 0);
+                    var delta = BitConverter.ToUInt64(deltaArr, 0);
+                    blocks.Add(Algorithm.Encrypt(copyInitializationVector));
+                    
+                    for (var count = 0; count < result.Length / BlockSize; count++)
+                    {
+                        Array.Copy(result, count * BlockSize, curBlock, 0, BlockSize);
+                        blocks.Add(Algorithm.Encrypt(Xor(copyInitializationVector, curBlock)));
+                        initializationVector += delta;
+                        copyInitializationVector = BitConverter.GetBytes(initializationVector);
+                    }
                     break;
+                }
                 case EncryptionMode.RD_H:
                     break;
                 default:
@@ -137,6 +161,7 @@ namespace Crypto1
                 case EncryptionMode.ECB:
                 {
                     var block = new Byte[BlockSize];
+                    
                     for (var count = 0; count < inputBlock.Length / BlockSize; count++)
                     {
                         Array.Copy(inputBlock, count * BlockSize, block, 0, BlockSize);
@@ -149,6 +174,7 @@ namespace Crypto1
                     var previousBlock = new Byte[BlockSize];
                     var currentBlock = new Byte[BlockSize];
                     Array.Copy(_initializationVector, previousBlock, previousBlock.Length);
+                    
                     for (var count = 0; count < inputBlock.Length / BlockSize; count++)
                     {
                         Array.Copy(inputBlock, count * BlockSize, currentBlock, 0, BlockSize);
@@ -162,6 +188,7 @@ namespace Crypto1
                     var previousBlock = new Byte[BlockSize];
                     var currentBlock = new Byte[BlockSize];
                     Array.Copy(_initializationVector, previousBlock, previousBlock.Length);
+                    
                     for (var count = 0; count < inputBlock.Length / BlockSize; count++)
                     {
                         Array.Copy(inputBlock, count * BlockSize, currentBlock, 0, BlockSize);
@@ -175,6 +202,7 @@ namespace Crypto1
                     var previousBlock = new Byte[BlockSize];
                     var currentBlock = new Byte[BlockSize];
                     Array.Copy(_initializationVector, previousBlock, previousBlock.Length);
+                    
                     for (var count = 0; count < inputBlock.Length / BlockSize; count++)
                     {
                         Array.Copy(inputBlock, count * BlockSize, currentBlock, 0, BlockSize);
@@ -190,6 +218,7 @@ namespace Crypto1
                     _initializationVector.CopyTo(copyInitializationVector, 0);
                     var counter = BitConverter.ToUInt64(copyInitializationVector, 0);
                     var currentBlock = new Byte[BlockSize];
+                    
                     for (var count = 0; count < inputBlock.Length / BlockSize; count++)
                     {
                         Array.Copy(inputBlock, count * BlockSize, currentBlock, 0, BlockSize);
@@ -200,7 +229,24 @@ namespace Crypto1
                     break;
                 }
                 case EncryptionMode.RD:
+                {
+                    var curBlock = new byte[BlockSize];
+                    var deltaArr = new byte[8];
+                    Array.Copy(_initializationVector, _initializationVector.Length / 2, deltaArr, 0, BlockSize);
+                    var delta = BitConverter.ToUInt64(deltaArr, 0);
+                    Array.Copy(inputBlock, 0, curBlock, 0, BlockSize);
+                    var copyInitializationVector = Algorithm.Decrypt(curBlock);
+                    var initializationVector = BitConverter.ToUInt64(copyInitializationVector, 0);
+                    
+                    for (var count = 1; count < inputBlock.Length / BlockSize; count++)
+                    {
+                        Array.Copy(inputBlock, count * BlockSize, curBlock, 0, BlockSize);
+                        blocks.Add(Xor(Algorithm.Decrypt(curBlock), copyInitializationVector));
+                        initializationVector += delta;
+                        copyInitializationVector = BitConverter.GetBytes(initializationVector);
+                    }
                     break;
+                }
                 case EncryptionMode.RD_H:
                     break;
                 default:
