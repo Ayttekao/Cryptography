@@ -39,15 +39,28 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Enums\EncryptionMode.cs" />
-        <Compile Include="Enums\Padding.cs" />
-        <Compile Include="Interfaces\ICypherAlgorithm.cs" />
-        <Compile Include="Interfaces\IEncryptionTransformation.cs" />
-        <Compile Include="Interfaces\IRoundKeyGen.cs" />
+        <Compile Include="CypherAlgorithm\DES.cs" />
+        <Compile Include="CypherAlgorithm\FeistelNetwork.cs" />
+        <Compile Include="CypherAlgorithm\ICypherAlgorithm.cs" />
+        <Compile Include="CypherAlgorithm\SymmetricCypherAlgorithm.cs" />
+        <Compile Include="CipherModes\CBC.cs" />
+        <Compile Include="CipherModes\CFB.cs" />
+        <Compile Include="CipherModes\CTR.cs" />
+        <Compile Include="CipherModes\ECB.cs" />
+        <Compile Include="CipherModes\CipherMode.cs" />
+        <Compile Include="CipherModes\CipherModeBase.cs" />
+        <Compile Include="CipherModes\OFB.cs" />
+        <Compile Include="CipherModes\RD.cs" />
+        <Compile Include="CipherModes\RDH.cs" />
+        <Compile Include="EncryptionTransformation\Encryption.cs" />
+        <Compile Include="EncryptionTransformation\IEncryptionTransformation.cs" />
+        <Compile Include="Padding\Padder.cs" />
+        <Compile Include="Padding\PaddingType.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="SymmetricCypherAlgorithm.cs" />
-        <Compile Include="Utils.cs" />
+        <Compile Include="RoundKey\IRoundKeyGen.cs" />
+        <Compile Include="RoundKey\RoundKeysGenerator.cs" />
+        <Compile Include="Stuff\Utils.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

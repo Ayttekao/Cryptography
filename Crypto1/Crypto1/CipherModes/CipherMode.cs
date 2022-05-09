@@ -1,6 +1,6 @@
-namespace Crypto1.Enums
+namespace Crypto1.CipherModes
 {
-    public enum EncryptionMode
+    public enum CipherMode
     {
         ECB,
         CBC,
@@ -8,6 +8,6 @@ namespace Crypto1.Enums
         OFB,
         CTR,
         RD,
-        RD_H
+        RDH
     }
 }

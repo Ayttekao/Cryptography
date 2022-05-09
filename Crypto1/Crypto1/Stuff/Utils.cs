@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Crypto1
+namespace Crypto1.Stuff
 {
     /// <summary>
     /// Helper Methods
     /// </summary>
     internal static class Utils
     {
+        /*
+         * 1 - Реализуйте функцию для выполнения перестановки битов в рамках переданного значения (тип - массив байтов).
+         * Параметры функции: значение для перестановки, правило перестановки (P-блок).
+         */
+    
         /// <summary>
         /// Method of permuting bits within the passed value 
         /// </summary>
@@ -46,6 +51,23 @@ namespace Crypto1
             }
             return result;
         }
+        
+        public static byte[] Permutation(byte[] permRule, byte[] block)
+        {
+            ulong res = 0;
+            var n = BitConverter.ToUInt64(block, 0);
+            for (var i = 0; i < permRule.Length; i++)
+            {
+                res |= ((n >> (permRule[i] - 1) & 1) << i);
+            }
+            return BitConverter.GetBytes(res);
+        }
+        
+        /*
+         * 2 - Реализуйте функцию для выполнения замены группы битов размера k на другую группу битов размером k в
+         * рамках переданного значения (тип - массив байтов). Параметры функции: значение для перестановки, правило
+         * перестановки (S-блок), размер входной группы k (в битах).
+         */
 
         /// <summary>
         /// Method for replacing a group of bits of size k 
