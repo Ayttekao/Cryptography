@@ -1,74 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
     <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{0819F0F2-B55F-4776-A867-033EDBE089F7}</ProjectGuid>
         <OutputType>Exe</OutputType>
-        <AppDesignerFolder>Properties</AppDesignerFolder>
-        <RootNamespace>Crypto1</RootNamespace>
-        <AssemblyName>Crypto1</AssemblyName>
-        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-        <FileAlignment>512</FileAlignment>
-        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <TargetFramework>net5.0</TargetFramework>
+        <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
-        <Optimize>false</Optimize>
-        <OutputPath>bin\Debug\</OutputPath>
-        <DefineConstants>DEBUG;TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-        <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugType>pdbonly</DebugType>
-        <Optimize>true</Optimize>
-        <OutputPath>bin\Release\</OutputPath>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-    </PropertyGroup>
-    <ItemGroup>
-        <Reference Include="System" />
-        <Reference Include="System.Core" />
-        <Reference Include="System.Data" />
-        <Reference Include="System.Xml" />
-    </ItemGroup>
-    <ItemGroup>
-        <Compile Include="CypherAlgorithm\DES.cs" />
-        <Compile Include="CypherAlgorithm\FeistelNetwork.cs" />
-        <Compile Include="CypherAlgorithm\ICypherAlgorithm.cs" />
-        <Compile Include="CypherAlgorithm\SymmetricCypherAlgorithm.cs" />
-        <Compile Include="CipherModes\CBC.cs" />
-        <Compile Include="CipherModes\CFB.cs" />
-        <Compile Include="CipherModes\CTR.cs" />
-        <Compile Include="CipherModes\ECB.cs" />
-        <Compile Include="CipherModes\CipherMode.cs" />
-        <Compile Include="CipherModes\CipherModeBase.cs" />
-        <Compile Include="CipherModes\OFB.cs" />
-        <Compile Include="CipherModes\RD.cs" />
-        <Compile Include="CipherModes\RDH.cs" />
-        <Compile Include="EncryptionTransformation\Encryption.cs" />
-        <Compile Include="EncryptionTransformation\IEncryptionTransformation.cs" />
-        <Compile Include="Padding\Padder.cs" />
-        <Compile Include="Padding\PaddingType.cs" />
-        <Compile Include="Program.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="RoundKey\IRoundKeyGen.cs" />
-        <Compile Include="RoundKey\RoundKeysGenerator.cs" />
-        <Compile Include="Stuff\Utils.cs" />
-    </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-         Other similar extension points exist, see Microsoft.Common.targets.
-    <Target Name="BeforeBuild">
-    </Target>
-    <Target Name="AfterBuild">
-    </Target>
-    -->
 
 </Project>
