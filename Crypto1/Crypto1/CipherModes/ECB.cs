@@ -1,15 +1,19 @@
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Crypto1.CypherAlgorithm;
+using Crypto1.Padding;
 
 namespace Crypto1.CipherModes
 {
     public class ECB : CipherModeBase
     {
-        public ECB(ICypherAlgorithm algorithm, byte[] initializationVector) : base(algorithm, initializationVector) { }
+        public ECB(ICypherAlgorithm algorithm, Byte[] initializationVector, PaddingType paddingType, Int32 blockSize) :
+            base(algorithm, initializationVector, paddingType, blockSize) { }
 
-        public override byte[] Encrypt(byte[] inputBlock)
+        public override Byte[] Encrypt(Byte[] inputBlock)
         {
-            var result = PadBuffer(inputBlock);
+            var result = Stuffer.PadBuffer(inputBlock);
             var blocks = InitList(result.Length);
             var blockList = GetListFromArray(result);
                     
@@ -18,10 +22,10 @@ namespace Crypto1.CipherModes
                 blocks[count] = Algorithm.Encrypt(blockList[count])
             );
             
-            return ConvertListToArray(blocks);
+            return blocks.SelectMany(x => x.ToArray()).ToArray();
         }
 
-        public override byte[] Decrypt(byte[] inputBlock)
+        public override Byte[] Decrypt(Byte[] inputBlock)
         {
             var blocks = InitList(inputBlock.Length);
             var blockList = GetListFromArray(inputBlock);
@@ -31,7 +35,7 @@ namespace Crypto1.CipherModes
                 blocks[i] = Algorithm.Decrypt(blockList[i])
             );
             
-            return RemovePadding(blocks);
+            return Stuffer.RemovePadding(blocks);
         }
     }
 }

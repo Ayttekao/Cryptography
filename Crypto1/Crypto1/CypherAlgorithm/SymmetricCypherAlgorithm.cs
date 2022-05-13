@@ -1,5 +1,6 @@
 using System;
 using Crypto1.CipherModes;
+using Crypto1.Padding;
 
 namespace Crypto1.CypherAlgorithm
 {
@@ -25,52 +26,33 @@ namespace Crypto1.CypherAlgorithm
         {
             Algorithm = algorithm;
 
-            switch (cipherMode)
+            _cipherModeBase = cipherMode switch
             {
-                case CipherMode.ECB:
-                {
-                    _cipherModeBase = new ECB(Algorithm, initializationVector);
-                    break;
-                }
-                case CipherMode.CBC:
-                {
-                    _cipherModeBase = new CBC(Algorithm, initializationVector);
-                    break;
-                }
-                case CipherMode.CFB:
-                {
-                    _cipherModeBase = new CFB(Algorithm, initializationVector);
-                    break;
-                }
-                case CipherMode.OFB:
-                {
-                    _cipherModeBase = new OFB(Algorithm, initializationVector);
-                    break;
-                }
-                case CipherMode.CTR:
-                {
-                    _cipherModeBase = new CTR(Algorithm, initializationVector);
-                    break;
-                }
-                case CipherMode.RD:
-                {
-                    _cipherModeBase = new RD(Algorithm, initializationVector);
-                    break;
-                }
-                case CipherMode.RDH:
-                {
-                    _cipherModeBase = new RDH(Algorithm, initializationVector, valueForHash);
-                    break;
-                }
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                CipherMode.ECB => new ECB(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
+                CipherMode.CBC => new CBC(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
+                CipherMode.CFB => new CFB(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
+                CipherMode.OFB => new OFB(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
+                CipherMode.CTR => new CTR(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
+                CipherMode.RD => new RD(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
+                CipherMode.RDH => new RDH(Algorithm, initializationVector, valueForHash, PaddingType.ANSI_X_923, _blockSize),
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
         
         public SymmetricCypherAlgorithm(Byte[] key, CipherMode mode, Byte[] initializationVector, 
             params object[] list)
         {
             
+        }
+
+        public Byte[] Encrypt(Byte[] inputBlock)
+        {
+            return _cipherModeBase.Encrypt(inputBlock);
+        }
+
+        public Byte[] Decrypt(Byte[] inputBlock)
+        {
+            return _cipherModeBase.Decrypt(inputBlock);
         }
 
         public void Encrypt(Byte[] inputBlock, ref Byte[] encryptBlock)
@@ -86,7 +68,7 @@ namespace Crypto1.CypherAlgorithm
                 ? throw new ArgumentNullException(nameof(decryptBlock))
                 : _cipherModeBase.Decrypt(inputBlock);
         }
-        
+
         public void Encrypt(String inputFile, String outputFile)
         {
             
@@ -95,16 +77,6 @@ namespace Crypto1.CypherAlgorithm
         public void Decrypt(String inputFile, String outputFile)
         {
             
-        }
-        
-        public Byte[] Encrypt(Byte[] inputBlock)
-        {
-            return _cipherModeBase.Encrypt(inputBlock);
-        }
-
-        public Byte[] Decrypt(Byte[] inputBlock)
-        {
-            return _cipherModeBase.Decrypt(inputBlock);
         }
     }
 }

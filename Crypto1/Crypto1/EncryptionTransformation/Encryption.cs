@@ -1,11 +1,12 @@
 using System;
+using Crypto1.Stuff;
 
 namespace Crypto1.EncryptionTransformation
 {
     public class Encryption : IEncryptionTransformation
     {
         #region
-        static byte[] ExpandingPermutation = 
+        static Byte[] ExpandingPermutation = 
         {
             32,  1,  2,  3,  4,  5,  4,  5,  6,  7,  8,  9,
             8,  9, 10, 11, 12, 13, 12, 13, 14, 15, 16, 17,
@@ -13,7 +14,7 @@ namespace Crypto1.EncryptionTransformation
             24, 25, 26, 27, 28, 29, 28, 29, 30, 31, 32,  1
         };
 
-        static byte[,,] STables = 
+        static Byte[,,] STables = 
         {
             {
                 { 14, 4, 13, 1, 2, 15, 11, 8, 3, 10, 6, 12, 5, 9, 0, 7 },
@@ -66,7 +67,7 @@ namespace Crypto1.EncryptionTransformation
         };
 
 
-        static byte[] FeistelPermutation =
+        static Byte[] FeistelPermutation =
         {
             16,  7, 20, 21, 29, 12, 28, 17,
              1, 15, 23, 26,  5, 18, 31, 10,
@@ -74,32 +75,27 @@ namespace Crypto1.EncryptionTransformation
             19, 13, 30,  6, 22, 11,  4, 25
         };
         #endregion
-        public byte[] EncryptionTransformation(byte[] block, byte[] roundKey)
+        public Byte[] EncryptionTransformation(Byte[] block, Byte[] roundKey)
         {
-            ulong expandedN = BitConverter.ToUInt64(Permute(ExpandingPermutation, block), 0) ^ BitConverter.ToUInt64(roundKey, 0);
-            ulong res = 0;
-            ulong B, row, column;
-            for (int i = 0; i < 8; i++)
+            UInt64 expandedN = BitConverter.ToUInt64(Utils.Permutation(ExpandingPermutation,
+                                       block),
+                                   0) ^
+                               BitConverter.ToUInt64(roundKey,
+                                   0);
+            UInt64 res = 0;
+            UInt64 row; 
+            UInt64 column;
+            
+            for (var i = 0; i < 8; i++)
             {
-                B = (ulong)(expandedN >> (i * 6)) & ((uint)1 << 6) - 1;
+                var B = expandedN >> (i * 6) & ((UInt32)1 << 6) - 1;
                 row = ((B >> 5) << 1) | B & 1;
                 column = B >> 1 & 15;
                 B = STables[i, row, column];
-                B <<= (i * 4);
+                B <<= i * 4;
                 res |= B;
             }
-            return Permute(FeistelPermutation, BitConverter.GetBytes(res));
-        }
-
-        private static byte[] Permute(byte[] permRule, byte[] block)
-        {
-            ulong res = 0;
-            ulong n = BitConverter.ToUInt32(block, 0);
-            for (int i = 0; i < permRule.Length; i++)
-            {
-                res |= ((n >> (permRule[i] - 1) & 1) << i);
-            }
-            return BitConverter.GetBytes(res);
+            return Utils.Permutation(FeistelPermutation, BitConverter.GetBytes(res));
         }
     }
 }

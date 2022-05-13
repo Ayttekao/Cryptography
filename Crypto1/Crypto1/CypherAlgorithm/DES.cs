@@ -1,7 +1,7 @@
 using System;
 using Crypto1.EncryptionTransformation;
 using Crypto1.RoundKey;
-using static Crypto1.Stuff.Utils;
+using Crypto1.Stuff;
 
 namespace Crypto1.CypherAlgorithm
 {
@@ -35,18 +35,18 @@ namespace Crypto1.CypherAlgorithm
         
         public override Byte[] Encrypt(Byte[] message) 
         {
-            var firstPermutation = Permutation(_initialPermutation, message);
+            var firstPermutation = Utils.Permutation(_initialPermutation, message);
             var feistelTransformation = base.Encrypt(firstPermutation);
-            var lastPermutation = Permutation(_finalPermutation, feistelTransformation);
+            var lastPermutation = Utils.Permutation(_finalPermutation, feistelTransformation);
             
             return lastPermutation;
         }
 
         public override Byte[] Decrypt(Byte[] message)
         {
-            var firstPermutation = Permutation(_initialPermutation, message);
+            var firstPermutation = Utils.Permutation(_initialPermutation, message);
             var feistelTransformation = base.Decrypt(firstPermutation);
-            var lastPermutation = Permutation(_finalPermutation, feistelTransformation);
+            var lastPermutation = Utils.Permutation(_finalPermutation, feistelTransformation);
             
             return lastPermutation;
         }

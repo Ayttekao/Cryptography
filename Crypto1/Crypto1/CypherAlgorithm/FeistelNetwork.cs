@@ -24,9 +24,10 @@ namespace Crypto1.CypherAlgorithm
         public virtual Byte[] Encrypt(Byte[] inputBlock)
         {
             var res = BitConverter.ToUInt64(inputBlock, 0);
-            var left = (uint)(res >> 32);
-            var right = (uint)(res & ((ulong)1 << 32) - 1);
-            uint newLeft = 0, newRight = 0;
+            var left = (UInt32)(res >> 32);
+            var right = (UInt32)(res & ((UInt64)1 << 32) - 1);
+            UInt32 newLeft = 0;
+            UInt32 newRight = 0;
             
             for (var round = 0; round < 16; round++)
             {
@@ -48,8 +49,8 @@ namespace Crypto1.CypherAlgorithm
         public virtual Byte[] Decrypt(Byte[] inputBlock)
         {
             var res = BitConverter.ToUInt64(inputBlock, 0);
-            var left = (uint)(res >> 32);
-            var right = (uint)(res & ((ulong)1 << 32) - 1);
+            var left = (UInt32)(res >> 32);
+            var right = (UInt32)(res & ((UInt64)1 << 32) - 1);
             UInt32 newLeft = 0; 
             UInt32 newRight = 0;
 

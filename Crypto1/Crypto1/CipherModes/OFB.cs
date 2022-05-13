@@ -1,15 +1,18 @@
 using System;
+using System.Linq;
 using Crypto1.CypherAlgorithm;
+using Crypto1.Padding;
 
 namespace Crypto1.CipherModes
 {
     public class OFB : CipherModeBase
     {
-        public OFB(ICypherAlgorithm algorithm, byte[] initializationVector) : base(algorithm, initializationVector) { }
+        public OFB(ICypherAlgorithm algorithm, Byte[] initializationVector, PaddingType paddingType, Int32 blockSize) :
+            base(algorithm, initializationVector, paddingType, blockSize) { }
 
-        public override byte[] Encrypt(byte[] inputBlock)
+        public override Byte[] Encrypt(Byte[] inputBlock)
         {
-            var result = PadBuffer(inputBlock);
+            var result = Stuffer.PadBuffer(inputBlock);
             var blocks = InitList(result.Length);
             var previousBlock = new Byte[BlockSize];
             var currentBlock = new Byte[BlockSize];
@@ -23,10 +26,10 @@ namespace Crypto1.CipherModes
                 Array.Copy(encryptBlock, previousBlock, BlockSize);
             }
 
-            return ConvertListToArray(blocks);
+            return blocks.SelectMany(x => x.ToArray()).ToArray();
         }
 
-        public override byte[] Decrypt(byte[] inputBlock)
+        public override Byte[] Decrypt(Byte[] inputBlock)
         {
             var blocks = InitList(inputBlock.Length);
             var previousBlock = new Byte[BlockSize];
@@ -41,7 +44,7 @@ namespace Crypto1.CipherModes
                 Array.Copy(encryptBlock, previousBlock, BlockSize);
             }
             
-            return RemovePadding(blocks);
+            return Stuffer.RemovePadding(blocks);
         }
     }
 }

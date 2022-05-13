@@ -52,13 +52,27 @@ namespace Crypto1.Stuff
             return result;
         }
         
-        public static byte[] Permutation(byte[] permRule, byte[] block)
+        public static Byte[] Permutation(Byte[] permRule, Byte[] block)
         {
-            ulong res = 0;
-            var n = BitConverter.ToUInt64(block, 0);
+            UInt64 res = 0;
+            UInt64 n;
+            
+            if (block.Length - sizeof(Int64) >= 0)
+            {
+                 n = BitConverter.ToUInt64(block, 0);
+            } 
+            else if (block.Length - sizeof(Int32) >= 0)
+            {
+                n = BitConverter.ToUInt32(block, 0);
+            }
+            else
+            {
+                throw new AggregateException(nameof(block));
+            }
+
             for (var i = 0; i < permRule.Length; i++)
             {
-                res |= ((n >> (permRule[i] - 1) & 1) << i);
+                res |= (n >> (permRule[i] - 1) & 1) << i;
             }
             return BitConverter.GetBytes(res);
         }
