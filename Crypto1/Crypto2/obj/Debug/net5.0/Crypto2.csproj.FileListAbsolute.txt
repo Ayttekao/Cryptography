@@ -1,0 +1,16 @@
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\bin\Debug\net5.0\Crypto2.exe
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\bin\Debug\net5.0\Crypto2.deps.json
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\bin\Debug\net5.0\Crypto2.runtimeconfig.json
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\bin\Debug\net5.0\Crypto2.runtimeconfig.dev.json
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\bin\Debug\net5.0\Crypto2.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\bin\Debug\net5.0\ref\Crypto2.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\bin\Debug\net5.0\Crypto2.pdb
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\Crypto2.csproj.AssemblyReference.cache
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\Crypto2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\Crypto2.AssemblyInfoInputs.cache
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\Crypto2.AssemblyInfo.cs
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\Crypto2.csproj.CoreCompileInputs.cache
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\Crypto2.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\ref\Crypto2.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\Crypto2.pdb
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\Crypto2.genruntimeconfig.cache
