@@ -22,7 +22,7 @@ namespace Crypto1.CipherModes
                 blocks[count] = Algorithm.Encrypt(blockList[count])
             );
             
-            return blocks.SelectMany(x => x.ToArray()).ToArray();
+            return blocks.SelectMany(x => x).ToArray();
         }
 
         public override Byte[] Decrypt(Byte[] inputBlock)

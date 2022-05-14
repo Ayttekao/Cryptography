@@ -13,9 +13,9 @@ namespace Crypto2
             var solovayStrassenTest = new SolovayStrassenTest();
             var millerRabinTest = new MillerRabinTest();
 
-            var fermatResult = fermatTest.MakeSimplicityTest(1, 0.7);
-            var solovayResult = solovayStrassenTest.MakeSimplicityTest(1, 0.7);
-            var millerResult = millerRabinTest.MakeSimplicityTest(1, 0.7);
+            var fermatResult = fermatTest.MakeSimplicityTest(229, 0.7);
+            var solovayResult = solovayStrassenTest.MakeSimplicityTest(229, 0.7);
+            var millerResult = millerRabinTest.MakeSimplicityTest(229, 0.7);
 
             var resL = Functions.Legendre(126, 53);
             var resJ = Functions.Jacobi(7, 143);
@@ -26,6 +26,7 @@ namespace Crypto2
 
             var rsa = new RSA(TestType.MillerRabin, 0.7, 30);
             var encryptInt = rsa.Encrypt(123123123);
+            var decryptInt = rsa.Decrypt(encryptInt);
 
             var attack = attack1.WienerAttack(e, n);
         }

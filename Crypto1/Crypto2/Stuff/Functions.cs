@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 
 namespace Crypto2.Stuff
@@ -22,6 +23,11 @@ namespace Crypto2.Stuff
         }
         public static BigInteger Legendre(BigInteger a, BigInteger p)
         {
+            if (p < 2)
+            {
+                throw new ArgumentException(nameof(p));
+            }
+            
             a %= p;
             if (a == 0) return 0;
 

@@ -83,14 +83,12 @@ namespace Crypto1.EncryptionTransformation
                                BitConverter.ToUInt64(roundKey,
                                    0);
             UInt64 res = 0;
-            UInt64 row; 
-            UInt64 column;
-            
+
             for (var i = 0; i < 8; i++)
             {
                 var B = expandedN >> (i * 6) & ((UInt32)1 << 6) - 1;
-                row = ((B >> 5) << 1) | B & 1;
-                column = B >> 1 & 15;
+                var row = ((B >> 5) << 1) | B & 1;
+                var column = B >> 1 & 15;
                 B = STables[i, row, column];
                 B <<= i * 4;
                 res |= B;

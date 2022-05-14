@@ -17,9 +17,9 @@ namespace Crypto2
      */
     public struct Keys
     {
-        public BigInteger n;   //p*q
-        public BigInteger e;   //public key
-        public BigInteger d;   //private key
+        public BigInteger Modulo;       //p*q
+        public BigInteger PublicKey;    //public key (e)
+        public BigInteger PrivateKey;   //private key (d)
         
     }
 
@@ -33,11 +33,11 @@ namespace Crypto2
         }
         public BigInteger Encrypt(BigInteger message)
         {
-            return BigInteger.ModPow(message, _keys.e, _keys.n);
+            return BigInteger.ModPow(message, _keys.PublicKey, _keys.Modulo);
         }
         public BigInteger Decrypt(BigInteger message)
         {
-            return BigInteger.ModPow(message, _keys.d, _keys.n);
+            return BigInteger.ModPow(message, _keys.PrivateKey, _keys.Modulo);
         }
 
         private class KeysGenerator
@@ -57,10 +57,16 @@ namespace Crypto2
                 Keys keys;
                 var p = GetPrimeNumber();
                 var q = GetPrimeNumber();
+                
+                if (!FermatCheck(p, q))
+                {
+                    throw new ArithmeticException("Keys vulnerable to Fermat attack");
+                }
+                
                 var euler = BigInteger.Multiply(p - 1, q - 1);
                 var random = new Random();
                 var buffer = new Byte[_numSize];
-                keys.n = BigInteger.Multiply(p, q);
+                keys.Modulo = BigInteger.Multiply(p, q);
 
                 while (true)
                 {
@@ -68,22 +74,25 @@ namespace Crypto2
                     {
                         random.NextBytes(buffer);
                         var e = new BigInteger(buffer);
-                        if (e > 3 && e < euler && Utils.EuclideanAlgorithm(e, euler) == 1)
+                        if (e >= 3 && e < euler && Utils.EuclideanAlgorithm(e, euler) == 1)
                         {
-                            keys.e = e;
+                            keys.PublicKey = e;
                             break;
                         }
                     }
 
-                    var g = Utils.ExtendedEuclideanAlgorithm(keys.e, euler, out var x, out _);
-                    if (g != 1) throw new ArgumentException();
+                    var g = Utils.ExtendedEuclideanAlgorithm(keys.PublicKey, euler, out var x, out _);
+                    if (g != 1)
+                    {
+                        throw new ArithmeticException(nameof(g));
+                    }
                     while (x < 0)
                     {
                         x += euler;
                     }
-                    if (WienerCheck(x, keys.n))
+                    if (!WienerCheck(x, keys.Modulo))
                     {
-                        keys.d = x;
+                        keys.PrivateKey = x;
                         break;
                     }
                 }
@@ -93,7 +102,28 @@ namespace Crypto2
 
             private static bool WienerCheck(BigInteger d, BigInteger n)
             {
-                return d > (BigInteger)(0.3333 * Math.Pow((Double)n, 0.25));
+                return d < (BigInteger)(0.3333 * Math.Pow((Double)n, 0.25));
+            }
+
+            private static bool FermatCheck(BigInteger p, BigInteger q)
+            {
+                if (p == q)
+                {
+                    return false;
+                }
+                
+                var a = (p + q) / 2;
+                var b = BigInteger.Abs(p - q);
+                var n = (a - b) * (a + b);
+                
+                if (n < 0)
+                {
+                    return true;
+                }
+                
+                var sqrtN = Utils.SqrtFast(n);
+                
+                return p != sqrtN && q != sqrtN;
             }
 
             private BigInteger GetPrimeNumber()

@@ -30,9 +30,9 @@ namespace Crypto1.CipherModes
             blocks.Add(null);
             blocks[0] = Algorithm.Encrypt(copyInitializationVector);
             blocks.Add(null);
+            //TODO: not use getHashCode
             blocks[1] = Xor(copyInitializationVector, Stuffer.PadBuffer(BitConverter.GetBytes(_valueForHash.GetHashCode())));
-                    
-                    
+
             var blockList = GetListFromArray(result);
             var counterList = new List<Byte[]>();
             for (var count = 0; count < result.Length / BlockSize; count++)
@@ -47,7 +47,7 @@ namespace Crypto1.CipherModes
                 blocks[i + 2] = Algorithm.Encrypt(Xor(counterList[i], blockList[i])) 
             );
             
-            return blocks.SelectMany(x => x.ToArray()).ToArray();
+            return blocks.SelectMany(x => x).ToArray();
         }
 
         public override Byte[] Decrypt(Byte[] inputBlock)

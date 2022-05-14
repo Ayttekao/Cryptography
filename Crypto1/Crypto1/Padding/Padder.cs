@@ -68,7 +68,7 @@ namespace Crypto1.Padding
 
         public Byte[] RemovePadding(List<Byte[]> blocks)
         {
-            var array = blocks.SelectMany(x => x.ToArray()).ToArray();
+            var array = blocks.SelectMany(x => x).ToArray();
             var extraBlocks = array[array.Length - 1];
             var result = new Byte[array.Length - extraBlocks];
             Array.Copy(array, result, result.Length);

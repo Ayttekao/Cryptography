@@ -33,7 +33,7 @@ namespace Crypto1.CipherModes
                 blocks[count] =  Xor(Algorithm.Encrypt(counterList[count]), blockList[count])
             );
             
-            return blocks.SelectMany(x => x.ToArray()).ToArray();
+            return blocks.SelectMany(x => x).ToArray();
         }
 
         public override Byte[] Decrypt(Byte[] inputBlock)

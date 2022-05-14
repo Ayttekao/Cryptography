@@ -26,7 +26,7 @@ namespace Crypto1.CipherModes
                 Array.Copy(encryptBlock, previousBlock, BlockSize);
             }
 
-            return blocks.SelectMany(x => x.ToArray()).ToArray();
+            return blocks.SelectMany(x => x).ToArray();
         }
 
         public override Byte[] Decrypt(Byte[] inputBlock)
