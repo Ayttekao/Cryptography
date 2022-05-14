@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using CourseWork.LOKI97.Algorithm;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
@@ -8,11 +10,11 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
     {
         public override byte[] Encrypt(List<byte[]> blocksList, object key, byte[] iv)
         {
-            byte[] outputBuffer = new byte[blocksList.Count * blockSize];
-            Encoder encoder = new Encoder();
+            var outputBuffer = new byte[blocksList.Count * blockSize];
+            var encoder = new Encoder();
 
-            int step = 0;
-            byte[] encBlock = iv;
+            var step = 0;
+            var encBlock = iv;
 
             foreach (var block in blocksList)
             {
@@ -27,23 +29,22 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
 
         public override byte[] Decrypt(List<byte[]> blocksList, object key, byte[] iv)
         {
-            byte[] outputBuffer = new byte[blocksList.Count * blockSize];
-            Encoder encoder = new Encoder();
+            var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
+            var encoder = new Encoder();
 
-            int step = 0;
-            byte[] encBlock = iv;
+            var encBlock = iv;
+            
+            Parallel.For(0, outputBuffer.Count, counter =>
+                {
+                    encBlock = encoder.BlockEncrypt(encBlock, 0, key);
 
-            foreach (var block in blocksList)
-            {
-                encBlock = encoder.BlockEncrypt(encBlock, 0, key);
+                    var temp = Xor(encBlock, blocksList[counter]);
+                    encBlock = blocksList[counter];
+                    outputBuffer[counter] = temp;
+                }
+            );
 
-                byte[] temp = Xor(encBlock, block);
-                encBlock = block;
-
-                Array.Copy(temp, 0, outputBuffer, (step++) * blockSize, blockSize);
-            }
-
-            return outputBuffer;
+            return outputBuffer.SelectMany(x => x).ToArray();
         }
     }
 }

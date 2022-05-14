@@ -16,7 +16,7 @@ namespace Crypto1.CipherModes
         {
             var result = Stuffer.PadBuffer(inputBlock);
             var blocks = Enumerable.Repeat(default(Byte[]), result.Length / BlockSize).ToList();
-            var copyInitializationVector = new Byte[8];
+            var copyInitializationVector = new Byte[BlockSize];
             InitializationVector.CopyTo(copyInitializationVector, 0);
             var counter = BitConverter.ToUInt64(copyInitializationVector, 0);
             var blockList = GetListFromArray(result);
@@ -30,7 +30,7 @@ namespace Crypto1.CipherModes
                     
             Parallel.For(0, result.Length / BlockSize, count =>
                     
-                blocks[count] =  Xor(Algorithm.Encrypt(counterList[count]), blockList[count])
+                blocks[count] = Xor(Algorithm.Encrypt(counterList[count]), blockList[count])
             );
             
             return blocks.SelectMany(x => x).ToArray();
@@ -54,7 +54,7 @@ namespace Crypto1.CipherModes
                     
             Parallel.For(0, inputBlock.Length / BlockSize, i =>
                     
-                blocks[i] =  Xor(Algorithm.Encrypt(counterList[i]), blockList[i])
+                blocks[i] = Xor(Algorithm.Encrypt(counterList[i]), blockList[i])
             );
 
             return Stuffer.RemovePadding(blocks);

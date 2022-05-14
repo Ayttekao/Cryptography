@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using CourseWork.LOKI97.Algorithm;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
@@ -8,15 +10,15 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
     {
         public override byte[] Encrypt(List<byte[]> blocksList, Object key, byte[] iv)
         {
-            byte[] outputBuffer = new byte[blocksList.Count * blockSize];
-            Encoder encoder = new Encoder();
+            var outputBuffer = new byte[blocksList.Count * blockSize];
+            var encoder = new Encoder();
 
-            int step = 0;
-            byte[] encBlock = iv;
+            var step = 0;
+            var encBlock = iv;
 
             foreach (var block in blocksList)
             {
-                byte[] temp = Xor(encBlock, block);
+                var temp = Xor(encBlock, block);
 
                 encBlock = encoder.BlockEncrypt(temp, 0, key);
 
@@ -28,24 +30,22 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
 
         public override byte[] Decrypt(List<byte[]> blocksList, Object key, byte[] iv)
         {
-            byte[] outputBuffer = new byte[blocksList.Count * blockSize];
-            Decoder decoder = new Decoder();
+            var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
+            var decoder = new Decoder();
 
-            int step = 0;
             byte[] decBlock;
-            byte[] encBlock = iv;
+            var encBlock = iv;
+            
+            Parallel.For(0, outputBuffer.Count, counter =>
+                {
+                    decBlock = decoder.BlockDecrypt(blocksList[counter], 0, key);
+                    var temp = Xor(decBlock, encBlock);
+                    encBlock = blocksList[counter];
+                    outputBuffer[counter] = temp;
+                }
+            );
 
-            foreach (var block in blocksList)
-            {
-                decBlock = decoder.BlockDecrypt(block, 0, key);
-
-                byte[] temp = EncryptionModeBase.Xor(decBlock, encBlock);
-                encBlock = block; // !
-
-                Array.Copy(temp, 0, outputBuffer, (step++) * blockSize, blockSize);
-            }
-
-            return outputBuffer;
+            return outputBuffer.SelectMany(x => x).ToArray();
         }
     }
 }

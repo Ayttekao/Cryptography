@@ -30,9 +30,9 @@ namespace Crypto1.CipherModes
             var blocks = Enumerable.Repeat(default(Byte[]), inputBlock.Length / BlockSize).ToList();
             var blockList = GetListFromArray(inputBlock);
                     
-            Parallel.For(0, inputBlock.Length / BlockSize, i =>
+            Parallel.For(0, inputBlock.Length / BlockSize, count =>
                     
-                blocks[i] = Algorithm.Decrypt(blockList[i])
+                blocks[count] = Algorithm.Decrypt(blockList[count])
             );
             
             return Stuffer.RemovePadding(blocks);

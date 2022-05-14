@@ -2,9 +2,12 @@ namespace CourseWork.LOKI97.AlgorithmService.Enums
 {
     public enum EncryptionMode
     {
+        ECB,
         CBC,
         CFB,
-        ECB,
-        OFB
+        OFB,
+        CTR,
+        RD,
+        RDH
     }
 }
