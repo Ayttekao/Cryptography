@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CourseWork.LOKI97.Algorithm;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
 {

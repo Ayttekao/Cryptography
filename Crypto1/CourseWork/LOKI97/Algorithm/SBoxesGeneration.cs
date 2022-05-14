@@ -1,4 +1,4 @@
-namespace CourseWork.LOKI97
+namespace CourseWork.LOKI97.Algorithm
 {
     public class SBoxesGeneration
     {

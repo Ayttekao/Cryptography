@@ -1,7 +1,6 @@
 using System;
-using CourseWork.LOKI97.Algorithm;
 
-namespace CourseWork.LOKI97
+namespace CourseWork.LOKI97.Algorithm
 {
     public class Decoder
     {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CourseWork.LOKI97.Algorithm;
 using CourseWork.LOKI97.AlgorithmService.Enums;
 using CourseWork.LOKI97.AlgorithmService.Modes;
 
