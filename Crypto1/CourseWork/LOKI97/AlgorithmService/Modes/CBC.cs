@@ -6,45 +6,36 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
     public class CBC : EncryptionModeBase
     {
-        public override byte[] Encrypt(List<byte[]> blocksArray, Object key, byte[] iv)
+        public override byte[] Encrypt(List<byte[]> blocksList, Object key, byte[] iv)
         {
-            byte[] outputBuffer = new byte[blocksArray.Count * blockSize];
+            byte[] outputBuffer = new byte[blocksList.Count * blockSize];
             Encoder encoder = new Encoder();
 
             int step = 0;
             byte[] encBlock = iv;
 
-            foreach (var block in blocksArray)
-            {
-                byte[] temp = EncryptionModeBase.Xor(encBlock, block);
-
-                encBlock = encoder.BlockEncrypt(temp, 0, key);
-
-                Array.Copy(encBlock, 0, outputBuffer, (step++) * blockSize, blockSize);
-            }
-
-            foreach (var block in blocksArray)
+            foreach (var block in blocksList)
             {
                 byte[] temp = Xor(encBlock, block);
 
                 encBlock = encoder.BlockEncrypt(temp, 0, key);
 
-                Array.Copy(encBlock, 0, outputBuffer, (step++) * blockSize, blockSize);
+                Array.Copy(encBlock, 0, outputBuffer, step++ * blockSize, blockSize);
             }
 
             return outputBuffer;
         }
 
-        public override byte[] Decrypt(List<byte[]> blocksArray, Object key, byte[] iv)
+        public override byte[] Decrypt(List<byte[]> blocksList, Object key, byte[] iv)
         {
-            byte[] outputBuffer = new byte[blocksArray.Count * blockSize];
+            byte[] outputBuffer = new byte[blocksList.Count * blockSize];
             Decoder decoder = new Decoder();
 
             int step = 0;
             byte[] decBlock;
             byte[] encBlock = iv;
 
-            foreach (var block in blocksArray)
+            foreach (var block in blocksList)
             {
                 decBlock = decoder.BlockDecrypt(block, 0, key);
 

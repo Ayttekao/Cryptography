@@ -1,20 +1,20 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Crypto1.CypherAlgorithm;
+using Crypto1.CipherAlgorithm;
 using Crypto1.Padding;
 
 namespace Crypto1.CipherModes
 {
     public class CFB : CipherModeBase
     {
-        public CFB(ICypherAlgorithm algorithm, Byte[] initializationVector, PaddingType paddingType, Int32 blockSize) :
+        public CFB(ICipherAlgorithm algorithm, Byte[] initializationVector, PaddingType paddingType, Int32 blockSize) :
             base(algorithm, initializationVector, paddingType, blockSize) { }
 
         public override Byte[] Encrypt(Byte[] inputBlock)
         {
             var result = Stuffer.PadBuffer(inputBlock);
-            var blocks = InitList(result.Length);
+            var blocks = Enumerable.Repeat(default(Byte[]), result.Length / BlockSize).ToList();
             var previousBlock = new Byte[BlockSize];
             var currentBlock = new Byte[BlockSize];
             Array.Copy(InitializationVector, previousBlock, previousBlock.Length);
@@ -31,7 +31,7 @@ namespace Crypto1.CipherModes
 
         public override Byte[] Decrypt(Byte[] inputBlock)
         {
-            var blocks = InitList(inputBlock.Length);
+            var blocks = Enumerable.Repeat(default(Byte[]), inputBlock.Length / BlockSize).ToList();
             var blockList = GetListFromArray(inputBlock);
             blockList.Insert(0, InitializationVector);
                    

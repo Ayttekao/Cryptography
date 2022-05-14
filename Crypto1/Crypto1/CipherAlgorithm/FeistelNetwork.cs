@@ -2,14 +2,14 @@ using System;
 using Crypto1.EncryptionTransformation;
 using Crypto1.RoundKey;
 
-namespace Crypto1.CypherAlgorithm
+namespace Crypto1.CipherAlgorithm
 {
     /*
      * 4 На базе интерфейса 3.3 спроектируйте класс, реализующий функционал сети Фейстеля. Конструктор класса
      * должен принимать в качестве параметров реализации интерфейсов 3.1 и 3.2.
      */
     
-    public class FeistelNetwork : ICypherAlgorithm
+    public class FeistelNetwork : ICipherAlgorithm
     {
         private IEncryptionTransformation _encryptionTransformation;
         private IRoundKeyGen _roundKeyGen;

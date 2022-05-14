@@ -3,7 +3,7 @@ using Crypto1.EncryptionTransformation;
 using Crypto1.RoundKey;
 using Crypto1.Stuff;
 
-namespace Crypto1.CypherAlgorithm
+namespace Crypto1.CipherAlgorithm
 {
     /*
      * 5 - Реализуйте алгоритм шифрования DES на базе класса из задания 4, определив свои реализации интерфейсов

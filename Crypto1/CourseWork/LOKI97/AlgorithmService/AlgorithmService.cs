@@ -14,8 +14,7 @@ namespace CourseWork.LOKI97.AlgorithmService
         {
             KeyGeneration keyGeneration = new KeyGeneration();
             int blocksQuantity;
-            List<byte[]> blocksArray;
-    
+
             if (inputBuffer.Length % blockSize == 0)
             {
                 blocksQuantity = inputBuffer.Length / 16;
@@ -25,7 +24,7 @@ namespace CourseWork.LOKI97.AlgorithmService
                 blocksQuantity = inputBuffer.Length / 16 + 1;
             }
     
-            blocksArray = new List<byte[]>(blocksQuantity);
+            var blocksArray = new List<byte[]>(blocksQuantity);
     
             for (int i = 0; i < blocksQuantity; i++)
             {
@@ -43,27 +42,31 @@ namespace CourseWork.LOKI97.AlgorithmService
                 } 
                 else
                 {
-                var badCharCount = 0;
-                byte[] outputBuffer = mode.Decrypt(blocksArray, key, initializationVector);
-    
-                for (int i = 0; i < 15; i++)
-                {
-                    if (outputBuffer[outputBuffer.Length - i - 1] == 0)
-                        badCharCount++;
-                    else
-                        break;
-                }
+                    var badCharCount = 0;
+                    byte[] outputBuffer = mode.Decrypt(blocksArray, key, initializationVector);
+        
+                    for (int i = 0; i < 15; i++)
+                    {
+                        if (outputBuffer[outputBuffer.Length - i - 1] == 0)
+                        {
+                            badCharCount++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
                 
                 return CopyOfRange(outputBuffer, 0, outputBuffer.Length - badCharCount);
             }
         }
 
-        static byte[] CopyOfRange (byte[] src, int start, int end) {
+        private static byte[] CopyOfRange (byte[] src, int start, int end) {
             int len = end - start;
             byte[] dest = new byte[len];
             for (var i = 0; i < len; i++)
             {
-                dest[i] = src[start + i]; // so 0..n = 0+x..n+x
+                dest[i] = src[start + i];
             }
             return dest;
         }

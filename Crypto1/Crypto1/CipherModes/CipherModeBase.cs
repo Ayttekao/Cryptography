@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Crypto1.CypherAlgorithm;
+using Crypto1.CipherAlgorithm;
 using Crypto1.Padding;
 
 namespace Crypto1.CipherModes
@@ -10,11 +10,14 @@ namespace Crypto1.CipherModes
         protected static Int32 BlockSize;
         protected Padder Stuffer;
         protected readonly Byte[] InitializationVector;
-        protected ICypherAlgorithm Algorithm { get; }
+        protected ICipherAlgorithm Algorithm { get; }
         public abstract Byte[] Encrypt(Byte[] inputBlock);
         public abstract Byte[] Decrypt(Byte[] inputBlock);
 
-        protected CipherModeBase(ICypherAlgorithm algorithm, Byte[] initializationVector, PaddingType paddingType, Int32 blockSize)
+        protected CipherModeBase(ICipherAlgorithm algorithm,
+            Byte[] initializationVector,
+            PaddingType paddingType,
+            Int32 blockSize)
         {
             InitializationVector = initializationVector;
             Algorithm = algorithm;
@@ -46,18 +49,6 @@ namespace Crypto1.CipherModes
                 result[count] = (Byte)(left[count] ^ right[count]);
             }
             return result;
-        }
-
-        protected static List<Byte[]> InitList(Int32 size)
-        {
-            var blocks = new List<Byte[]>();
-
-            for (var count = 0; count < size / BlockSize; count++)
-            {
-                blocks.Add(null);
-            }
-            
-            return blocks;
         }
     }
 }

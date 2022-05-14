@@ -2,20 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Crypto1.CypherAlgorithm;
+using Crypto1.CipherAlgorithm;
 using Crypto1.Padding;
 
 namespace Crypto1.CipherModes
 {
     public class CTR : CipherModeBase
     {
-        public CTR(ICypherAlgorithm algorithm, Byte[] initializationVector, PaddingType paddingType, Int32 blockSize) :
+        public CTR(ICipherAlgorithm algorithm, Byte[] initializationVector, PaddingType paddingType, Int32 blockSize) :
             base(algorithm, initializationVector, paddingType, blockSize) { }
 
         public override Byte[] Encrypt(Byte[] inputBlock)
         {
             var result = Stuffer.PadBuffer(inputBlock);
-            var blocks = InitList(result.Length);
+            var blocks = Enumerable.Repeat(default(Byte[]), result.Length / BlockSize).ToList();
             var copyInitializationVector = new Byte[8];
             InitializationVector.CopyTo(copyInitializationVector, 0);
             var counter = BitConverter.ToUInt64(copyInitializationVector, 0);
@@ -38,7 +38,7 @@ namespace Crypto1.CipherModes
 
         public override Byte[] Decrypt(Byte[] inputBlock)
         {
-            var blocks = InitList(inputBlock.Length);
+            var blocks = Enumerable.Repeat(default(Byte[]), inputBlock.Length / BlockSize).ToList();
             var copyInitializationVector = new Byte[BlockSize];
             InitializationVector.CopyTo(copyInitializationVector, 0);
             var counter = BitConverter.ToUInt64(InitializationVector, 0);

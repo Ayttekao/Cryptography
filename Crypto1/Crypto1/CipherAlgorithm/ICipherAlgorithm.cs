@@ -1,6 +1,6 @@
 using System;
 
-namespace Crypto1.CypherAlgorithm
+namespace Crypto1.CipherAlgorithm
 {
     /*
      * 3.2 - Интерфейс, предоставляющий описание функционала по выполнению шифрующего преобразования
@@ -8,7 +8,7 @@ namespace Crypto1.CypherAlgorithm
      * выходной блок - массив байтов);
      */
     
-    public interface ICypherAlgorithm
+    public interface ICipherAlgorithm
     {
         Byte[] Encrypt(Byte[] inputBlock);
         Byte[] Decrypt(Byte[] inputBlock);

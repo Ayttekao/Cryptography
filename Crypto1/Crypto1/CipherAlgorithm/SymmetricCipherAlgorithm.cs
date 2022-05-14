@@ -2,7 +2,7 @@ using System;
 using Crypto1.CipherModes;
 using Crypto1.Padding;
 
-namespace Crypto1.CypherAlgorithm
+namespace Crypto1.CipherAlgorithm
 {
     /*
      * 3.4 - Класс-контекст, предоставляющий объектный функционал по выполнению шифрования и дешифрования симметричным
@@ -15,31 +15,31 @@ namespace Crypto1.CypherAlgorithm
      * Шифрование должно производиться асинхронно. При реализации используйте тип набивки (padding) PKCS7.
      */
     
-    public class SymmetricCypherAlgorithm
+    public class SymmetricCipherAlgorithm
     {
         private Int32 _blockSize = 8;
         private readonly CipherModeBase _cipherModeBase;
-        private ICypherAlgorithm Algorithm { get; set; }
+        private ICipherAlgorithm Algorithm { get; set; }
         
-        public SymmetricCypherAlgorithm(CipherMode cipherMode, Byte[] initializationVector,
-            ICypherAlgorithm algorithm, String valueForHash = null)
+        public SymmetricCipherAlgorithm(CipherMode cipherMode, Byte[] initializationVector,
+            ICipherAlgorithm algorithm, String valueForHash = null)
         {
             Algorithm = algorithm;
 
             _cipherModeBase = cipherMode switch
             {
-                CipherMode.ECB => new ECB(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
-                CipherMode.CBC => new CBC(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
-                CipherMode.CFB => new CFB(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
-                CipherMode.OFB => new OFB(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
-                CipherMode.CTR => new CTR(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
-                CipherMode.RD => new RD(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
+                CipherMode.ECB => new ECB(Algorithm, initializationVector, PaddingType.PKCS7, _blockSize),
+                CipherMode.CBC => new CBC(Algorithm, initializationVector, PaddingType.PKCS7, _blockSize),
+                CipherMode.CFB => new CFB(Algorithm, initializationVector, PaddingType.PKCS7, _blockSize),
+                CipherMode.OFB => new OFB(Algorithm, initializationVector, PaddingType.PKCS7, _blockSize),
+                CipherMode.CTR => new CTR(Algorithm, initializationVector, PaddingType.PKCS7, _blockSize),
+                CipherMode.RD => new RD(Algorithm, initializationVector, PaddingType.PKCS7, _blockSize),
                 CipherMode.RDH => new RDH(Algorithm, initializationVector, valueForHash, PaddingType.ANSI_X_923, _blockSize),
                 _ => throw new ArgumentException("Unexpected value: " + cipherMode)
             };
         }
         
-        public SymmetricCypherAlgorithm(Byte[] key, CipherMode mode, Byte[] initializationVector, 
+        public SymmetricCipherAlgorithm(Byte[] key, CipherMode mode, Byte[] initializationVector, 
             params object[] list)
         {
             

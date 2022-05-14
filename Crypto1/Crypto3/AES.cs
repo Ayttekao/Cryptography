@@ -1,5 +1,5 @@
 using System;
-using Crypto1.CypherAlgorithm;
+using Crypto1.CipherAlgorithm;
 using Crypto1.EncryptionTransformation;
 using Crypto1.RoundKey;
 
@@ -11,7 +11,7 @@ namespace Crypto3
      * раундовых ключей. Реализация алгоритма должен поддерживать работу с блоками длиной 128/192/256 бит и ключами
      * длиной 128/192/256 бит, а также предоставлять возможность настройки модуля над 𝐺𝐹(2^8)
      */
-    public class AES : ICypherAlgorithm, IEncryptionTransformation, IRoundKeyGen
+    public class AES : ICipherAlgorithm, IEncryptionTransformation, IRoundKeyGen
     {
         public Byte[] Encrypt(byte[] inputBlock)
         {
