@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crypto2", "Crypto2\Crypto2.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crypto3", "Crypto3\Crypto3.csproj", "{1EF3CDC1-5FCF-4EBB-9393-BE370D60C517}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseWork", "CourseWork\CourseWork.csproj", "{2460A432-100E-4DF0-93A1-D58B481F5746}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{1EF3CDC1-5FCF-4EBB-9393-BE370D60C517}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EF3CDC1-5FCF-4EBB-9393-BE370D60C517}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EF3CDC1-5FCF-4EBB-9393-BE370D60C517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2460A432-100E-4DF0-93A1-D58B481F5746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2460A432-100E-4DF0-93A1-D58B481F5746}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2460A432-100E-4DF0-93A1-D58B481F5746}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2460A432-100E-4DF0-93A1-D58B481F5746}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

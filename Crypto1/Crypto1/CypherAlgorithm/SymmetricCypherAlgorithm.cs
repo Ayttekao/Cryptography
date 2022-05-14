@@ -35,7 +35,7 @@ namespace Crypto1.CypherAlgorithm
                 CipherMode.CTR => new CTR(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
                 CipherMode.RD => new RD(Algorithm, initializationVector, PaddingType.ANSI_X_923, _blockSize),
                 CipherMode.RDH => new RDH(Algorithm, initializationVector, valueForHash, PaddingType.ANSI_X_923, _blockSize),
-                _ => throw new ArgumentOutOfRangeException()
+                _ => throw new ArgumentException("Unexpected value: " + cipherMode)
             };
         }
         
