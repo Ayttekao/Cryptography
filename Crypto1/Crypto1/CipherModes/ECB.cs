@@ -17,11 +17,10 @@ namespace Crypto1.CipherModes
             var blocks = Enumerable.Repeat(default(Byte[]), result.Length / BlockSize).ToList();
             var blockList = GetListFromArray(result);
 
-            for (var count = 0; count < result.Length / BlockSize; count++)
-            {
-                blocks[count] = Algorithm.Encrypt(blockList[count]);
-
-            }
+            Parallel.For(0, result.Length / BlockSize, count =>
+                    
+                blocks[count] = Algorithm.Encrypt(blockList[count])
+            );
             
             return blocks.SelectMany(x => x).ToArray();
         }
