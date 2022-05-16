@@ -22,27 +22,14 @@ namespace CourseWork.LOKI97.AlgorithmService
             {
                 inputBuffer = padder.PadBuffer(inputBuffer);
                 blocksList = GetBlocksList(inputBuffer);
+                
                 return mode.Encrypt(blocksList, key, initializationVector);
             } 
             else
             {
                 blocksList = GetBlocksList(inputBuffer);
-                var badCharCount = 0;
-                var outputBuffer = padder.RemovePadding(mode.Decrypt(blocksList, key, initializationVector));
-                    
-                for (var index = 0; index < 15; index++)
-                {
-                    if (outputBuffer[outputBuffer.Length - index - 1] == 0)
-                    {
-                        badCharCount++;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
                 
-                return CopyOfRange(outputBuffer, 0, outputBuffer.Length - badCharCount);
+                return padder.RemovePadding(mode.Decrypt(blocksList, key, initializationVector));
             }
         }
 

@@ -37,7 +37,7 @@ namespace CourseWork
             
             var passCount = 0;
             var failCount = 0;
-            for (var i = 0; i < 1000; i++)
+            for (var i = 0; i < 1; i++)
             {
                 try
                 {

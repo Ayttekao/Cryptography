@@ -15,7 +15,6 @@ namespace CourseWork.LOKI97.Algorithm
 
                 for (int j = 0, k = 7; j < 8; j++, k += 8)
                 {
-                    //pval |= (long)((i >>> j) & 0x1) << k;
                     pval |= (((UInt64)i >> j) & 0x1) << k;
                 }
                 P[i] = pval;
