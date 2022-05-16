@@ -28,10 +28,7 @@ namespace Crypto1.CipherAlgorithm
         };
 
         public DES(IRoundKeyGen roundKeyGen, IEncryptionTransformation encryptionTransformation) : 
-            base(encryptionTransformation, roundKeyGen)
-        {
-
-        }
+            base(encryptionTransformation, roundKeyGen) { }
         
         public override Byte[] Encrypt(Byte[] message) 
         {

@@ -5,11 +5,11 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
     public abstract class EncryptionModeBase
     {
-        public int blockSize = 16;
+        protected int blockSize = 16;
         public abstract byte[] Encrypt(List<byte[]> blocksList, Object key, byte[] iv);
         public abstract byte[] Decrypt(List<byte[]> blocksList, Object key, byte[] iv);
 
-        public static byte[] Xor(byte[] a, byte[] b)
+        protected static byte[] Xor(byte[] a, byte[] b)
         {
             byte[] res = new byte[a.Length];
 

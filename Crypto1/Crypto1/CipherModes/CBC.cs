@@ -18,7 +18,7 @@ namespace Crypto1.CipherModes
             var previousBlock = new Byte[BlockSize];
             var currentBlock = new Byte[BlockSize];
             Array.Copy(InitializationVector, previousBlock, previousBlock.Length);
-                    
+            
             for (var count = 0; count < result.Length / BlockSize; count++)
             {
                 Array.Copy(result, count * BlockSize, currentBlock, 0, BlockSize);

@@ -6,7 +6,7 @@ using CourseWork.LOKI97.Algorithm;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
-    public class ECB : EncryptionModeBase
+    public sealed class ECB : EncryptionModeBase
     {
         public override byte[] Encrypt(List<byte[]> blocksList, object key, byte[] iv)
         {

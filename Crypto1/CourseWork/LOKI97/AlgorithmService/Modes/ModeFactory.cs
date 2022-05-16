@@ -1,5 +1,4 @@
 using System;
-using CourseWork.LOKI97.AlgorithmService.Enums;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
@@ -14,6 +13,7 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
                 EncryptionMode.CFB => new CFB(),
                 EncryptionMode.OFB => new OFB(),
                 EncryptionMode.CTR => new CTR(),
+                EncryptionMode.RD => new RD(),
                 _ => throw new ArgumentException("Unexpected value: " + encryptionMode)
             };
         }

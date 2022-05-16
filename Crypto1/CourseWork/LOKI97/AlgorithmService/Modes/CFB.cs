@@ -6,7 +6,7 @@ using CourseWork.LOKI97.Algorithm;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
-    public class CFB : EncryptionModeBase
+    public sealed class CFB : EncryptionModeBase
     {
         public override byte[] Encrypt(List<byte[]> blocksList, object key, byte[] iv)
         {
@@ -29,21 +29,16 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
 
         public override byte[] Decrypt(List<byte[]> blocksList, object key, byte[] iv)
         {
-            var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
             var encoder = new Encoder();
+            var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
+            var inputBuffer = new List<Byte[]>(blocksList);
+            inputBuffer.Insert(0, iv);
 
-            var encBlock = iv;
-            
-            Parallel.For(0, outputBuffer.Count, counter =>
-                {
-                    encBlock = encoder.BlockEncrypt(encBlock, 0, key);
-
-                    var temp = Xor(encBlock, blocksList[counter]);
-                    encBlock = blocksList[counter];
-                    outputBuffer[counter] = temp;
-                }
+            Parallel.For(0, blocksList.Count, index =>
+                    
+                outputBuffer[index] = Xor(encoder.BlockEncrypt(inputBuffer[index], 0, key), inputBuffer[index + 1])
             );
-
+            
             return outputBuffer.SelectMany(x => x).ToArray();
         }
     }

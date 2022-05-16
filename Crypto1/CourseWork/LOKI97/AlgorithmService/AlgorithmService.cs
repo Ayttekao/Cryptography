@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using CourseWork.LOKI97.Algorithm;
-using CourseWork.LOKI97.AlgorithmService.Enums;
 using CourseWork.LOKI97.AlgorithmService.Modes;
+using CourseWork.LOKI97.AlgorithmService.Padding;
 
 namespace CourseWork.LOKI97.AlgorithmService
 {
@@ -10,11 +10,46 @@ namespace CourseWork.LOKI97.AlgorithmService
     {
         static readonly int blockSize = 16;
 
-        public static byte[] LaunchAlgorithm(byte[] inputBuffer, byte[] keyBuffer, byte[] initializationVector, EncryptionMode encryptionMode, bool doEncrypt)
+        public static byte[] RunAlgorithm(byte[] inputBuffer, byte[] keyBuffer, byte[] initializationVector, EncryptionMode encryptionMode, bool doEncrypt)
         {
-            KeyGeneration keyGeneration = new KeyGeneration();
-            int blocksQuantity;
+            List<byte[]> blocksList;
+            var keyGeneration = new KeyGeneration();
+            var padder = new Padder(PaddingType.PKCS7, blockSize);
+            var key = keyGeneration.MakeKey(keyBuffer);
+            var mode = ModeFactory.CreateEncryptionMode(encryptionMode);
 
+            if (doEncrypt)
+            {
+                inputBuffer = padder.PadBuffer(inputBuffer);
+                blocksList = GetBlocksList(inputBuffer);
+                return mode.Encrypt(blocksList, key, initializationVector);
+            } 
+            else
+            {
+                blocksList = GetBlocksList(inputBuffer);
+                var badCharCount = 0;
+                var outputBuffer = padder.RemovePadding(mode.Decrypt(blocksList, key, initializationVector));
+                    
+                for (var index = 0; index < 15; index++)
+                {
+                    if (outputBuffer[outputBuffer.Length - index - 1] == 0)
+                    {
+                        badCharCount++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                
+                return CopyOfRange(outputBuffer, 0, outputBuffer.Length - badCharCount);
+            }
+        }
+
+        private static List<Byte[]> GetBlocksList(Byte[] inputBuffer)
+        {
+            Int32 blocksQuantity;
+            
             if (inputBuffer.Length % blockSize == 0)
             {
                 blocksQuantity = inputBuffer.Length / 16;
@@ -23,50 +58,25 @@ namespace CourseWork.LOKI97.AlgorithmService
             {
                 blocksQuantity = inputBuffer.Length / 16 + 1;
             }
-    
-            var blocksArray = new List<byte[]>(blocksQuantity);
-    
-            for (int i = 0; i < blocksQuantity; i++)
+            
+            var blocksArray = new List<Byte[]>(blocksQuantity);
+
+            for (var i = 0; i < blocksQuantity; i++)
             {
-                int step = i * blockSize;
+                var step = i * blockSize;
                 blocksArray.Add(CopyOfRange(inputBuffer, step, blockSize + step));
             }
-    
-            Object key = keyGeneration.MakeKey(keyBuffer);
-    
-            var mode = ModeFactory.CreateEncryptionMode(encryptionMode);
-    
-                if (doEncrypt)
-                {
-                    return mode.Encrypt(blocksArray, key, initializationVector);
-                } 
-                else
-                {
-                    var badCharCount = 0;
-                    byte[] outputBuffer = mode.Decrypt(blocksArray, key, initializationVector);
-        
-                    for (int i = 0; i < 15; i++)
-                    {
-                        if (outputBuffer[outputBuffer.Length - i - 1] == 0)
-                        {
-                            badCharCount++;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                
-                return CopyOfRange(outputBuffer, 0, outputBuffer.Length - badCharCount);
-            }
+
+            return blocksArray;
         }
 
-        private static byte[] CopyOfRange (byte[] src, int start, int end) {
-            int len = end - start;
-            byte[] dest = new byte[len];
-            for (var i = 0; i < len; i++)
+        private static byte[] CopyOfRange (Byte[] src, int start, int end) {
+            var len = end - start;
+            var dest = new byte[len];
+            
+            for (var index = 0; index < len; index++)
             {
-                dest[i] = src[start + i];
+                dest[index] = src[start + index];
             }
             return dest;
         }

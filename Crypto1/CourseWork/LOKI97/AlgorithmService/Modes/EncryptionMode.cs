@@ -1,4 +1,4 @@
-namespace CourseWork.LOKI97.AlgorithmService.Enums
+namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
     public enum EncryptionMode
     {

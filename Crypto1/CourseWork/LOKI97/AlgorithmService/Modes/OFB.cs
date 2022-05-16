@@ -4,7 +4,7 @@ using CourseWork.LOKI97.Algorithm;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
-    public class OFB : EncryptionModeBase
+    public sealed class OFB : EncryptionModeBase
     {
         public override byte[] Encrypt(List<byte[]> blocksList, object key, byte[] iv)
         {

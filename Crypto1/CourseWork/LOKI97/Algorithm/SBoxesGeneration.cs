@@ -37,8 +37,10 @@ namespace CourseWork.LOKI97.Algorithm
         private static byte Exp3(int b, int g, int n)
         {
             if (b == 0)
+            {
                 return 0;
-            int r = b;            // r = b ** 1
+            }
+            var r = b;            // r = b ** 1
             b = Mult(r, b, g, n); // r = b ** 2
             r = Mult(r, b, g, n); // r = b ** 3
             return (byte) r;
@@ -46,7 +48,7 @@ namespace CourseWork.LOKI97.Algorithm
 
         private static int Mult(int a, int b, int g, int n)
         {
-            int p = 0;
+            var p = 0;
             while (b != 0)
             {
                 if ((b & 0x01) != 0)
@@ -54,7 +56,6 @@ namespace CourseWork.LOKI97.Algorithm
                 a <<= 1;
                 if (a >= n)
                     a ^= g;
-                //b >>>= 1;
                 b = (int)((uint)b >> 1);
             }
             return p;
@@ -65,12 +66,12 @@ namespace CourseWork.LOKI97.Algorithm
             return S1;
         }
 
-        public static byte[] getS2Box()
+        public static byte[] GetS2Box()
         {
             return S2;
         }
 
-        public static void init()
+        public static void Init()
         {
             GenerationS1Box();
             GenerationS2Box();

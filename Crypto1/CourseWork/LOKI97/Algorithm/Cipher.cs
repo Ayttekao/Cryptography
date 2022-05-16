@@ -7,7 +7,7 @@ namespace CourseWork.LOKI97.Algorithm
         public static UInt64 Compute(UInt64 A, UInt64 B)
         {
             var S1 = SBoxesGeneration.GetS1Box();
-            var S2 = SBoxesGeneration.getS2Box();
+            var S2 = SBoxesGeneration.GetS2Box();
             var P = PermutationGeneration.GetPermutation();
     
             var Al = (int) (A >> 32);

@@ -31,9 +31,10 @@ namespace CourseWork.LOKI97.Algorithm
 
 
             // compute all rounds for this 1 block
-            UInt64 nR, f_out;
+            UInt64 nR;
+            UInt64 f_out;
             UInt32 k = 0;
-            for (int i = 0; i < ROUNDS; i++)
+            for (var i = 0; i < ROUNDS; i++)
             {
                 nR = R + SK[k++];
                 f_out = Cipher.Compute(nR, SK[k++]);
