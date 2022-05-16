@@ -8,7 +8,7 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
     public sealed class CTR : EncryptionModeBase
     {
-        public override byte[] Encrypt(List<byte[]> blocksList, object key, byte[] iv)
+        public override Byte[] Encrypt(List<Byte[]> blocksList, object key, Byte[] iv)
         {
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
             var encoder = new Encoder();
@@ -26,7 +26,7 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
             return outputBuffer.SelectMany(x => x).ToArray();
         }
 
-        public override byte[] Decrypt(List<byte[]> blocksList, object key, byte[] iv)
+        public override Byte[] Decrypt(List<Byte[]> blocksList, object key, Byte[] iv)
         {
             return Encrypt(blocksList, key, iv);
         }

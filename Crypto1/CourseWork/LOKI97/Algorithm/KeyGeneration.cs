@@ -5,10 +5,9 @@ namespace CourseWork.LOKI97.Algorithm
     public class KeyGeneration
     {
         private readonly UInt32 NUM_SUBKEYS = 48;
-        //private readonly long DELTA = 0x9E3779B97F4A7C15L;
         private readonly UInt64 DELTA = 0x9E3779B97F4A7C15;
     
-        public Object MakeKey(byte[] k)
+        public Object MakeKey(Byte[] k)
         {
     
             UInt64[] SK = new UInt64[NUM_SUBKEYS];    // array of subkeys

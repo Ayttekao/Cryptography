@@ -8,9 +8,9 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
     public sealed class CBC : EncryptionModeBase
     {
-        public override byte[] Encrypt(List<byte[]> blocksList, Object key, byte[] iv)
+        public override Byte[] Encrypt(List<Byte[]> blocksList, Object key, Byte[] iv)
         {
-            var outputBuffer = new byte[blocksList.Count * blockSize];
+            var outputBuffer = new Byte[blocksList.Count * blockSize];
             var encoder = new Encoder();
 
             var step = 0;
@@ -26,7 +26,7 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
             return outputBuffer;
         }
 
-        public override byte[] Decrypt(List<byte[]> blocksList, Object key, byte[] iv)
+        public override Byte[] Decrypt(List<Byte[]> blocksList, Object key, Byte[] iv)
         {
             var decoder = new Decoder();
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();

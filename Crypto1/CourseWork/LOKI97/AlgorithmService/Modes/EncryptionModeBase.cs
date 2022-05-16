@@ -6,16 +6,16 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
     public abstract class EncryptionModeBase
     {
         protected int blockSize = 16;
-        public abstract byte[] Encrypt(List<byte[]> blocksList, Object key, byte[] iv);
-        public abstract byte[] Decrypt(List<byte[]> blocksList, Object key, byte[] iv);
+        public abstract Byte[] Encrypt(List<Byte[]> blocksList, Object key, Byte[] iv);
+        public abstract Byte[] Decrypt(List<Byte[]> blocksList, Object key, Byte[] iv);
 
-        protected static byte[] Xor(byte[] a, byte[] b)
+        protected static Byte[] Xor(Byte[] a, Byte[] b)
         {
-            byte[] res = new byte[a.Length];
+            Byte[] res = new Byte[a.Length];
 
             for (int i = 0; i < a.Length; i++)
             {
-                res[i] = (byte) (a[i] ^ b[i]);
+                res[i] = (Byte) (a[i] ^ b[i]);
             }
             return res;
         }

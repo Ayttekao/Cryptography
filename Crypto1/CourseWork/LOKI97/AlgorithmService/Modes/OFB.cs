@@ -6,9 +6,9 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
     public sealed class OFB : EncryptionModeBase
     {
-        public override byte[] Encrypt(List<byte[]> blocksList, object key, byte[] iv)
+        public override Byte[] Encrypt(List<Byte[]> blocksList, object key, Byte[] iv)
         {
-            var outputBuffer = new byte[blocksList.Count * blockSize];
+            var outputBuffer = new Byte[blocksList.Count * blockSize];
             var encoder = new Encoder();
 
             var step = 0;
@@ -25,7 +25,7 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
             return outputBuffer;
         }
 
-        public override byte[] Decrypt(List<byte[]> blocksList, object key, byte[] iv)
+        public override Byte[] Decrypt(List<Byte[]> blocksList, object key, Byte[] iv)
         {
             return Encrypt(blocksList, key, iv);
         }

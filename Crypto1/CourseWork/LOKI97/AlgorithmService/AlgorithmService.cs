@@ -10,9 +10,9 @@ namespace CourseWork.LOKI97.AlgorithmService
     {
         static readonly int blockSize = 16;
 
-        public static byte[] RunAlgorithm(byte[] inputBuffer, byte[] keyBuffer, byte[] initializationVector, EncryptionMode encryptionMode, bool doEncrypt)
+        public static Byte[] RunAlgorithm(Byte[] inputBuffer, Byte[] keyBuffer, Byte[] initializationVector, EncryptionMode encryptionMode, bool doEncrypt)
         {
-            List<byte[]> blocksList;
+            List<Byte[]> blocksList;
             var keyGeneration = new KeyGeneration();
             var padder = new Padder(PaddingType.PKCS7, blockSize);
             var key = keyGeneration.MakeKey(keyBuffer);
@@ -70,9 +70,9 @@ namespace CourseWork.LOKI97.AlgorithmService
             return blocksArray;
         }
 
-        private static byte[] CopyOfRange (Byte[] src, int start, int end) {
+        private static Byte[] CopyOfRange (Byte[] src, int start, int end) {
             var len = end - start;
-            var dest = new byte[len];
+            var dest = new Byte[len];
             
             for (var index = 0; index < len; index++)
             {
