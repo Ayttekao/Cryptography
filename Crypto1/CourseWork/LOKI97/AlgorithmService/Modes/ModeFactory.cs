@@ -14,6 +14,7 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
                 EncryptionMode.OFB => new OFB(),
                 EncryptionMode.CTR => new CTR(),
                 EncryptionMode.RD => new RD(),
+                EncryptionMode.RDH => new RDH(),
                 _ => throw new ArgumentException("Unexpected value: " + encryptionMode)
             };
         }

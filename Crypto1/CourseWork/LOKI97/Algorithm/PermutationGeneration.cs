@@ -23,6 +23,7 @@ namespace CourseWork.LOKI97.Algorithm
 
         public static UInt64[] GetPermutation()
         {
+            Init();
             return P;
         }
     }

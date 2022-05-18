@@ -13,7 +13,7 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
         {
             Byte[] res = new Byte[a.Length];
 
-            for (int i = 0; i < a.Length; i++)
+            for (var i = 0; i < a.Length; i++)
             {
                 res[i] = (Byte) (a[i] ^ b[i]);
             }

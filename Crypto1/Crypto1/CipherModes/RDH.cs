@@ -68,7 +68,7 @@ namespace Crypto1.CipherModes
                     ).SequenceEqual(blockList[1])
                 )
             {
-                throw new ArgumentException();
+                throw new ArgumentException(nameof(_valueForHash));
             }
                     
             var counterList = new List<Byte[]>();

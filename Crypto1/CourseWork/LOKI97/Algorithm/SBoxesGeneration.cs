@@ -65,11 +65,13 @@ namespace CourseWork.LOKI97.Algorithm
 
         public static Byte[] GetS1Box()
         {
+            GenerationS1Box();
             return S1;
         }
 
         public static Byte[] GetS2Box()
         {
+            GenerationS2Box();
             return S2;
         }
 
