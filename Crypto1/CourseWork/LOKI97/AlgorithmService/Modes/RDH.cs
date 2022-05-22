@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using Encoder = CourseWork.LOKI97.Algorithm.Encoder;
 using Decoder = CourseWork.LOKI97.Algorithm.Decoder;
@@ -12,16 +11,21 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
     public sealed class RDH : EncryptionModeBase
     {
+        private readonly Byte[] _valueForHash;
+        public RDH(Byte[] valueForHash)
+        {
+            _valueForHash = valueForHash;
+        }
+        
         public override Byte[] Encrypt(List<Byte[]> blocksList, object key, Byte[] iv)
         {
-            var valueForHash = Encoding.Default.GetBytes("aboba");
             var hashAlgorithm = MD5.Create();
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count + 2).ToList();
             var encoder = new Encoder();
             var counterList = GetCounterList(iv, blocksList.Count);
             var initial = GetInitialAsBiginteger(iv).ToByteArray();
             outputBuffer[0] = encoder.BlockEncrypt(initial, 0, key);
-            outputBuffer[1] = Xor(initial, hashAlgorithm.ComputeHash(valueForHash));
+            outputBuffer[1] = Xor(initial, hashAlgorithm.ComputeHash(_valueForHash));
             
             Parallel.For(0, blocksList.Count, i =>
                     
@@ -33,7 +37,7 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
 
         public override Byte[] Decrypt(List<Byte[]> blocksList, object key, Byte[] iv)
         {
-            if (IsWrongInit(iv, Encoding.Default.GetBytes("aboba"), blocksList[1]))
+            if (IsWrongInit(iv, _valueForHash, blocksList[1]))
             {
                 throw new ArgumentException();
             }

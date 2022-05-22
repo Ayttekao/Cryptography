@@ -10,7 +10,7 @@ namespace CourseWork.LOKI97.AlgorithmService
     {
         static readonly int blockSize = 16;
 
-        public static Byte[] RunAlgorithm(Byte[] inputBuffer, Byte[] keyBuffer, Byte[] initializationVector, EncryptionMode encryptionMode, bool doEncrypt)
+        public static Byte[] RunAlgorithm(Byte[] inputBuffer, Byte[] keyBuffer, Byte[] initializationVector, EncryptionMode encryptionMode, Boolean doEncrypt)
         {
             List<Byte[]> blocksList;
             var keyGeneration = new KeyGeneration();

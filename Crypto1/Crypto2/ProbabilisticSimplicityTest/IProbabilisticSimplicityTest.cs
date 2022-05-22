@@ -11,6 +11,6 @@ namespace Crypto2.ProbabilisticSimplicityTest
          * сервиса, реализованного в задании 1, реализуйте интерфейс для следующих вероятностных тестов простоты:
          * Ферма, Соловея-Штрассена, Миллера-Рабина.
          */
-        bool MakeSimplicityTest(BigInteger value, Double minProbability);
+        Boolean MakeSimplicityTest(BigInteger value, Double minProbability);
     }
 }

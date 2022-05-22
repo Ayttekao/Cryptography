@@ -100,12 +100,12 @@ namespace Crypto2
                 return keys;
             }
 
-            private static bool WienerCheck(BigInteger d, BigInteger n)
+            private static Boolean WienerCheck(BigInteger d, BigInteger n)
             {
                 return d < (BigInteger)(0.3333 * Math.Pow((Double)n, 0.25));
             }
 
-            private static bool FermatCheck(BigInteger p, BigInteger q)
+            private static Boolean FermatCheck(BigInteger p, BigInteger q)
             {
                 if (p == q)
                 {

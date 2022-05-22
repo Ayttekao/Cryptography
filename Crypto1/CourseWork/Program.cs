@@ -56,9 +56,9 @@ namespace CourseWork
             Console.WriteLine($"PASS: {passCount}\nFAIL: {failCount}");*/
 
             Byte[] encryptedByteArray =
-                AlgorithmService.RunAlgorithm(bytes, key, initializationVectorRD, EncryptionMode.RDH, true);
+                AlgorithmService.RunAlgorithm(bytes, key, initializationVectorRD, EncryptionMode.RD, true);
             Byte[] decryptedByteArray = 
-                AlgorithmService.RunAlgorithm(encryptedByteArray, key, initializationVectorRD, EncryptionMode.RDH, false);
+                AlgorithmService.RunAlgorithm(encryptedByteArray, key, initializationVectorRD, EncryptionMode.RD, false);
             string str = Encoding.Default.GetString(decryptedByteArray);
             Console.WriteLine("The String is: " + str);
             Console.WriteLine(bytes.SequenceEqual(decryptedByteArray));

@@ -4,8 +4,8 @@ namespace CourseWork.LOKI97.Algorithm
 {
     public class Decoder
     {
-        readonly UInt32 ROUNDS = 16;
-        readonly UInt32 NUM_SUBKEYS = 48;
+        private static readonly UInt32 ROUNDS = 16;
+        private static readonly UInt32 NUM_SUBKEYS = 48;
 
         public Byte[] BlockDecrypt(Byte[] input, int inOffset, Object sessionKey)
         {
@@ -31,14 +31,15 @@ namespace CourseWork.LOKI97.Algorithm
                        (input[inOffset++] & 0xFFUL);
 
             // compute all rounds for this 1 block
-            UInt64 nR, f_out;
+            UInt64 nR;
+            UInt64 fOut;
             UInt32 k = NUM_SUBKEYS - 1;
             for (var i = 0; i < ROUNDS; i++)
             {
                 nR = R - SK[k--];
-                f_out = Cipher.Compute(nR, SK[k--]);
+                fOut = Cipher.Compute(nR, SK[k--]);
                 nR -= SK[k--];
-                R = L ^ f_out;
+                R = L ^ fOut;
                 L = nR;
             }
 

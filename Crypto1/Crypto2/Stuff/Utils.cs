@@ -88,7 +88,7 @@ namespace Crypto2.Stuff
             }
         }
 
-        private static bool IsSqrt(BigInteger value, BigInteger root)
+        private static Boolean IsSqrt(BigInteger value, BigInteger root)
         {
             var lowerBound = root * root;
 

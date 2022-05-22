@@ -8,7 +8,7 @@ namespace Crypto2.ProbabilisticSimplicityTest
 {
     public class FermatTest : IProbabilisticSimplicityTest
     {
-        public bool MakeSimplicityTest(BigInteger value, Double minProbability)
+        public Boolean MakeSimplicityTest(BigInteger value, Double minProbability)
         {
             if (minProbability is < 0.5 or >= 1)
             {

@@ -27,9 +27,9 @@ namespace CourseWork.LOKI97.Algorithm
 
         private static void GenerationS2Box()
         {
-            int S2_MASK = S2_SIZE - 1;
+            var S2_MASK = S2_SIZE - 1;
 
-            for (int i = 0; i < S2_SIZE; i++)
+            for (var i = 0; i < S2_SIZE; i++)
             { // for all S1 inputs
                 int b = i ^ S2_MASK; // compute input value
                 S2[i] = Exp3(b, S2_GEN, S2_SIZE);

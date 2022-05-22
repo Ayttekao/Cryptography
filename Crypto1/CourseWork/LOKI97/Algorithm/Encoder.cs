@@ -4,7 +4,7 @@ namespace CourseWork.LOKI97.Algorithm
 {
     public class Encoder
     {
-        static readonly int ROUNDS = 16;
+        private static readonly int ROUNDS = 16;
 
         public Byte[] BlockEncrypt(Byte[] input, int inOffset, Object sessionKey)
         {

@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2u26TkOEDRwOrI69e/E68P8wxG9Wx1eKdfH5kTUqNLLvB28Y5MnOmr1wYsknyeFB/zSnau6wVt4VrQtYr4uLKg==",
+  "dgSpecHash": "Fbur1aAGucMNtvmL/Ilns8KuJWkvRRM9Q9Y1A0/fH3lDE202o/HxSXGmv88/g5py53GkZ2fI6mv6UuNhOi2clg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\Crypto1\\Crypto1.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Ayttekao\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+  ],
   "logs": []
 }
