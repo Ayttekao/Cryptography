@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v5.0": {
       "Crypto3/1.0.0": {
+        "dependencies": {
+          "Crypto1": "1.0.0"
+        },
         "runtime": {
           "Crypto3.dll": {}
+        }
+      },
+      "Crypto1/1.0.0": {
+        "runtime": {
+          "Crypto1.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Crypto3/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Crypto1/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

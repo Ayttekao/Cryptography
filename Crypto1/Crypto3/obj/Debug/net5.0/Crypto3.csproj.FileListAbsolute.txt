@@ -3,7 +3,6 @@ C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\bin\Debug\net5.0
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\bin\Debug\net5.0\Crypto3.runtimeconfig.json
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\bin\Debug\net5.0\Crypto3.runtimeconfig.dev.json
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\bin\Debug\net5.0\Crypto3.dll
-C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\bin\Debug\net5.0\ref\Crypto3.dll
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\bin\Debug\net5.0\Crypto3.pdb
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\obj\Debug\net5.0\Crypto3.csproj.AssemblyReference.cache
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\obj\Debug\net5.0\Crypto3.GeneratedMSBuildEditorConfig.editorconfig
@@ -14,3 +13,11 @@ C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\obj\Debug\net5.0
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\obj\Debug\net5.0\ref\Crypto3.dll
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\obj\Debug\net5.0\Crypto3.pdb
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\obj\Debug\net5.0\Crypto3.genruntimeconfig.cache
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\bin\Debug\net5.0\Crypto1.deps.json
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\bin\Debug\net5.0\Crypto1.runtimeconfig.json
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\bin\Debug\net5.0\Crypto1.runtimeconfig.dev.json
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\bin\Debug\net5.0\Crypto1.exe
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\bin\Debug\net5.0\Crypto1.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\bin\Debug\net5.0\Crypto1.pdb
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\obj\Debug\net5.0\Crypto3.csproj.CopyComplete
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto3\obj\Debug\net5.0\refint\Crypto3.dll
