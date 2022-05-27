@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Text;
+using CourseWork.Benalo.Algorithm;
+using CourseWork.Benalo.ProbabilisticSimplicityTest;
 using CourseWork.LOKI97.AlgorithmService;
 using CourseWork.LOKI97.AlgorithmService.Modes;
 
@@ -29,6 +34,31 @@ namespace CourseWork
                 "like the hand of God hovering above? At least, it is true that man has no control, even over his own will.");
             Console.WriteLine("Byte Array is: " + String.Join(" ", bytes));
 
+            /*
+             * RD ++
+             * RDH ++
+             * CBC ++
+             * CFB ++
+             * CTR ++
+             * ECB ++
+             * OFB +
+             */
+            
+            var aboba = File.ReadAllBytes(@"C:\Users\Ayttekao\Downloads\JoJo's Bizarre Adventure Opening 3 - 4K - 60FPS - Creditless.mp4");
+
+            var encryptionMode = EncryptionMode.OFB;
+            var iv = initializationVector;
+            
+            Byte[] encryptedByteArray =
+                AlgorithmService.RunAlgorithm(aboba, key, iv, encryptionMode, true);
+            Byte[] decryptedByteArray = 
+                AlgorithmService.RunAlgorithm(encryptedByteArray, key, iv, encryptionMode, false);
+
+            File.WriteAllBytes(@"C:\Users\Ayttekao\Desktop\JoJo's Bizarre Adventure Opening 3 - 4K - 60FPS - Creditless.mp4", decryptedByteArray);
+            
+            Console.WriteLine("Encrypted?: {0}", !aboba.SequenceEqual(encryptedByteArray));
+            Console.WriteLine("Decrypted?: {0}", aboba.SequenceEqual(decryptedByteArray));
+            
             /*var passCount = 0;
             var failCount = 0;
             for (var i = 0; i < 2; i++)
@@ -55,13 +85,24 @@ namespace CourseWork
             }
             Console.WriteLine($"PASS: {passCount}\nFAIL: {failCount}");*/
 
-            Byte[] encryptedByteArray =
+            /*Byte[] encryptedByteArray =
                 AlgorithmService.RunAlgorithm(bytes, key, initializationVectorRD, EncryptionMode.RD, true);
             Byte[] decryptedByteArray = 
                 AlgorithmService.RunAlgorithm(encryptedByteArray, key, initializationVectorRD, EncryptionMode.RD, false);
             string str = Encoding.Default.GetString(decryptedByteArray);
             Console.WriteLine("The String is: " + str);
-            Console.WriteLine(bytes.SequenceEqual(decryptedByteArray));
+            Console.WriteLine(bytes.SequenceEqual(decryptedByteArray));*/
+
+            /*var message = new BigInteger(25290);
+            Console.WriteLine(message.GetByteCount());
+            var benalo = new Benaloh(TestType.MillerRabin, 0.7, 30, message + 1);
+            var encryptInt = benalo.BlockEncrypt(message);
+            var decryptInt = benalo.BlockDecrypt(encryptInt);
+            Console.WriteLine(message == decryptInt);*/
+            
+            /*var list = new List<BigInteger>();
+            new PollardsRhoSolver().GetFactors(list, 13195);
+            list.ForEach(s => Console.WriteLine(s));*/
         }
     }
 }

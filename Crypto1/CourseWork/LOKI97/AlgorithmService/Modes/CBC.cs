@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseWork.LOKI97.Algorithm;
+using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
     public sealed class CBC : EncryptionModeBase
     {
-        public override Byte[] Encrypt(List<Byte[]> blocksList, Object key, Byte[] iv)
+        public override Byte[] Encrypt(ICipherAlgorithm cipherAlgorithm, List<Byte[]> blocksList, Byte[] iv)
         {
             var outputBuffer = new Byte[blocksList.Count * blockSize];
-            var encoder = new Encoder();
 
             var step = 0;
             var encBlock = iv;
@@ -19,23 +19,22 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
             foreach (var block in blocksList)
             {
                 var temp = Xor(encBlock, block);
-                encBlock = encoder.BlockEncrypt(temp, 0, key);
+                encBlock = cipherAlgorithm.BlockEncrypt(temp, 0);
                 Array.Copy(encBlock, 0, outputBuffer, step++ * blockSize, blockSize);
             }
 
             return outputBuffer;
         }
 
-        public override Byte[] Decrypt(List<Byte[]> blocksList, Object key, Byte[] iv)
+        public override Byte[] Decrypt(ICipherAlgorithm cipherAlgorithm, List<Byte[]> blocksList, Byte[] iv)
         {
-            var decoder = new Decoder();
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
             var inputBuffer = new List<Byte[]>(blocksList);
             inputBuffer.Insert(0, iv);
                     
             Parallel.For(0, blocksList.Count, index =>
                     
-                outputBuffer[index] = Xor(inputBuffer[index], decoder.BlockDecrypt(inputBuffer[index + 1], 0, key))
+                outputBuffer[index] = Xor(inputBuffer[index], cipherAlgorithm.BlockDecrypt(inputBuffer[index + 1], 0))
             );
             
             return outputBuffer.SelectMany(x => x).ToArray();

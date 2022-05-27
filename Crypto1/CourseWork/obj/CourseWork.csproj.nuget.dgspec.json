@@ -43,6 +43,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "MessagePack.Annotations": {
+              "target": "Package",
+              "version": "[2.1.90, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

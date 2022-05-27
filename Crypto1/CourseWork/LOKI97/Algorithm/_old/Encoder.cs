@@ -1,12 +1,12 @@
-using System;
+/*using System;
 
 namespace CourseWork.LOKI97.Algorithm
 {
     public class Encoder
     {
-        private static readonly int ROUNDS = 16;
+        private const int Rounds = 16;
 
-        public Byte[] BlockEncrypt(Byte[] input, int inOffset, Object sessionKey)
+        public static Byte[] BlockEncrypt(Byte[] input, int inOffset, Object sessionKey)
         {
 
             UInt64[] SK = (UInt64[]) sessionKey;    // local ref to session key
@@ -31,15 +31,13 @@ namespace CourseWork.LOKI97.Algorithm
 
 
             // compute all rounds for this 1 block
-            UInt64 nR;
-            UInt64 f_out;
             UInt32 k = 0;
-            for (var i = 0; i < ROUNDS; i++)
+            for (var i = 0; i < Rounds; i++)
             {
-                nR = R + SK[k++];
-                f_out = Cipher.Compute(nR, SK[k++]);
+                var nR = R + SK[k++];
+                var fOut = Cipher.Compute(nR, SK[k++]);
                 nR += SK[k++];
-                R = L ^ f_out;
+                R = L ^ fOut;
                 L = nR;
 
             }
@@ -60,4 +58,4 @@ namespace CourseWork.LOKI97.Algorithm
             return result;
         }
     }
-}
+}*/

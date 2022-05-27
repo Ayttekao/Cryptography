@@ -2,14 +2,14 @@ using System;
 
 namespace CourseWork.LOKI97.Algorithm
 {
-    public class PermutationGeneration
+    public static class PermutationGeneration
     {
-        private static readonly UInt32 PERMUTATION_SIZE = 0x100;
-        private static readonly UInt64[] P = new UInt64[PERMUTATION_SIZE];
+        private const UInt32 PermutationSize = 0x100;
+        private static readonly UInt64[] P = new UInt64[PermutationSize];
 
-        public static void Init()
+        private static void Init()
         {
-            for (var i = 0; i < PERMUTATION_SIZE; i++)
+            for (var i = 0; i < PermutationSize; i++)
             {
                 var pval = (UInt64)0;
 

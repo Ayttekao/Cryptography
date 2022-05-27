@@ -30,3 +30,5 @@ C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto\CourseWork\obj\Debug\net5
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto\CourseWork\obj\Debug\net5.0\CourseWork.genruntimeconfig.cache
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto\CourseWork\obj\Debug\net5.0\ref\CourseWork.dll
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\CourseWork\obj\Debug\net5.0\refint\CourseWork.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\CourseWork\bin\Debug\net5.0\MessagePack.Annotations.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\CourseWork\obj\Debug\net5.0\CourseWork.csproj.CopyComplete

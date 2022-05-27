@@ -26,7 +26,13 @@ C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\Server.RazorTargetAssemblyInfo.cache
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\Server.csproj.CopyComplete
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\Server.dll
-C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\refint\Server.dll
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\Server.pdb
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\Server.genruntimeconfig.cache
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\ref\Server.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\bin\Debug\net5.0\CourseWork.deps.json
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\bin\Debug\net5.0\CourseWork.runtimeconfig.json
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\bin\Debug\net5.0\CourseWork.runtimeconfig.dev.json
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\bin\Debug\net5.0\CourseWork.exe
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\bin\Debug\net5.0\CourseWork.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\bin\Debug\net5.0\CourseWork.pdb
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\refint\Server.dll

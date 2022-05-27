@@ -4,8 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using Encoder = CourseWork.LOKI97.Algorithm.Encoder;
-using Decoder = CourseWork.LOKI97.Algorithm.Decoder;
+using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
@@ -17,25 +16,24 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
             _valueForHash = valueForHash;
         }
         
-        public override Byte[] Encrypt(List<Byte[]> blocksList, object key, Byte[] iv)
+        public override Byte[] Encrypt(ICipherAlgorithm cipherAlgorithm, List<Byte[]> blocksList, Byte[] iv)
         {
             var hashAlgorithm = MD5.Create();
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count + 2).ToList();
-            var encoder = new Encoder();
             var counterList = GetCounterList(iv, blocksList.Count);
             var initial = GetInitialAsBiginteger(iv).ToByteArray();
-            outputBuffer[0] = encoder.BlockEncrypt(initial, 0, key);
+            outputBuffer[0] = cipherAlgorithm.BlockEncrypt(initial, 0);
             outputBuffer[1] = Xor(initial, hashAlgorithm.ComputeHash(_valueForHash));
             
             Parallel.For(0, blocksList.Count, i =>
                     
-                outputBuffer[i + 2] = encoder.BlockEncrypt(Xor(counterList[i], blocksList[i]), 0, key) 
+                outputBuffer[i + 2] = cipherAlgorithm.BlockEncrypt(Xor(counterList[i], blocksList[i]), 0) 
             );
             
             return outputBuffer.SelectMany(x => x).ToArray();
         }
 
-        public override Byte[] Decrypt(List<Byte[]> blocksList, object key, Byte[] iv)
+        public override Byte[] Decrypt(ICipherAlgorithm cipherAlgorithm, List<Byte[]> blocksList, Byte[] iv)
         {
             if (IsWrongInit(iv, _valueForHash, blocksList[1]))
             {
@@ -43,12 +41,11 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
             }
             
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
-            var decoder = new Decoder();
             var counterList = GetCounterList(iv, blocksList.Count);
 
             Parallel.For(2, blocksList.Count, i =>
                     
-                outputBuffer[i - 2] = Xor(decoder.BlockDecrypt(blocksList[i], 0, key), counterList[i - 2])
+                outputBuffer[i - 2] = Xor(cipherAlgorithm.BlockDecrypt(blocksList[i], 0), counterList[i - 2])
             );
             outputBuffer.RemoveAt(outputBuffer.Count - 1);
             outputBuffer.RemoveAt(outputBuffer.Count - 1);

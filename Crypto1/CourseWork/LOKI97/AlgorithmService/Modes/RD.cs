@@ -4,35 +4,34 @@ using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using CourseWork.LOKI97.Algorithm;
+using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
     public sealed class RD : EncryptionModeBase
     {
-        public override Byte[] Encrypt(List<Byte[]> blocksList, object key, Byte[] iv)
+        public override Byte[] Encrypt(ICipherAlgorithm cipherAlgorithm, List<Byte[]> blocksList, Byte[] iv)
         {
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count + 1).ToList();
-            var encoder = new Encoder();
             var counterList = GetCounterList(iv, blocksList.Count);
-            outputBuffer[0] = encoder.BlockEncrypt(GetInitial(iv).ToByteArray(), 0, key);
+            outputBuffer[0] = cipherAlgorithm.BlockEncrypt(GetInitial(iv).ToByteArray(), 0);
 
             Parallel.For(0, blocksList.Count, count =>
                     
-                outputBuffer[count + 1] = encoder.BlockEncrypt(Xor(counterList[count], blocksList[count]), 0, key) 
+                outputBuffer[count + 1] = cipherAlgorithm.BlockEncrypt(Xor(counterList[count], blocksList[count]), 0) 
             );
             
             return outputBuffer.SelectMany(x => x).ToArray();
         }
 
-        public override Byte[] Decrypt(List<Byte[]> blocksList, object key, Byte[] iv)
+        public override Byte[] Decrypt(ICipherAlgorithm cipherAlgorithm, List<Byte[]> blocksList, Byte[] iv)
         {
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
-            var decoder = new Decoder();
             var counterList = GetCounterList(iv, blocksList.Count);
                     
             Parallel.For(1, blocksList.Count, count =>
                     
-                outputBuffer[count - 1] = Xor(decoder.BlockDecrypt(blocksList[count], 0, key), counterList[count - 1]) 
+                outputBuffer[count - 1] = Xor(cipherAlgorithm.BlockDecrypt(blocksList[count], 0), counterList[count - 1]) 
             );
             
             outputBuffer.RemoveAt(outputBuffer.Count - 1);

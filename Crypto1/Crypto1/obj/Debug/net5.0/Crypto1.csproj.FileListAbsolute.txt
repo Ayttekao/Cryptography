@@ -13,4 +13,4 @@ C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto1\obj\Debug\net5.0
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto1\obj\Debug\net5.0\ref\Crypto1.dll
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto1\obj\Debug\net5.0\Crypto1.pdb
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto1\obj\Debug\net5.0\Crypto1.genruntimeconfig.cache
-C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto1\obj\Debug\net5.0\refint\Crypto1.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto1\bin\Debug\net5.0\ref\Crypto1.dll

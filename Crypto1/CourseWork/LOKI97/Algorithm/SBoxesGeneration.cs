@@ -2,41 +2,41 @@ using System;
 
 namespace CourseWork.LOKI97.Algorithm
 {
-    public class SBoxesGeneration
+    public static class SBoxesGeneration
     {
         /*S1-box options*/
-        private static readonly int S1_GEN = 0x2911;
-        private static readonly int S1_SIZE = 0x2000;
-        private static readonly Byte[] S1 = new Byte[S1_SIZE];
+        private const Int32 S1Gen = 0x2911;
+        private const Int32 S1Size = 0x2000;
+        private static readonly Byte[] S1 = new Byte[S1Size];
 
         /*S2-box options*/
-        private static readonly int S2_GEN = 0xAA7;
-        private static readonly int S2_SIZE = 0x800;
-        private static readonly Byte[] S2 = new Byte[S2_SIZE];
+        private const Int32 S2Gen = 0xAA7;
+        private const Int32 S2Size = 0x800;
+        private static readonly Byte[] S2 = new Byte[S2Size];
 
         private static void GenerationS1Box()
         {
-            int S1_MASK = S1_SIZE - 1;
+            const Int32 s1Mask = S1Size - 1;
 
-            for (int i = 0; i < S1_SIZE; i++)
+            for (var i = 0; i < S1Size; i++)
             { // for all S1 inputs
-                int b = i ^ S1_MASK; // compute input value
-                S1[i] = Exp3(b, S1_GEN, S1_SIZE);
+                var b = i ^ s1Mask; // compute input value
+                S1[i] = Exp3(b, S1Gen, S1Size);
             }
         }
 
         private static void GenerationS2Box()
         {
-            var S2_MASK = S2_SIZE - 1;
+            const Int32 s2Mask = S2Size - 1;
 
-            for (var i = 0; i < S2_SIZE; i++)
+            for (var i = 0; i < S2Size; i++)
             { // for all S1 inputs
-                int b = i ^ S2_MASK; // compute input value
-                S2[i] = Exp3(b, S2_GEN, S2_SIZE);
+                var b = i ^ s2Mask; // compute input value
+                S2[i] = Exp3(b, S2Gen, S2Size);
             }
         }
 
-        private static Byte Exp3(int b, int g, int n)
+        private static Byte Exp3(Int32 b, Int32 g, Int32 n)
         {
             if (b == 0)
             {
@@ -48,7 +48,7 @@ namespace CourseWork.LOKI97.Algorithm
             return (Byte) r;
         }
 
-        private static int Mult(int a, int b, int g, int n)
+        private static Int32 Mult(Int32 a, Int32 b, Int32 g, Int32 n)
         {
             var p = 0;
             while (b != 0)
@@ -58,7 +58,7 @@ namespace CourseWork.LOKI97.Algorithm
                 a <<= 1;
                 if (a >= n)
                     a ^= g;
-                b = (int)((uint)b >> 1);
+                b = (Int32)((UInt32)b >> 1);
             }
             return p;
         }

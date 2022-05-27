@@ -1,11 +1,38 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "MessagePack.Annotations/2.1.90": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/MessagePack.Annotations.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MessagePack.Annotations.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "MessagePack.Annotations/2.1.90": {
+      "sha512": "YnS4qdOMFJuC8TDvXK8ECjWn+hI/B6apwMSgQsiynVXxsvFiiSyun7OXgVT7KxkR8qLinFuASzoG/5zv3kemwQ==",
+      "type": "package",
+      "path": "messagepack.annotations/2.1.90",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "lib/netstandard2.0/MessagePack.Annotations.dll",
+        "lib/netstandard2.0/MessagePack.Annotations.xml",
+        "messagepack.annotations.2.1.90.nupkg.sha512",
+        "messagepack.annotations.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "MessagePack.Annotations >= 2.1.90"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Ayttekao\\.nuget\\packages\\": {},
@@ -50,6 +77,12 @@
     "frameworks": {
       "net5.0": {
         "targetAlias": "net5.0",
+        "dependencies": {
+          "MessagePack.Annotations": {
+            "target": "Package",
+            "version": "[2.1.90, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

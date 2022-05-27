@@ -173,6 +173,19 @@
         "runtime": {
           "lib/netcoreapp2.1/_._": {}
         }
+      },
+      "CourseWork/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "MessagePack.Annotations": "2.1.90"
+        },
+        "compile": {
+          "bin/placeholder/CourseWork.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CourseWork.dll": {}
+        }
       }
     }
   },
@@ -581,10 +594,16 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "CourseWork/1.0.0": {
+      "type": "project",
+      "path": "../CourseWork/CourseWork.csproj",
+      "msbuildProject": "../CourseWork/CourseWork.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "CourseWork >= 1.0.0",
       "Microsoft.AspNetCore.SignalR.Protocols.MessagePack >= 5.0.17"
     ]
   },
@@ -619,7 +638,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj": {
+              "projectPath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

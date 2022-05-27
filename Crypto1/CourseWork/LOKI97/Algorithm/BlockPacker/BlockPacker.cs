@@ -1,18 +1,11 @@
 using System;
 
-namespace CourseWork.LOKI97.Algorithm
+namespace CourseWork.LOKI97.Algorithm.BlockPacker
 {
-    public class Decoder
+    public class BlockPacker : IBlockPacker
     {
-        private static readonly UInt32 ROUNDS = 16;
-        private static readonly UInt32 NUM_SUBKEYS = 48;
-
-        public Byte[] BlockDecrypt(Byte[] input, int inOffset, Object sessionKey)
+        public Tuple<UInt64, UInt64> PackBlock(Byte[] input, Int32 inOffset)
         {
-
-            UInt64[] SK = (UInt64[]) sessionKey;    // local ref to session key
-
-            // pack input block into 2 longs: L and R
             UInt64 L = (input[inOffset++] & 0xFFUL) << 56 |
                        (input[inOffset++] & 0xFFUL) << 48 |
                        (input[inOffset++] & 0xFFUL) << 40 |
@@ -28,23 +21,14 @@ namespace CourseWork.LOKI97.Algorithm
                        (input[inOffset++] & 0xFFUL) << 24 |
                        (input[inOffset++] & 0xFFUL) << 16 |
                        (input[inOffset++] & 0xFFUL) << 8 |
-                       (input[inOffset++] & 0xFFUL);
+                       (input[inOffset] & 0xFFUL);
 
-            // compute all rounds for this 1 block
-            UInt64 nR;
-            UInt64 fOut;
-            UInt32 k = NUM_SUBKEYS - 1;
-            for (var i = 0; i < ROUNDS; i++)
-            {
-                nR = R - SK[k--];
-                fOut = Cipher.Compute(nR, SK[k--]);
-                nR -= SK[k--];
-                R = L ^ fOut;
-                L = nR;
-            }
+            return new Tuple<UInt64, UInt64>(L, R);
+        }
 
-            // unpack resulting L & R into out buffer
-            Byte[] result = {
+        public Byte[] UnpackBlock(UInt64 L, UInt64 R)
+        {
+            return new Byte[] {
                 (Byte) (R >> 56), (Byte) (R >> 48),
                 (Byte) (R >> 40), (Byte) (R >> 32),
                 (Byte) (R >> 24), (Byte) (R >> 16),
@@ -54,8 +38,6 @@ namespace CourseWork.LOKI97.Algorithm
                 (Byte) (L >> 24), (Byte) (L >> 16),
                 (Byte) (L >> 8), (Byte) L
             };
-
-            return result;
         }
     }
 }
