@@ -1,13 +1,14 @@
 using System;
-using System.Linq;
 using System.Text;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
     public class ModeFactory
     {
+        //remove static 
         public static EncryptionModeBase CreateEncryptionMode(EncryptionMode encryptionMode, params Object[] list)
         {
+            //dict enums to class
             return encryptionMode switch
             {
                 EncryptionMode.ECB => new ECB(),

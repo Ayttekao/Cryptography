@@ -19,9 +19,10 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
         public override Byte[] Encrypt(ICipherAlgorithm cipherAlgorithm, List<Byte[]> blocksList, Byte[] iv)
         {
             var hashAlgorithm = MD5.Create();
+            var blockSize = cipherAlgorithm.GetBlockSize();
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count + 2).ToList();
-            var counterList = GetCounterList(iv, blocksList.Count);
-            var initial = GetInitialAsBiginteger(iv).ToByteArray();
+            var counterList = GetCounterList(iv, blocksList.Count, blockSize);
+            var initial = GetInitialAsBiginteger(iv, blockSize).ToByteArray();
             outputBuffer[0] = cipherAlgorithm.BlockEncrypt(initial, 0);
             outputBuffer[1] = Xor(initial, hashAlgorithm.ComputeHash(_valueForHash));
             
@@ -35,13 +36,14 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
 
         public override Byte[] Decrypt(ICipherAlgorithm cipherAlgorithm, List<Byte[]> blocksList, Byte[] iv)
         {
-            if (IsWrongInit(iv, _valueForHash, blocksList[1]))
+            var blockSize = cipherAlgorithm.GetBlockSize();
+            if (IsWrongInit(iv, _valueForHash, blocksList[1], blockSize))
             {
                 throw new ArgumentException();
             }
             
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
-            var counterList = GetCounterList(iv, blocksList.Count);
+            var counterList = GetCounterList(iv, blocksList.Count, blockSize);
 
             Parallel.For(2, blocksList.Count, i =>
                     
@@ -53,45 +55,45 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
             return outputBuffer.SelectMany(x => x).ToArray();
         }
 
-        private Boolean IsWrongInit(Byte[] iv, Byte[] valueForHash, Byte[] hashedValue)
+        private Boolean IsWrongInit(Byte[] iv, Byte[] valueForHash, Byte[] hashedValue, Int32 blockSize)
         {
-            var initial = GetInitial(iv);
+            var initial = GetInitial(iv, blockSize);
             var hashAlgorithm = MD5.Create();
 
             return !Xor(initial, hashAlgorithm.ComputeHash(valueForHash)).SequenceEqual(hashedValue);
         }
 
-        private BigInteger GetDeltaAsBiginteger(Byte[] iv)
+        private BigInteger GetDeltaAsBiginteger(Byte[] iv, Int32 blockSize)
         {
-            return new BigInteger(GetDelta(iv));
+            return new BigInteger(GetDelta(iv, blockSize));
         }
 
-        private BigInteger GetInitialAsBiginteger(Byte[] iv)
+        private BigInteger GetInitialAsBiginteger(Byte[] iv, Int32 blockSize)
         {
-            return new BigInteger(GetInitial(iv));
+            return new BigInteger(GetInitial(iv, blockSize));
         }
 
-        private Byte[] GetDelta(Byte[] iv)
+        private Byte[] GetDelta(Byte[] iv, Int32 blockSize)
         {
             var deltaArr = new Byte[blockSize];
             Array.Copy(iv, blockSize, deltaArr, 0, blockSize);
             return deltaArr;
         }
 
-        private Byte[] GetInitial(Byte[] iv)
+        private Byte[] GetInitial(Byte[] iv, Int32 blockSize)
         {
             var initial = new Byte[blockSize];
             Array.Copy(iv, 0, initial, 0, blockSize);
             return initial;
         }
 
-        private List<Byte[]> GetCounterList(Byte[] iv, Int32 size)
+        private List<Byte[]> GetCounterList(Byte[] iv, Int32 size, Int32 blockSize)
         {
-            var delta = GetDeltaAsBiginteger(iv);
+            var delta = GetDeltaAsBiginteger(iv, blockSize);
             
             var copyInitializationVector = new Byte[blockSize];
             Array.Copy(iv, 0, copyInitializationVector, 0, blockSize);
-            var initializationVector = GetInitialAsBiginteger(iv);
+            var initializationVector = GetInitialAsBiginteger(iv, blockSize);
             
             var counterList = new List<Byte[]>();
             for (var count = 0; count < size; count++)

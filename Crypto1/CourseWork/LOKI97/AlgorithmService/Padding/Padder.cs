@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace CourseWork.LOKI97.AlgorithmService.Padding
 {
-    public class Padder
+    public sealed class Padder
     {
         private PaddingType _paddingType;
         private Int32 _blockSize;

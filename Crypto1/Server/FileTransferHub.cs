@@ -14,7 +14,7 @@ namespace Server
         private const Int32 BlockSize = 8;
         private static readonly String CurrentPath = AppDomain.CurrentDomain.BaseDirectory + FileFolderName;
         private static Boolean _isFileDirectoryExist = false;
-        private static Benaloh benalo = new(TestType.MillerRabin, 0.7, 16, BigInteger.Pow(2, 16) + BigInteger.One);
+        private static BenalohImpl benalo = new(TestType.MillerRabin, 0.7, 16, BigInteger.Pow(2, 16) + BigInteger.One);
         private static ConcurrentDictionary<String, BigInteger> _privateKeys = new();
         private static Byte[] iv;
         //public PublicKeys testKey;
@@ -115,6 +115,7 @@ namespace Server
         private static async Task<byte[]> ReadFileAsync(String path)
         {
             byte[] result;
+            // filestream
 
             await using (var sourceStream = File.Open(path, FileMode.Open))
             {

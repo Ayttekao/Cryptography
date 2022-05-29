@@ -6,10 +6,11 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
     public abstract class EncryptionModeBase
     {
-        protected int blockSize = 16;
+        // abstract property or get from algo
         public abstract Byte[] Encrypt(ICipherAlgorithm cipherAlgorithm, List<Byte[]> blocksList, Byte[] iv);
         public abstract Byte[] Decrypt(ICipherAlgorithm cipherAlgorithm, List<Byte[]> blocksList, Byte[] iv);
 
+        // SOLID
         protected static Byte[] Xor(Byte[] a, Byte[] b)
         {
             Byte[] res = new Byte[a.Length];

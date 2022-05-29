@@ -5,10 +5,11 @@ using CourseWork.LOKI97.Algorithm.KeyGen;
 
 namespace CourseWork.LOKI97.Algorithm.CipherAlgorithm
 {
-    public class Loki97Impl : ICipherAlgorithm
+    public sealed class Loki97Impl : ICipherAlgorithm
     {
         private const UInt32 Rounds = 16;
         private const UInt32 NumSubKeys = 48;
+        private const Int32 BlockSize = 16;
         private IEncryptionTransformation _encryptionTransformation;
         private IBlockPacker _blockPacker;
         private Object _keys;
@@ -66,6 +67,11 @@ namespace CourseWork.LOKI97.Algorithm.CipherAlgorithm
 
             // unpack resulting L & R into out buffer
             return _blockPacker.UnpackBlock(L, R);
+        }
+
+        public int GetBlockSize()
+        {
+            return BlockSize;
         }
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CourseWork.LOKI97.Algorithm;
 using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
@@ -11,6 +10,7 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
     {
         public override Byte[] Encrypt(ICipherAlgorithm cipherAlgorithm, List<Byte[]> blocksList, Byte[] iv)
         {
+            var blockSize = cipherAlgorithm.GetBlockSize();
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
             var initCounterValue = iv;
 
@@ -19,7 +19,7 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
                 outputBuffer[index] = Xor
                 (
                     blocksList[index],
-                    cipherAlgorithm.BlockEncrypt(IncrementCounterByOne(initCounterValue), 0)
+                    cipherAlgorithm.BlockEncrypt(IncrementCounterByOne(initCounterValue, blockSize), 0)
                 );
             });
 
@@ -31,7 +31,7 @@ namespace CourseWork.LOKI97.AlgorithmService.Modes
             return Encrypt(cipherAlgorithm, blocksList, iv);
         }
 
-        private Byte[] IncrementCounterByOne(Byte[] initCounterValue)
+        private Byte[] IncrementCounterByOne(Byte[] initCounterValue, Int32 blockSize)
         {
             Byte[] tmp = (Byte[])initCounterValue.Clone();
             for (var i = blockSize; i > 0; i--)

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using CourseWork.LOKI97.Algorithm;
 using CourseWork.LOKI97.Algorithm.BlockPacker;
 using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
 using CourseWork.LOKI97.Algorithm.EncryptionTransformation;
@@ -14,25 +13,29 @@ namespace CourseWork.LOKI97.AlgorithmService
     {
         static readonly int blockSize = 16;
 
-        public static Byte[] RunAlgorithm(Byte[] inputBuffer, Byte[] keyBuffer, Byte[] initializationVector, EncryptionMode encryptionMode, Boolean doEncrypt)
+        public Byte[] RunAlgorithm(Byte[] inputBuffer,
+            Byte[] keyBuffer,
+            Byte[] initializationVector,
+            EncryptionMode encryptionMode,
+            Boolean doEncrypt)
         {
             List<Byte[]> blocksList;
             var padder = new Padder(PaddingType.PKCS7, blockSize);
             var mode = ModeFactory.CreateEncryptionMode(encryptionMode);
-            var loki97V2 = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), keyBuffer);
+            var loki97 = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), keyBuffer);
 
             if (doEncrypt)
             {
                 inputBuffer = padder.PadBuffer(inputBuffer);
                 blocksList = GetBlocksList(inputBuffer);
                 
-                return mode.Encrypt(loki97V2, blocksList, initializationVector);
+                return mode.Encrypt(loki97, blocksList, initializationVector);
             } 
             else
             {
                 blocksList = GetBlocksList(inputBuffer);
-                
-                return padder.RemovePadding(mode.Decrypt(loki97V2, blocksList, initializationVector));
+                var outputBuffer = mode.Decrypt(loki97, blocksList, initializationVector);
+                return padder.RemovePadding(outputBuffer);
             }
         }
 

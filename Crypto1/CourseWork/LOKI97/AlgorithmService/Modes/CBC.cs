@@ -2,15 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CourseWork.LOKI97.Algorithm;
 using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
 
 namespace CourseWork.LOKI97.AlgorithmService.Modes
 {
     public sealed class CBC : EncryptionModeBase
     {
+        // передача iv по ссылке
         public override Byte[] Encrypt(ICipherAlgorithm cipherAlgorithm, List<Byte[]> blocksList, Byte[] iv)
         {
+            var blockSize = cipherAlgorithm.GetBlockSize();
             var outputBuffer = new Byte[blocksList.Count * blockSize];
 
             var step = 0;
