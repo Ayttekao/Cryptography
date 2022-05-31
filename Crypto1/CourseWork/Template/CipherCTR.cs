@@ -16,7 +16,7 @@ namespace CourseWork.Template
             _cipherAlgorithm = cipherAlgorithm;
         }
         
-        protected override byte[] EncryptBlocks(List<byte[]> blocksList, ref byte[] iv)
+        protected override Byte[] EncryptBlocks(List<Byte[]> blocksList, ref Byte[] iv)
         {
             var blockSize = _cipherAlgorithm.GetBlockSize();
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
@@ -35,7 +35,7 @@ namespace CourseWork.Template
             return outputBuffer.SelectMany(x => x).ToArray();
         }
 
-        protected override byte[] DecryptBlocks(List<byte[]> blocksList, ref byte[] iv)
+        protected override Byte[] DecryptBlocks(List<Byte[]> blocksList, ref Byte[] iv)
         {
             return EncryptBlocks(blocksList, ref iv);
         }

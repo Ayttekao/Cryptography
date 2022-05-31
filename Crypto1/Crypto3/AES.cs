@@ -13,22 +13,22 @@ namespace Crypto3
      */
     public class AES : ICipherAlgorithm, IEncryptionTransformation, IRoundKeyGen
     {
-        public Byte[] Encrypt(byte[] inputBlock)
+        public Byte[] Encrypt(Byte[] inputBlock)
         {
             throw new System.NotImplementedException();
         }
 
-        public Byte[] Decrypt(byte[] inputBlock)
+        public Byte[] Decrypt(Byte[] inputBlock)
         {
             throw new System.NotImplementedException();
         }
 
-        public Byte[] EncryptionTransformation(byte[] inputBlock, Byte[] roundKey)
+        public Byte[] EncryptionTransformation(Byte[] inputBlock, Byte[] roundKey)
         {
             throw new System.NotImplementedException();
         }
 
-        public Byte[][] Generate(byte[] inputKey)
+        public Byte[][] Generate(Byte[] inputKey)
         {
             throw new System.NotImplementedException();
         }

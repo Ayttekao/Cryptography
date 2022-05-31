@@ -9,7 +9,7 @@ namespace CourseWork.Template
 {
     public class CipherRD : CipherTemplate
     {
-        private ICipherAlgorithm _cipherAlgorithm;
+        protected ICipherAlgorithm _cipherAlgorithm;
 
         public CipherRD(ICipherAlgorithm cipherAlgorithm)
         {
@@ -17,7 +17,7 @@ namespace CourseWork.Template
 
         }
         
-        protected override byte[] EncryptBlocks(List<byte[]> blocksList, ref byte[] iv)
+        protected override Byte[] EncryptBlocks(List<Byte[]> blocksList, ref Byte[] iv)
         {
             var blockSize = _cipherAlgorithm.GetBlockSize();
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
@@ -37,7 +37,7 @@ namespace CourseWork.Template
             return outputBuffer.SelectMany(x => x).ToArray();
         }
 
-        protected override byte[] DecryptBlocks(List<byte[]> blocksList, ref byte[] iv)
+        protected override Byte[] DecryptBlocks(List<Byte[]> blocksList, ref Byte[] iv)
         {
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
             var counterList = GetCounterListV2(iv, blocksList.Count, _cipherAlgorithm.GetBlockSize());
@@ -56,7 +56,7 @@ namespace CourseWork.Template
             return outputBuffer.SelectMany(x => x).ToArray();
         }
 
-        protected override List<byte[]> ModifyOnFirstStageEncrypt(ref List<byte[]> blocksList, ref byte[] iv)
+        protected override List<Byte[]> ModifyOnFirstStageEncrypt(ref List<Byte[]> blocksList, ref Byte[] iv)
         {
             var outputBuffer = new List<Byte[]>();
             var initial =
@@ -74,7 +74,7 @@ namespace CourseWork.Template
             return outputBuffer;
         }
 
-        protected override List<byte[]> ModifyOnFirstStageDecrypt(ref List<byte[]> blocksList, ref byte[] iv)
+        protected override List<Byte[]> ModifyOnFirstStageDecrypt(ref List<Byte[]> blocksList, ref Byte[] iv)
         {
             var outputBuffer = new List<Byte[]>();
             var initial =

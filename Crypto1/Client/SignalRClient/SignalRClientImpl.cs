@@ -56,7 +56,7 @@ namespace Client.SignalRClient
         
         public SignalRClientImpl(string hubPath) : base(hubPath) { }
 
-        public async Task AcceptFile(byte[] file, string filename)
+        public async Task AcceptFile(Byte[] file, string filename)
         {
             if (_localStore == null || _localStore.GetFiles().All(x => x.Name != filename))
             {
@@ -84,7 +84,7 @@ namespace Client.SignalRClient
         {
             if (!Started)
             {
-                HubConnection.On<byte[], string>("AcceptFile", async (file, filename) =>
+                HubConnection.On<Byte[], string>("AcceptFile", async (file, filename) =>
                 {
                     await AcceptFile(file, filename);
                 });

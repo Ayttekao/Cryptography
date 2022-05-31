@@ -24,7 +24,7 @@ namespace CourseWork.LOKI97.Algorithm.CipherAlgorithm
             _keys = keyGen.MakeKey((Byte[])key, _encryptionTransformation);
         }
         
-        public byte[] BlockEncrypt(byte[] input, int inOffset)
+        public Byte[] BlockEncrypt(Byte[] input, int inOffset)
         {
             UInt64[] SK = (UInt64[]) _keys;    // local ref to session key
 
@@ -47,7 +47,7 @@ namespace CourseWork.LOKI97.Algorithm.CipherAlgorithm
             return _blockPacker.UnpackBlock(L, R);
         }
 
-        public byte[] BlockDecrypt(byte[] input, int inOffset)
+        public Byte[] BlockDecrypt(Byte[] input, int inOffset)
         {
             UInt64[] SK = (UInt64[]) _keys;    // local ref to session key
 

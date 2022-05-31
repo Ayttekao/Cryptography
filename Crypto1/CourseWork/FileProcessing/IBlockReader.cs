@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CourseWork.FileProcessing
 {
     public interface IBlockReader : IDisposable
     {
-        public List<Byte[]> GetNextBlocks(Int32 numBlocks);
+        public Task<List<Byte[]>> GetNextBlocks(Int32 numBlocks);
 
         public Int64 GetLength();
 

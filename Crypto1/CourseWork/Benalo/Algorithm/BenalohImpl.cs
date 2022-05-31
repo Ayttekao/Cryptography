@@ -108,7 +108,7 @@ namespace CourseWork.Benalo.Algorithm
             public BigInteger GetPrimeNumberP(BigInteger r)
             {
                 var random = new Random();
-                var buffer = new byte[_numSize / 8 + 1];
+                var buffer = new Byte[_numSize / 8 + 1];
 
                 random.NextBytes(buffer);
                 buffer[^1] = 0b00000000;
@@ -151,7 +151,7 @@ namespace CourseWork.Benalo.Algorithm
             public BigInteger GetPrimeNumberQ(BigInteger r, BigInteger p)
             {
                 var random = new Random();
-                var buffer = new byte[_numSize / 8 + 1];
+                var buffer = new Byte[_numSize / 8 + 1];
 
                 BigInteger qCandidate;
                 do

@@ -34,13 +34,13 @@ namespace Client.Stuff
             }
         }
         
-        public static async Task<byte[]> ReadFileAsync(String path)
+        public static async Task<Byte[]> ReadFileAsync(String path)
         {
-            byte[] result;
+            Byte[] result;
 
             await using (var sourceStream = File.Open(path, FileMode.Open))
             {
-                result = new byte[sourceStream.Length];
+                result = new Byte[sourceStream.Length];
                 await sourceStream.ReadAsync(result, 0, (int) sourceStream.Length);
             }
 

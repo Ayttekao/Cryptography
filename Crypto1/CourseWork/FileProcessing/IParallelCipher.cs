@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using CourseWork.LOKI97.AlgorithmService.Modes;
 
 namespace CourseWork.FileProcessing
 {
     public interface IParallelCipher
     {
-        public Byte[] Encrypt(String filePath, EncryptionMode encryptionMode);
-        public Byte[] Decrypt(Byte[] inputBuffer, EncryptionMode encryptionMode);
+        public Task<Byte[]> Encrypt(String filePath, EncryptionMode encryptionMode);
+        public Task<Byte[]> Decrypt(Byte[] inputBuffer, EncryptionMode encryptionMode);
     }
 }

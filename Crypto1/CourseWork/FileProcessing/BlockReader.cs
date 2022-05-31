@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace CourseWork.FileProcessing
 {
@@ -27,7 +28,7 @@ namespace CourseWork.FileProcessing
         }
 
         // async 
-        public List<Byte[]> GetNextBlocks(Int32 numBlocks)
+        public Task<List<Byte[]>> GetNextBlocks(Int32 numBlocks)
         {
             var blocksList = new List<Byte[]>();
             var bufferSize = _fileStream.Length - _fileStream.Position < _blockSize * numBlocks
@@ -68,7 +69,7 @@ namespace CourseWork.FileProcessing
                 }
             }
 
-            return blocksList; 
+            return Task.FromResult(blocksList); 
         }
 
         public Int64 GetLength()

@@ -10,7 +10,7 @@ namespace CourseWork.LOKI97.Algorithm._old
         private Byte[] S2 = SBoxesGeneration.GetS2Box();
         private UInt64[] P = PermutationGeneration.GetPermutation();
         
-        public byte[] BlockEncrypt(byte[] input, int inOffset, object sessionKey)
+        public Byte[] BlockEncrypt(Byte[] input, int inOffset, object sessionKey)
         {
             UInt64[] SK = (UInt64[]) sessionKey;    // local ref to session key
 
@@ -33,7 +33,7 @@ namespace CourseWork.LOKI97.Algorithm._old
             return UnpackBlock(L, R);
         }
 
-        public byte[] BlockDecrypt(byte[] input, int inOffset, object sessionKey)
+        public Byte[] BlockDecrypt(Byte[] input, int inOffset, object sessionKey)
         {
             UInt64[] SK = (UInt64[]) sessionKey;    // local ref to session key
 

@@ -83,7 +83,7 @@ namespace Client
 
         private async void DownloadButton_Click(object sender, EventArgs e)
         {
-            /*_hubConnection.On<byte[], string>("AcceptFile", async (file, filename) =>
+            /*_hubConnection.On<Byte[], string>("AcceptFile", async (file, filename) =>
             {
                 var files = new DirectoryInfo(CurrentPath).GetFiles().Select(o => o.Name);
                 _fileNames = new ConcurrentBag<String>(files);
@@ -146,12 +146,12 @@ namespace Client
                 values.Add(Utils.RandomBigInteger(BigInteger.Zero, ringModulo));
             }
 
-            var keyByteArray = new byte[ValuesCount][];
+            var keyByteArray = new Byte[ValuesCount][];
             for (var i = 0; i < ValuesCount; i++)
             {
                 keyByteArray[i] = values[i].ToByteArray();
             }
-            var temp = new byte[8];
+            var temp = new Byte[8];
             var count = 0;
             for (var i = 0; i < 4; i++)
             {
@@ -167,7 +167,7 @@ namespace Client
         private Byte[] GetByteArray(int size)
         {
             var rnd = new Random();
-            var b = new byte[size];
+            var b = new Byte[size];
             rnd.NextBytes(b);
             return b;
         }*/

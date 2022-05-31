@@ -57,14 +57,14 @@ namespace Server
             await sourceStream.WriteAsync(text, 0, text.Length);
         }
         
-        private static async Task<byte[]> ReadFileAsync(String path)
+        private static async Task<Byte[]> ReadFileAsync(String path)
         {
-            byte[] result;
+            Byte[] result;
             // filestream
 
             await using (var sourceStream = File.Open(path, FileMode.Open))
             {
-                result = new byte[sourceStream.Length];
+                result = new Byte[sourceStream.Length];
                 await sourceStream.ReadAsync(result, 0, (int)sourceStream.Length);
             }
 

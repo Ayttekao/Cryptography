@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
 using CourseWork.LOKI97.AlgorithmService.Modes;
 using CourseWork.LOKI97.AlgorithmService.Padding;
@@ -28,7 +29,7 @@ namespace CourseWork.FileProcessing
             _padder = new Padder(PaddingType.PKCS7, blockSize);
         }
         
-        public byte[] Encrypt(string filePath, EncryptionMode encryptionMode)
+        public async Task<Byte[]> Encrypt(string filePath, EncryptionMode encryptionMode)
         {
             _cipherTemplate = new CipherTemplateFactory().CreateCipherTemplate(_algorithm, encryptionMode);
             var processorCount = Environment.ProcessorCount;
@@ -40,7 +41,7 @@ namespace CourseWork.FileProcessing
 
             for (var count = 0; count < iterations; count++)
             {
-                var blocks = blockReader.GetNextBlocks(processorCount);
+                var blocks = await blockReader.GetNextBlocks(processorCount);
                 if (count == iterations - 1)
                 {
                     if (blocks[^1].Length == _blockSize)
@@ -59,7 +60,7 @@ namespace CourseWork.FileProcessing
             return outputBuffer.SelectMany(x => x).ToArray();
         }
 
-        public Byte[] Decrypt(Byte[] inputBuffer, EncryptionMode encryptionMode)
+        public async Task<Byte[]> Decrypt(Byte[] inputBuffer, EncryptionMode encryptionMode)
         {
             _cipherTemplate = new CipherTemplateFactory().CreateCipherTemplate(_algorithm, encryptionMode);
             var processorCount = Environment.ProcessorCount;

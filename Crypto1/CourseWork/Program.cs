@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using CourseWork.FileProcessing;
 using CourseWork.LOKI97.Algorithm.BlockPacker;
 using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
@@ -14,14 +15,14 @@ namespace CourseWork
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var temp = new UTF8Encoding(true);
-            var filePath = @"C:\Users\Ayttekao\Downloads\new 1.txt";
+            var filePath = @"C:\Users\Ayttekao\Downloads\JoJo's Bizarre Adventure Opening 3 - 4K - 60FPS - Creditless.mp4";
             var processorCount = Environment.ProcessorCount;
             var aboba = File.ReadAllBytes(filePath);
             var blockSize = 16;
-            var encryptionMode = EncryptionMode.ECB;
+            var encryptionMode = EncryptionMode.RDH;
             var algo = new AlgorithmService();
             
             Byte[] initializationVector = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 69, 11, 12, 13, 14, 15};
@@ -38,7 +39,7 @@ namespace CourseWork
                 28, 29, 30, 31
             };
 
-            var iv = initializationVector;
+            var iv = initializationVectorRD;
 
             var loki97 = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), key);
 
@@ -57,7 +58,7 @@ namespace CourseWork
              * RDH +
              */
 
-            var encrypt = parallelCipher.Encrypt(filePath, encryptionMode);
+            var encrypt = await parallelCipher.Encrypt(filePath, encryptionMode);
 
             if (!encrypt.SequenceEqual(encryptedByteArray))
             {
@@ -75,7 +76,7 @@ namespace CourseWork
                 Console.WriteLine("Stream encrypt equals serial");
             }
             
-            var decrypt = parallelCipher.Decrypt(encrypt, encryptionMode);
+            var decrypt = await parallelCipher.Decrypt(encrypt, encryptionMode);
 
             var decryptedByteArray = 
                 algo.RunAlgorithm(encryptedByteArray, key, iv, encryptionMode, false);
