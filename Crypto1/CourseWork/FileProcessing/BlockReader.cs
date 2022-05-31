@@ -9,7 +9,7 @@ namespace CourseWork.FileProcessing
         private FileStream _fileStream;
         private Int32 _blockSize;
         private Int32 _blocksCounted;
-        private Int32 _blocksNumber; 
+        private Int32 _blocksNumber;
         
         public BlockReader(String path, Int32 blockSize)
         {
@@ -54,7 +54,7 @@ namespace CourseWork.FileProcessing
 
                 for (var index = 0; index < iterations; index++)
                 {
-                    var length = (index + 1) * _blockSize < bufferSize 
+                    var length = (index + 1) * _blockSize < bufferSize
                         ? _blockSize 
                         : bufferSize - index * _blockSize;
                     

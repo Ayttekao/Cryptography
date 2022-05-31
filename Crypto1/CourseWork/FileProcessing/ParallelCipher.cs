@@ -1,58 +1,59 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
 using CourseWork.LOKI97.AlgorithmService.Modes;
 using CourseWork.LOKI97.AlgorithmService.Padding;
+using CourseWork.Template;
 
 namespace CourseWork.FileProcessing
 {
     public class ParallelCipher : IParallelCipher
     {
         private Byte[] _iv;
+        private Byte[] _copyIvForEncrypt;
+        private Byte[] _copyIvForDecrypt;
         private ICipherAlgorithm _algorithm;
         private Int32 _blockSize;
         private Padder _padder;
+        private CipherTemplate _cipherTemplate;
 
         public ParallelCipher(ICipherAlgorithm algorithm, Byte[] iv, Int32 blockSize)
         {
             _algorithm = algorithm;
             _iv = iv.ToArray();
+            _copyIvForEncrypt = iv.ToArray();
+            _copyIvForDecrypt = iv.ToArray();
             _blockSize = blockSize;
             _padder = new Padder(PaddingType.PKCS7, blockSize);
         }
         
         public byte[] Encrypt(string filePath, EncryptionMode encryptionMode)
         {
-            var symmetricCipherAlgo = ModeFactory.CreateEncryptionMode(encryptionMode);
+            _cipherTemplate = new CipherTemplateFactory().CreateCipherTemplate(_algorithm, encryptionMode);
             var processorCount = Environment.ProcessorCount;
             var blockReader = new BlockReader(filePath, _blockSize);
-            Int32 iterations = blockReader.GetBlocksNumber() / processorCount;
-            var outputBuffer = new Byte[blockReader.GetBlocksNumber()][];
+            var iterations = blockReader.GetBlocksNumber() % processorCount == 0
+                ? blockReader.GetBlocksNumber() / processorCount
+                : blockReader.GetBlocksNumber() / processorCount + 1;
+            var outputBuffer = new Byte[iterations][];
 
-            for (var block = 0; block < iterations; block++)
+            for (var count = 0; count < iterations; count++)
             {
                 var blocks = blockReader.GetNextBlocks(processorCount);
-                var blockLocal = block;
-                Parallel.For(0, blocks.Count, index =>
+                if (count == iterations - 1)
                 {
-                    if (blockLocal == iterations - 1 && index == blocks.Count - 1 && blocks[index].Length != _blockSize)
+                    if (blocks[^1].Length == _blockSize)
                     {
-                        blocks[index] = _padder.PadBuffer(blocks[index]);
+                        blocks.Add(Enumerable.Repeat((Byte)_blockSize, _blockSize).ToArray());
                     }
-
-                    outputBuffer[index + blockLocal * processorCount] = _algorithm.BlockEncrypt(blocks[index], 0);
-                });
+                    else
+                    {
+                        blocks[^1] = _padder.PadBuffer(blocks.Last());
+                    }
+                }
                 
-                /*for (var index = 0; index < blocks.Count; index++)
-                {
-                    if (block == iterations - 1 && index == blocks.Count - 1 && blocks[index].Length != _blockSize)
-                    {
-                        blocks[index] = _padder.PadBuffer(blocks[index]);
-                    }
-                    outputBuffer[index + block * processorCount] = _algorithm.BlockEncrypt(blocks[index], 0);
-                }*/
+                outputBuffer[count] = _cipherTemplate.Run(blocks, ref _copyIvForEncrypt, count, true);
             }
 
             return outputBuffer.SelectMany(x => x).ToArray();
@@ -60,27 +61,28 @@ namespace CourseWork.FileProcessing
 
         public Byte[] Decrypt(Byte[] inputBuffer, EncryptionMode encryptionMode)
         {
-            var outputBuffer = GetBlocksList(inputBuffer);
-            var symmetricCipherAlgo = ModeFactory.CreateEncryptionMode(encryptionMode);
+            _cipherTemplate = new CipherTemplateFactory().CreateCipherTemplate(_algorithm, encryptionMode);
             var processorCount = Environment.ProcessorCount;
+            var blocks = GetBlocksList(inputBuffer);
+            var iterations = blocks.Count % processorCount == 0
+                ? blocks.Count / processorCount
+                : blocks.Count / processorCount + 1;
+            var outputBuffer = Enumerable.Repeat(default(Byte[]), iterations).ToList();
 
-            Parallel.For(0, outputBuffer.Count, index =>
+            for (var count = 0; count < iterations; count++)
             {
-                outputBuffer[index] = _algorithm.BlockDecrypt(outputBuffer[index], 0);
-                if (index == outputBuffer.Count - 1)
+                var currentBlock = blocks
+                    .Skip(count * processorCount)
+                    .Take(processorCount)
+                    .ToList();
+                
+                outputBuffer[count] = _cipherTemplate.Run(currentBlock, ref _copyIvForDecrypt, count, false);
+                
+                if (count == outputBuffer.Count - 1)
                 {
-                    outputBuffer[index] = _padder.RemovePadding(outputBuffer[index]);
+                    outputBuffer[^1] = _padder.RemovePadding(outputBuffer.Last());
                 }
-            });
-            
-            /*for (var index = 0; index < outputBuffer.Count; index++)
-            {
-                outputBuffer[index] = _algorithm.BlockDecrypt(outputBuffer[index], 0);
-                if (index == outputBuffer.Count - 1)
-                {
-                    outputBuffer[index] = _padder.RemovePadding(outputBuffer[index]);
-                }
-            }*/
+            }
 
             return outputBuffer.SelectMany(x => x).ToArray();
         }
@@ -91,11 +93,11 @@ namespace CourseWork.FileProcessing
             
             if (inputBuffer.Length % _blockSize == 0)
             {
-                blocksQuantity = inputBuffer.Length / 16;
+                blocksQuantity = inputBuffer.Length / _algorithm.GetBlockSize();
             }
             else
             {
-                blocksQuantity = inputBuffer.Length / 16 + 1;
+                blocksQuantity = inputBuffer.Length / _algorithm.GetBlockSize() + 1;
             }
             
             var blocksArray = new List<Byte[]>(blocksQuantity);
