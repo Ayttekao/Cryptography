@@ -6,7 +6,7 @@ using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
 
 namespace CourseWork.Template
 {
-    public class CipherECB : CipherTemplate
+    public sealed class CipherECB : CipherTemplate
     {
         private ICipherAlgorithm _cipherAlgorithm;
         

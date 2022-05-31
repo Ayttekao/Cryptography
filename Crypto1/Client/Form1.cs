@@ -16,7 +16,6 @@ namespace Client
         private const String ServerUrl = "https://localhost:5001/chat";
         private const String DownloadFolderName = "Downloads";
         private static readonly string CurrentPath = AppDomain.CurrentDomain.BaseDirectory + DownloadFolderName;
-        private DirectoryInfo _store;
         private SignalRClientImpl _signalRClient;
 
         public Form1()
@@ -27,7 +26,6 @@ namespace Client
             RefreshButton.Enabled = false;
             DownloadButton.Enabled = false;
             ServerCheckedListBox.Enabled = false;
-            _store = Utils.LoadStore(CurrentPath);
         }
 
         private async void ConnectionButton_Click(object sender, EventArgs e)
@@ -64,16 +62,6 @@ namespace Client
                     var mode = (EncryptionMode)Enum.Parse(typeof(EncryptionMode), ModesComboBox.SelectedItem.ToString()!);
                     await Task.Run(async () =>
                     {
-                        /*var file = Utils.ReadFileAsync(nameFile).Result;
-                        //шифруем и отправляем айдишник
-                        await _hubConnection.InvokeAsync(
-                            "BroadcastFile", 
-                            Path.GetFileName(nameFile), 
-                            file, 
-                            _hubConnection.ConnectionId, 
-                            modeAsString
-                            );*/
-                        
                         await _signalRClient.BroadcastFile(nameFile, modeAsString);
                     });
                     await RefreshListBox(_signalRClient.GetServerStore());
@@ -83,41 +71,19 @@ namespace Client
 
         private async void DownloadButton_Click(object sender, EventArgs e)
         {
-            /*_hubConnection.On<Byte[], string>("AcceptFile", async (file, filename) =>
-            {
-                var files = new DirectoryInfo(CurrentPath).GetFiles().Select(o => o.Name);
-                _fileNames = new ConcurrentBag<String>(files);
-                if (!_fileNames.Contains(filename))
-                {
-                    var fullPath = CurrentPath + "\\" + filename;
-                    //расшифровать
-                    await Utils.WriteTextAsync(fullPath, file);
-                }
-            });*/
-            //await _signalRClient.OnAcceptFile();
-
             var selectedItems = ServerCheckedListBox.CheckedItems;
             foreach (var item in selectedItems)
             {
                 await Task.Run(async () =>
                 {
                     await _signalRClient.SendFile(item.ToString());
-                    //await _hubConnection.InvokeAsync("SendFile", item.ToString());
                 });
             }
         }
 
         private async void RefreshButton_Click(object sender, EventArgs e)
         {
-            /*if (_hubConnection.ConnectionId == null)
-                MessageBox.Show(@"The connection was lost");
-            else
-            {
-                _hubConnection.On<ICollection<String>>("UnicastFilenames",
-                    async fileNames => { await UnicastFilenames(fileNames); });
 
-                await _hubConnection.InvokeAsync("ScanFilesDir");
-            }*/
         }
 
         public Task RefreshListBox(ICollection<String> fileNames)

@@ -5,7 +5,7 @@ using CourseWork.Stuff;
 
 namespace CourseWork.Template
 {
-    public class CipherOFB : CipherTemplate
+    public sealed class CipherOFB : CipherTemplate
     {
         private ICipherAlgorithm _cipherAlgorithm;
 

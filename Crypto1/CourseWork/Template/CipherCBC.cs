@@ -7,7 +7,7 @@ using CourseWork.Stuff;
 
 namespace CourseWork.Template
 {
-    public class CipherCBC : CipherTemplate
+    public sealed class CipherCBC : CipherTemplate
     {
         private ICipherAlgorithm _cipherAlgorithm;
         
