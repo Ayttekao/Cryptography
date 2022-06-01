@@ -53,6 +53,12 @@ namespace CourseWork.LOKI97.AlgorithmService.Padding
             return b;
         }
 
+        public Byte[] GetEmptyBlock()
+        {
+            var buffer = new Byte[_blockSize];
+            return PadBuffer(buffer, 0, _blockSize);
+        }
+
         public Byte[] PadBuffer(Byte[] buf) {
             var extraBlock = (buf.Length % _blockSize == 0) && _paddingType == PaddingType.NONE ? 0 : 1;
             return PadBuffer(buf, buf.Length, ((buf.Length / _blockSize) + extraBlock) * _blockSize);

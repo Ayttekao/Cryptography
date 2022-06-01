@@ -18,7 +18,7 @@ namespace CourseWork
         static async Task Main(string[] args)
         {
             var temp = new UTF8Encoding(true);
-            var filePath = @"C:\Users\Ayttekao\Downloads\JoJo's Bizarre Adventure Opening 3 - 4K - 60FPS - Creditless.mp4";
+            var filePath = @"C:\Users\Ayttekao\Downloads\MORGENSHTERN - Pososi.mp3";
             var processorCount = Environment.ProcessorCount;
             var aboba = File.ReadAllBytes(filePath);
             var blockSize = 16;
@@ -43,7 +43,7 @@ namespace CourseWork
 
             var loki97 = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), key);
 
-            var parallelCipher = new ParallelCipher(loki97, iv, blockSize);
+            var parallelCipher = new ParallelCipher(loki97, iv);
             
             var encryptedByteArray =
                 algo.RunAlgorithm(aboba, key, iv, encryptionMode, true);

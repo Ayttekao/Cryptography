@@ -7,7 +7,7 @@ namespace CourseWork.Template
 {
     public class CipherTemplateFactory
     {
-        public CipherTemplate CreateCipherTemplate(ICipherAlgorithm cipherAlgorithm, EncryptionMode encryptionMode, params Object[] list)
+        public CipherTemplate Create(ICipherAlgorithm cipherAlgorithm, EncryptionMode encryptionMode, params Object[] list)
         {
             return encryptionMode switch
             {

@@ -9,31 +9,29 @@ using CourseWork.Template;
 
 namespace CourseWork.FileProcessing
 {
-    public class ParallelCipher : IParallelCipher
+    public sealed class ParallelCipher : IParallelCipher
     {
         private Byte[] _iv;
         private Byte[] _copyIvForEncrypt;
         private Byte[] _copyIvForDecrypt;
         private ICipherAlgorithm _algorithm;
-        private Int32 _blockSize;
         private Padder _padder;
         private CipherTemplate _cipherTemplate;
 
-        public ParallelCipher(ICipherAlgorithm algorithm, Byte[] iv, Int32 blockSize)
+        public ParallelCipher(ICipherAlgorithm algorithm, Byte[] iv)
         {
             _algorithm = algorithm;
             _iv = iv.ToArray();
             _copyIvForEncrypt = iv.ToArray();
             _copyIvForDecrypt = iv.ToArray();
-            _blockSize = blockSize;
-            _padder = new Padder(PaddingType.PKCS7, blockSize);
+            _padder = new Padder(PaddingType.PKCS7, _algorithm.GetBlockSize());
         }
         
         public async Task<Byte[]> Encrypt(string filePath, EncryptionMode encryptionMode)
         {
-            _cipherTemplate = new CipherTemplateFactory().CreateCipherTemplate(_algorithm, encryptionMode);
+            _cipherTemplate = new CipherTemplateFactory().Create(_algorithm, encryptionMode);
             var processorCount = Environment.ProcessorCount;
-            var blockReader = new BlockReader(filePath, _blockSize);
+            var blockReader = new BlockReader(filePath, _algorithm.GetBlockSize());
             var iterations = blockReader.GetBlocksNumber() % processorCount == 0
                 ? blockReader.GetBlocksNumber() / processorCount
                 : blockReader.GetBlocksNumber() / processorCount + 1;
@@ -44,9 +42,9 @@ namespace CourseWork.FileProcessing
                 var blocks = await blockReader.GetNextBlocks(processorCount);
                 if (count == iterations - 1)
                 {
-                    if (blocks[^1].Length == _blockSize)
+                    if (blocks[^1].Length == _algorithm.GetBlockSize())
                     {
-                        blocks.Add(Enumerable.Repeat((Byte)_blockSize, _blockSize).ToArray());
+                        blocks.Add(_padder.GetEmptyBlock());
                     }
                     else
                     {
@@ -62,7 +60,7 @@ namespace CourseWork.FileProcessing
 
         public async Task<Byte[]> Decrypt(Byte[] inputBuffer, EncryptionMode encryptionMode)
         {
-            _cipherTemplate = new CipherTemplateFactory().CreateCipherTemplate(_algorithm, encryptionMode);
+            _cipherTemplate = new CipherTemplateFactory().Create(_algorithm, encryptionMode);
             var processorCount = Environment.ProcessorCount;
             var blocks = GetBlocksList(inputBuffer);
             var iterations = blocks.Count % processorCount == 0
@@ -92,7 +90,7 @@ namespace CourseWork.FileProcessing
         {
             Int32 blocksQuantity;
             
-            if (inputBuffer.Length % _blockSize == 0)
+            if (inputBuffer.Length % _algorithm.GetBlockSize() == 0)
             {
                 blocksQuantity = inputBuffer.Length / _algorithm.GetBlockSize();
             }
@@ -105,22 +103,16 @@ namespace CourseWork.FileProcessing
 
             for (var i = 0; i < blocksQuantity; i++)
             {
-                var step = i * _blockSize;
-                blocksArray.Add(CopyOfRange(inputBuffer, step, _blockSize + step));
+                var step = i * _algorithm.GetBlockSize();
+                blocksArray.Add(new Byte[_algorithm.GetBlockSize()]);
+                Array.Copy(sourceArray: inputBuffer,
+                    sourceIndex: step,
+                    destinationArray: blocksArray[i],
+                    destinationIndex: 0,
+                    length: _algorithm.GetBlockSize());
             }
 
             return blocksArray;
-        }
-
-        private static Byte[] CopyOfRange (Byte[] src, int start, int end) {
-            var len = end - start;
-            var dest = new Byte[len];
-            
-            for (var index = 0; index < len; index++)
-            {
-                dest[index] = src[start + index];
-            }
-            return dest;
         }
     }
 }
