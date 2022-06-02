@@ -96,7 +96,7 @@ namespace CourseWork.Template
             
             for (var count = 0; count < counterList.Count; count++)
             {
-                initializationVector += delta;
+                initializationVector += delta % 2;
                 counterList[count] = initializationVector.ToByteArray();
             }
 

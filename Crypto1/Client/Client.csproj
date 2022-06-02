@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <LangVersion>9</LangVersion>
+    <LangVersion>10</LangVersion>
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\Documents\GitHub\Cryptography\Crypto1\CourseWork\CourseWork.csproj" />
+    <ProjectReference Include="..\CipherStuffs\CipherStuffs.csproj" />
   </ItemGroup>
 
 </Project>

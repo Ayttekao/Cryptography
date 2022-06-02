@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Numerics;
-using CourseWork.Benalo.ProbabilisticSimplicityTest;
-using CourseWork.Benalo.Stuff;
+using CourseWork.Benaloh.ProbabilisticSimplicityTest;
+using CourseWork.Benaloh.Stuff;
 
-namespace CourseWork.Benalo.Algorithm
+namespace CourseWork.Benaloh.Algorithm
 {
     public sealed class BenalohImpl
     {
         private Keys _keys;
-        private BigInteger _u;
-        private BigInteger _a;
+        //private BigInteger _u;
+        //private BigInteger _a;
 
         public PublicKey GetPublicKey()
         {
@@ -31,28 +31,30 @@ namespace CourseWork.Benalo.Algorithm
 
         public BigInteger Encrypt(BigInteger message)
         {
+            BigInteger u;
+            
             while (true)
             {
-                _u = Utils.RandomBigInteger(2, _keys.PublicKey.n - 1);
-                if (BigInteger.GreatestCommonDivisor(_u, _keys.PublicKey.n) == 1)
+                u = Utils.RandomBigInteger(2, _keys.PublicKey.n - 1);
+                if (BigInteger.GreatestCommonDivisor(u, _keys.PublicKey.n) == 1)
                 {
                     break;
                 }
             }
 
             var left = BigInteger.ModPow(_keys.PublicKey.y, message, _keys.PublicKey.n);
-            var right = BigInteger.ModPow(_u, _keys.PublicKey.r, _keys.PublicKey.n);
+            var right = BigInteger.ModPow(u, _keys.PublicKey.r, _keys.PublicKey.n);
 
             return BigInteger.Multiply(left, right) % _keys.PublicKey.n;
         }
 
         public BigInteger Decrypt(BigInteger message)
         {
-            _a = BigInteger.ModPow(message, _keys.PrivateKey.f / _keys.PublicKey.r, _keys.PublicKey.n);
+            var a = BigInteger.ModPow(message, _keys.PrivateKey.f / _keys.PublicKey.r, _keys.PublicKey.n);
 
             for (var i = BigInteger.Zero; i < _keys.PublicKey.r; i++)
             {
-                if (BigInteger.ModPow(_keys.PrivateKey.x, i, _keys.PublicKey.n) == _a)
+                if (BigInteger.ModPow(_keys.PrivateKey.x, i, _keys.PublicKey.n) == a)
                 {
                     return i;
                 }

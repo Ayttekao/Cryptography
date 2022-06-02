@@ -1,7 +1,7 @@
 using System.Numerics;
 using MessagePack;
 
-namespace CourseWork.Benalo.Algorithm
+namespace CourseWork.Benaloh.Algorithm
 {
     public struct Keys
     {

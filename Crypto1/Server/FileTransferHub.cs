@@ -1,14 +1,39 @@
 using System.Collections.Concurrent;
+using System.Numerics;
+using CipherStuffs;
+using CipherStuffs.Handshake;
+using CourseWork.Benaloh.ProbabilisticSimplicityTest;
+using CourseWork.LOKI97.Algorithm.BlockPacker;
+using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
+using CourseWork.LOKI97.Algorithm.EncryptionTransformation;
+using CourseWork.LOKI97.Algorithm.KeyGen;
+using CourseWork.LOKI97.AlgorithmService.Modes;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Server
 {
     public class FileTransferHub : Hub<IFileTransferHub>
     {
-        private static ConcurrentBag<String> _fileNames = new();
-        private const String FileFolderName = "Downloads";
         private static readonly String CurrentPath = AppDomain.CurrentDomain.BaseDirectory + FileFolderName;
+        private static ConcurrentDictionary<String, Byte[]> _sessionKeys = new();
+        private static ConcurrentBag<String> _fileNames = new();
         private static Boolean _isFileDirectoryExist = false;
+        private static Handshaker _handshaker = new(TestType.MillerRabin, 0.7, 16, 2, 16);
+        private const String FileFolderName = "Downloads";
+        private CipherService _cipherService;
+
+        public async Task SendPublicKey()
+        {
+            await Clients.Caller.ReceivePublicKey(_handshaker.GetPublicKey());
+            Console.WriteLine("Send public key: {0}", String.Join(", ", _handshaker.GetPublicKey()));
+        }
+
+        public async Task AcceptSessionKey(List<BigInteger> encryptedSessionKey, String connectionId)
+        {
+            var sessionKey = _handshaker.DecryptSessionKey(encryptedSessionKey);
+            Console.WriteLine("Accepted session key {0}", String.Join(", ", sessionKey));
+            _sessionKeys.TryAdd(connectionId, sessionKey);
+        }
         
         public async Task ScanFilesDir()
         {
@@ -18,13 +43,21 @@ namespace Server
             await Clients.Caller.UnicastFilenames(_fileNames);
         }
 
-        public async Task BroadcastFile(String fileName, Byte[] file, String connectionId, String modeAsString)
+        public async Task BroadcastFile(String fileName, Byte[] file, Byte[] iv, String connectionId, String modeAsString)
         {
+            var mode = (EncryptionMode)Enum.Parse(typeof(EncryptionMode), modeAsString);
+            var sessionKey = _sessionKeys.First(x => x.Key == connectionId).Value;
+            Console.WriteLine("Session key is {0}", String.Join(", ", sessionKey));
+            Console.WriteLine("IV is {0}", String.Join(", ", iv));
+            var algorithm = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), sessionKey);
+            _cipherService = new CipherService(algorithm, iv);
+            
             CheckingExistenceDirectory();
             if (!_fileNames.Contains(fileName))
             {
                 var fullPath = CurrentPath + "\\" + fileName;
-                await WriteTextAsync(fullPath, file);
+                var decrypt = _cipherService.Decrypt(file, mode);
+                await WriteTextAsync(fullPath, decrypt);
                 _fileNames.Add(fileName);
                 await Clients.Caller.UnicastFilenames(_fileNames);
             }

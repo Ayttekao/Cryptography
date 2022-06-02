@@ -18,28 +18,20 @@ namespace CourseWork
         static async Task Main(string[] args)
         {
             var temp = new UTF8Encoding(true);
-            var filePath = @"C:\Users\Ayttekao\Downloads\MORGENSHTERN - Pososi.mp3";
+            var filePath = @"C:\Users\Ayttekao\Downloads\pardonUHD.jpg";
             var processorCount = Environment.ProcessorCount;
             var aboba = File.ReadAllBytes(filePath);
             var blockSize = 16;
-            var encryptionMode = EncryptionMode.RDH;
+            var encryptionMode = EncryptionMode.CBC;
             var algo = new AlgorithmService();
-            
-            Byte[] initializationVector = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 69, 11, 12, 13, 14, 15};
-            
-            Byte[] initializationVectorRD =
-            {
-                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 69, 11, 12, 13, 14, 15,
-                1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-            };
 
-            Byte[] key =
-            {
-                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 69, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
-                28, 29, 30, 31
-            };
+            Byte[] initializationVector = GetByteArray(16);
 
-            var iv = initializationVectorRD;
+            Byte[] initializationVectorRD = GetByteArray(32);
+
+            Byte[] key = GetByteArray(32);
+
+            var iv = initializationVector;
 
             var loki97 = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), key);
 
@@ -96,6 +88,14 @@ namespace CourseWork
             }
             
             //Console.WriteLine(temp.GetString(decrypt));
+        }
+        
+        private static Byte[] GetByteArray(int size)
+        {
+            var rnd = new Random();
+            var b = new byte[size];
+            rnd.NextBytes(b);
+            return b;
         }
     }
 }

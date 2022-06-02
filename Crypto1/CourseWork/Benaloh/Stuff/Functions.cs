@@ -1,7 +1,7 @@
 using System;
 using System.Numerics;
 
-namespace CourseWork.Benalo.Stuff
+namespace CourseWork.Benaloh.Stuff
 {
     public static class Functions
     {

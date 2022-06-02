@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using CourseWork.Benalo.Stuff;
+using CourseWork.Benaloh.Stuff;
 
-namespace CourseWork.Benalo.ProbabilisticSimplicityTest
+namespace CourseWork.Benaloh.ProbabilisticSimplicityTest
 {
     public class SolovayStrassenTest : IProbabilisticSimplicityTest
     {

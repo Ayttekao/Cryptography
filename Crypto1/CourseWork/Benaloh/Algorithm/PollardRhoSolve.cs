@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 
-namespace CourseWork.Benalo.Algorithm
+namespace CourseWork.Benaloh.Algorithm
 {
     class PollardsRhoSolver
     {

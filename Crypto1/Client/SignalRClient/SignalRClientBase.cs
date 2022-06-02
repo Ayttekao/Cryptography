@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,15 +27,7 @@ namespace Client.SignalRClient
                 Started = true;
             }
         }
-        
-        /*public async ValueTask DisposeAsync()
-        {
-            if (HubConnection != null)
-            {
-                await HubConnection.DisposeAsync();
-            }
-        }*/
-        
+
         ~SignalRClientBase()
         {
             Dispose();
@@ -51,7 +42,6 @@ namespace Client.SignalRClient
         public async ValueTask DisposeAsync()
         {
             await DisposeAsyncCore().ConfigureAwait(false);
-
             Dispose(disposing: false);
             GC.SuppressFinalize(this);
         }

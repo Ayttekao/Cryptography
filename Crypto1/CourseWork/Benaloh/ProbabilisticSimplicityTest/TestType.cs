@@ -1,4 +1,4 @@
-namespace CourseWork.Benalo.ProbabilisticSimplicityTest
+namespace CourseWork.Benaloh.ProbabilisticSimplicityTest
 {
     public enum TestType
     {

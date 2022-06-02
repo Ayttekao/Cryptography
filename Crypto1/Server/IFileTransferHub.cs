@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Numerics;
+using CourseWork.Benaloh.Algorithm;
 
 namespace Server
 {
@@ -10,6 +10,8 @@ namespace Server
 
         Task AcceptFile(Byte[] file, string filename);
 
-        Task RecivePublicKey(List<BigInteger> publicKeys);
+        Task ReceivePublicKey(PublicKey publicKey);
+
+        Task SendSessionKey();
     }
 }

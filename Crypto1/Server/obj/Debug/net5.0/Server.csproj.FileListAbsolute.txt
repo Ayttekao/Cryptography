@@ -36,3 +36,5 @@ C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\bin\Debug\net5.0\
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\bin\Debug\net5.0\CourseWork.dll
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\bin\Debug\net5.0\CourseWork.pdb
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\refint\Server.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\bin\Debug\net5.0\CipherStuffs.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Server\bin\Debug\net5.0\CipherStuffs.pdb

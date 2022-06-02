@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Numerics;
 
-namespace CourseWork.Benalo.ProbabilisticSimplicityTest
+namespace CourseWork.Benaloh.ProbabilisticSimplicityTest
 {
     public interface IProbabilisticSimplicityTest
     {

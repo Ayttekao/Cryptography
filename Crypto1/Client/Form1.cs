@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.SignalRClient;
-using Client.Stuff;
-using CourseWork.LOKI97.AlgorithmService.Modes;
-using Microsoft.AspNetCore.SignalR.Client;
 
 namespace Client
 {
     public partial class Form1 : Form
     {
         private const String ServerUrl = "https://localhost:5001/chat";
-        private const String DownloadFolderName = "Downloads";
-        private static readonly string CurrentPath = AppDomain.CurrentDomain.BaseDirectory + DownloadFolderName;
         private SignalRClientImpl _signalRClient;
 
         public Form1()
@@ -34,9 +27,11 @@ namespace Client
             
             try
             {
+                ConnectionButton.Enabled = false;
                 await _signalRClient.RegistersHandlers();
                 await _signalRClient.Start();
                 await _signalRClient.ScanFilesDir();
+                await _signalRClient.Handshake();
                 await RefreshListBox(_signalRClient.GetServerStore());
 
                 SendButton.Enabled = true;
@@ -44,7 +39,7 @@ namespace Client
                 DownloadButton.Enabled = true;
                 ServerCheckedListBox.Enabled = true;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 MessageBox.Show(@"Сan't connect to the server");
             }
@@ -59,7 +54,6 @@ namespace Client
                 foreach (var nameFile in opf.FileNames)
                 {
                     var modeAsString = ModesComboBox.SelectedItem.ToString();
-                    var mode = (EncryptionMode)Enum.Parse(typeof(EncryptionMode), ModesComboBox.SelectedItem.ToString()!);
                     await Task.Run(async () =>
                     {
                         await _signalRClient.BroadcastFile(nameFile, modeAsString);

@@ -328,6 +328,19 @@
           "lib/netcoreapp2.1/_._": {}
         }
       },
+      "CipherStuffs/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "CourseWork": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CipherStuffs.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CipherStuffs.dll": {}
+        }
+      },
       "CourseWork/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -1003,6 +1016,11 @@
         "version.txt"
       ]
     },
+    "CipherStuffs/1.0.0": {
+      "type": "project",
+      "path": "../CipherStuffs/CipherStuffs.csproj",
+      "msbuildProject": "../CipherStuffs/CipherStuffs.csproj"
+    },
     "CourseWork/1.0.0": {
       "type": "project",
       "path": "../CourseWork/CourseWork.csproj",
@@ -1011,6 +1029,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
+      "CipherStuffs >= 1.0.0",
       "CourseWork >= 1.0.0",
       "Microsoft.AspNetCore.Components >= 5.0.17",
       "Microsoft.AspNetCore.SignalR.Client >= 5.0.17",
@@ -1049,6 +1068,9 @@
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
           "projectReferences": {
+            "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj": {
+              "projectPath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj"
+            },
             "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj": {
               "projectPath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj"
             }

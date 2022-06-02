@@ -2,7 +2,7 @@
 using System.Numerics;
 using System.Security.Cryptography;
 
-namespace CourseWork.Benalo.Stuff
+namespace CourseWork.Benaloh.Stuff
 {
     public static class Utils
     {
