@@ -51,7 +51,7 @@ namespace CourseWork
              */
 
             var encrypt = await parallelCipher.Encrypt(filePath, encryptionMode);
-
+            
             if (!encrypt.SequenceEqual(encryptedByteArray))
             {
                 for (var index = 0; index < encrypt.Length; index++)
@@ -68,14 +68,15 @@ namespace CourseWork
                 Console.WriteLine("Stream encrypt equals serial");
             }
             
-            var decrypt = await parallelCipher.Decrypt(encrypt, encryptionMode);
+            //var decrypt = await parallelCipher.Decrypt(encrypt, encryptionMode);
+            // await parallelCipher.Decrypt(@"C:\Users\Ayttekao\Desktop\pardonUHD.jpg", encrypt, encryptionMode);
 
             var decryptedByteArray = 
                 algo.RunAlgorithm(encryptedByteArray, key, iv, encryptionMode, false);
             
-            Console.WriteLine("Serial decrypt and read file equals: {0}", decrypt.SequenceEqual(aboba));
+            //Console.WriteLine("Serial decrypt and read file equals: {0}", decrypt.SequenceEqual(aboba));
             
-            if (!decrypt.SequenceEqual(aboba))
+            /*if (!decrypt.SequenceEqual(aboba))
             {
                 for (var index = 0; index < decrypt.Length; index++)
                 {
@@ -85,7 +86,7 @@ namespace CourseWork
                         break;
                     }
                 }
-            }
+            }*/
             
             //Console.WriteLine(temp.GetString(decrypt));
         }

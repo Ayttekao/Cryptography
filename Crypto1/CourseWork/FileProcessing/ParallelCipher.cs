@@ -85,6 +85,35 @@ namespace CourseWork.FileProcessing
 
             return outputBuffer.SelectMany(x => x).ToArray();
         }
+
+        public async Task Decrypt(String path, Byte[] inputBuffer, EncryptionMode encryptionMode)
+        {
+            _cipherTemplate = new CipherTemplateFactory().Create(_algorithm, encryptionMode);
+            var blockWriter = new BlockWriter(path);
+            var processorCount = Environment.ProcessorCount;
+            var blocks = GetBlocksList(inputBuffer);
+            var iterations = blocks.Count % processorCount == 0
+                ? blocks.Count / processorCount
+                : blocks.Count / processorCount + 1;
+
+            for (var count = 0; count < iterations; count++)
+            {
+                var currentBlock = blocks
+                    .Skip(count * processorCount)
+                    .Take(processorCount)
+                    .ToList();
+                
+                var decryptBlock = _cipherTemplate.Run(currentBlock, ref _copyIvForDecrypt, count, false);
+                
+                if (count == iterations - 1)
+                {
+                    decryptBlock = _padder.RemovePadding(decryptBlock);
+                }
+                
+                await blockWriter.WriteNextBlocks(decryptBlock);
+            }
+            blockWriter.Dispose();
+        }
         
         private List<Byte[]> GetBlocksList(Byte[] inputBuffer)
         {

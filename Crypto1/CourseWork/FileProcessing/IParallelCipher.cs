@@ -8,5 +8,6 @@ namespace CourseWork.FileProcessing
     {
         public Task<Byte[]> Encrypt(String filePath, EncryptionMode encryptionMode);
         public Task<Byte[]> Decrypt(Byte[] inputBuffer, EncryptionMode encryptionMode);
+        public Task Decrypt(String path, Byte[] inputBuffer, EncryptionMode encryptionMode);
     }
 }

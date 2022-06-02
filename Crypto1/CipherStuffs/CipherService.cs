@@ -25,6 +25,11 @@ public class CipherService
         return await _parallelCipher.Encrypt(path, mode);
     }
 
+    public async Task Decrypt(String path, Byte[] inputBuffer, EncryptionMode mode)
+    {
+        await _parallelCipher.Decrypt(path, inputBuffer, mode);
+    }
+
     public Byte[] Decrypt(Byte[] inputBuffer, EncryptionMode mode)
     {
         return _parallelCipher.Decrypt(inputBuffer, mode).Result;

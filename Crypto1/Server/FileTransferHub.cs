@@ -14,13 +14,12 @@ namespace Server
 {
     public class FileTransferHub : Hub<IFileTransferHub>
     {
-        private static readonly String CurrentPath = AppDomain.CurrentDomain.BaseDirectory + FileFolderName;
-        private static ConcurrentDictionary<String, Byte[]> _sessionKeys = new();
-        private static ConcurrentBag<String> _fileNames = new();
-        private static Boolean _isFileDirectoryExist = false;
-        private static Handshaker _handshaker = new(TestType.MillerRabin, 0.7, 16, 2, 16);
-        private const String FileFolderName = "Downloads";
         private CipherService _cipherService;
+        private DirectoryInfo _localStore = Utils.LoadStore(CurrentPath);
+        private const String FileFolderName = "Downloads";
+        private static ConcurrentDictionary<String, Byte[]> _sessionKeys = new();
+        private static Handshaker _handshaker = new(TestType.MillerRabin, 0.7, 16, 2, 16);
+        private static readonly String CurrentPath = AppDomain.CurrentDomain.BaseDirectory + FileFolderName;
 
         public async Task SendPublicKey()
         {
@@ -37,29 +36,23 @@ namespace Server
         
         public async Task ScanFilesDir()
         {
-            CheckingExistenceDirectory();
-            var files = new DirectoryInfo(CurrentPath).GetFiles().Select(o => o.Name);
-            _fileNames = new ConcurrentBag<String>(files);
-            await Clients.Caller.UnicastFilenames(_fileNames);
+            _localStore = Utils.LoadStore(CurrentPath);
+            await Clients.Caller.UnicastFilenames(_localStore.GetFiles().Select(x => x.Name).ToList());
         }
 
         public async Task BroadcastFile(String fileName, Byte[] file, Byte[] iv, String connectionId, String modeAsString)
         {
             var mode = (EncryptionMode)Enum.Parse(typeof(EncryptionMode), modeAsString);
             var sessionKey = _sessionKeys.First(x => x.Key == connectionId).Value;
-            Console.WriteLine("Session key is {0}", String.Join(", ", sessionKey));
-            Console.WriteLine("IV is {0}", String.Join(", ", iv));
             var algorithm = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), sessionKey);
             _cipherService = new CipherService(algorithm, iv);
             
-            CheckingExistenceDirectory();
-            if (!_fileNames.Contains(fileName))
+            if (_localStore == null || _localStore.GetFiles().All(x => x.Name != fileName))
             {
                 var fullPath = CurrentPath + "\\" + fileName;
-                var decrypt = _cipherService.Decrypt(file, mode);
-                await WriteTextAsync(fullPath, decrypt);
-                _fileNames.Add(fileName);
-                await Clients.Caller.UnicastFilenames(_fileNames);
+                await _cipherService.Decrypt(fullPath, file, mode);
+                Utils.RefreshStore(ref _localStore);
+                await Clients.All.UnicastFilenames(_localStore.GetFiles().Select(x => x.Name).ToList());
             }
         }
 
@@ -70,26 +63,7 @@ namespace Server
             //зашифровать
             await Clients.Caller.AcceptFile(file, fileName);
         }
-        
-        private static void CheckingExistenceDirectory()
-        {
-            if (!_isFileDirectoryExist)
-            {
-                Directory.CreateDirectory(CurrentPath);
-            }
-        }
 
-        private static async Task WriteTextAsync(String filePath, Byte[] text)
-        {
-            using var sourceStream =
-                new FileStream(
-                    filePath,
-                    FileMode.Create, FileAccess.Write, FileShare.None,
-                    bufferSize: 4096, useAsync: true);
-            //расшифровать 
-            await sourceStream.WriteAsync(text, 0, text.Length);
-        }
-        
         private static async Task<Byte[]> ReadFileAsync(String path)
         {
             Byte[] result;

@@ -90,46 +90,5 @@ namespace Client
 
             return Task.CompletedTask;
         }
-
-        /*private async Task SetPublicKey(PublicKeys publicKeys)
-        {
-            _benaloh.SetPublicKey(publicKeys);
-        }*/
-
-        /*private static List<BigInteger> GenerateKey()
-        {
-            var rnd = new Random();
-            var ringModulo = BigInteger.Pow(2, 16) + BigInteger.One;
-            var values = new List<BigInteger>(ValuesCount);
-            for (var i = 0; i < ValuesCount; i++)
-            {
-                values.Add(Utils.RandomBigInteger(BigInteger.Zero, ringModulo));
-            }
-
-            var keyByteArray = new Byte[ValuesCount][];
-            for (var i = 0; i < ValuesCount; i++)
-            {
-                keyByteArray[i] = values[i].ToByteArray();
-            }
-            var temp = new Byte[8];
-            var count = 0;
-            for (var i = 0; i < 4; i++)
-            {
-                for (var j = 0; j < 2; j++)
-                {
-                    temp[count] = keyByteArray[i][j];
-                    count++;
-                }
-            }
-            return values;
-        }
-
-        private Byte[] GetByteArray(int size)
-        {
-            var rnd = new Random();
-            var b = new Byte[size];
-            rnd.NextBytes(b);
-            return b;
-        }*/
     }
 }
