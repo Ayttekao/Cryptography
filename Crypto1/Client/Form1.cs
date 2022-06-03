@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.SignalRClient;
@@ -11,7 +12,7 @@ namespace Client
     {
         private const String ServerUrl = "https://localhost:5001/chat";
         private SignalRClientImpl _signalRClient;
-        private Boolean _dragable = false;
+        private Boolean _dragable;
         private Point _startPosition;
 
         public Form1()
@@ -30,6 +31,7 @@ namespace Client
             
             try
             {
+                DoLog("\nTrying connect to server...\n");
                 ConnectionButton.Enabled = false;
                 await _signalRClient.RegistersHandlers();
                 await _signalRClient.Start();
@@ -46,6 +48,7 @@ namespace Client
             {
                 MessageBox.Show(@"Сan't connect to the server");
             }
+            DoLog("Connected successfully\n");
         }
 
         private async void SendButton_Click(object sender, EventArgs e)
@@ -54,13 +57,15 @@ namespace Client
             opf.Multiselect = true;
             if (opf.ShowDialog() == DialogResult.OK)
             {
-                foreach (var nameFile in opf.FileNames)
+                foreach (var fileName in opf.FileNames)
                 {
                     var modeAsString = ModesComboBox.SelectedItem.ToString();
+                    DoLog("Encrypt file " + Path.GetFileName(fileName) + "\n");
                     await Task.Run(async () =>
                     {
-                        await _signalRClient.BroadcastFile(nameFile, modeAsString);
+                        await _signalRClient.BroadcastFile(fileName, modeAsString);
                     });
+                    DoLog("Send file " + Path.GetFileName(fileName) + "\n");
                     await RefreshListBox(_signalRClient.GetServerStore());
                 }
             }
@@ -72,10 +77,12 @@ namespace Client
             var modeAsString = ModesComboBox.SelectedItem.ToString();
             foreach (var item in selectedItems)
             {
+                DoLog("Decrypt file " + item + "\n");
                 await Task.Run(async () =>
                 {
                     await _signalRClient.SendFile(item.ToString(), modeAsString);
                 });
+                DoLog("Saving a file " + item + "\n");
             }
         }
 
@@ -83,6 +90,7 @@ namespace Client
         {
             await _signalRClient.ScanFilesDir();
             await RefreshListBox(_signalRClient.GetServerStore());
+            DoLog("Successfully updated\n");
         }
 
         public Task RefreshListBox(ICollection<String> fileNames)
@@ -94,6 +102,11 @@ namespace Client
             }
 
             return Task.CompletedTask;
+        }
+
+        private void DoLog(String message)
+        {
+            logTextBox.Text += message;
         }
 
         private void HideForm_Click(object sender, EventArgs e)

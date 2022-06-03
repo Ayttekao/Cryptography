@@ -43,6 +43,7 @@ namespace Client
             this.label2 = new System.Windows.Forms.Label();
             this.closeForm = new System.Windows.Forms.Button();
             this.hideForm = new System.Windows.Forms.Button();
+            this.logTextBox = new System.Windows.Forms.RichTextBox();
             this.topPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,7 +62,7 @@ namespace Client
             this.DownloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DownloadButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
             this.DownloadButton.Image = ((System.Drawing.Image)(resources.GetObject("DownloadButton.Image")));
-            this.DownloadButton.Location = new System.Drawing.Point(260, 55);
+            this.DownloadButton.Location = new System.Drawing.Point(337, 55);
             this.DownloadButton.Name = "DownloadButton";
             this.DownloadButton.Size = new System.Drawing.Size(50, 50);
             this.DownloadButton.TabIndex = 2;
@@ -89,11 +90,13 @@ namespace Client
             // 
             // RefreshButton
             // 
-            this.RefreshButton.Location = new System.Drawing.Point(593, 58);
+            this.RefreshButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RefreshButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
+            this.RefreshButton.Image = ((System.Drawing.Image)(resources.GetObject("RefreshButton.Image")));
+            this.RefreshButton.Location = new System.Drawing.Point(257, 55);
             this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(116, 58);
+            this.RefreshButton.Size = new System.Drawing.Size(60, 50);
             this.RefreshButton.TabIndex = 5;
-            this.RefreshButton.Text = "Refresh";
             this.RefreshButton.UseVisualStyleBackColor = true;
             this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
@@ -128,7 +131,7 @@ namespace Client
             "CTR",
             "RD",
             "RDH"});
-            this.ModesComboBox.Location = new System.Drawing.Point(326, 78);
+            this.ModesComboBox.Location = new System.Drawing.Point(410, 78);
             this.ModesComboBox.Name = "ModesComboBox";
             this.ModesComboBox.Size = new System.Drawing.Size(151, 28);
             this.ModesComboBox.TabIndex = 9;
@@ -138,7 +141,7 @@ namespace Client
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.SystemColors.Window;
-            this.label1.Location = new System.Drawing.Point(326, 55);
+            this.label1.Location = new System.Drawing.Point(410, 55);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 20);
             this.label1.TabIndex = 10;
@@ -193,12 +196,24 @@ namespace Client
             this.hideForm.UseVisualStyleBackColor = true;
             this.hideForm.Click += new System.EventHandler(this.HideForm_Click);
             // 
+            // logTextBox
+            // 
+            this.logTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
+            this.logTextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.logTextBox.Location = new System.Drawing.Point(593, 161);
+            this.logTextBox.Name = "logTextBox";
+            this.logTextBox.ReadOnly = true;
+            this.logTextBox.Size = new System.Drawing.Size(204, 275);
+            this.logTextBox.TabIndex = 12;
+            this.logTextBox.Text = "Logs will be shown here";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
             this.ClientSize = new System.Drawing.Size(809, 500);
+            this.Controls.Add(this.logTextBox);
             this.Controls.Add(this.topPanel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ModesComboBox);
@@ -232,6 +247,7 @@ namespace Client
         private System.Windows.Forms.Button closeForm;
         private System.Windows.Forms.Button hideForm;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RichTextBox logTextBox;
     }
 }
 
