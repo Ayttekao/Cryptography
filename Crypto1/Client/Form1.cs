@@ -23,6 +23,7 @@ namespace Client
             RefreshButton.Enabled = false;
             DownloadButton.Enabled = false;
             ServerCheckedListBox.Enabled = false;
+            logTextBox.Text += "Logs will be shown here\n";
         }
 
         private async void ConnectionButton_Click(object sender, EventArgs e)
@@ -31,7 +32,7 @@ namespace Client
             
             try
             {
-                DoLog("\nTrying connect to server...\n");
+                DoLog("Trying connect to server...\n");
                 ConnectionButton.Enabled = false;
                 await _signalRClient.RegistersHandlers();
                 await _signalRClient.Start();
@@ -53,37 +54,46 @@ namespace Client
 
         private async void SendButton_Click(object sender, EventArgs e)
         {
+            IncreaseProgressBar(0);
             var opf = new OpenFileDialog();
             opf.Multiselect = true;
             if (opf.ShowDialog() == DialogResult.OK)
             {
-                foreach (var fileName in opf.FileNames)
+                for (var index = 0; index < opf.FileNames.Length; index++)
                 {
                     var modeAsString = ModesComboBox.SelectedItem.ToString();
-                    DoLog("Encrypt file " + Path.GetFileName(fileName) + "\n");
+                    DoLog("Encrypt file " + Path.GetFileName(opf.FileNames[index]) + "\n");
                     await Task.Run(async () =>
                     {
-                        await _signalRClient.BroadcastFile(fileName, modeAsString);
+                        await _signalRClient.BroadcastFile(opf.FileNames[index], modeAsString);
                     });
-                    DoLog("Send file " + Path.GetFileName(fileName) + "\n");
+                    DoLog("Send file " + Path.GetFileName(opf.FileNames[index]) + "\n");
                     await RefreshListBox(_signalRClient.GetServerStore());
+                    var progress = index / (float)opf.FileNames.Length * 100;
+                    IncreaseProgressBar(progress);
                 }
+                IncreaseProgressBar(100);
             }
         }
 
         private async void DownloadButton_Click(object sender, EventArgs e)
         {
+            IncreaseProgressBar(0);
             var selectedItems = ServerCheckedListBox.CheckedItems;
             var modeAsString = ModesComboBox.SelectedItem.ToString();
-            foreach (var item in selectedItems)
+
+            for (var index = 0; index < selectedItems.Count; index++)
             {
-                DoLog("Decrypt file " + item + "\n");
+                DoLog("Decrypt file " + selectedItems[index] + "\n");
                 await Task.Run(async () =>
                 {
-                    await _signalRClient.SendFile(item.ToString(), modeAsString);
+                    await _signalRClient.SendFile(selectedItems[index].ToString(), modeAsString);
                 });
-                DoLog("Saving a file " + item + "\n");
+                DoLog("Saving a file " + selectedItems[index] + "\n");
+                var progress = index / (float)selectedItems.Count * 100;
+                IncreaseProgressBar(progress);
             }
+            IncreaseProgressBar(100);
         }
 
         private async void RefreshButton_Click(object sender, EventArgs e)
@@ -138,6 +148,11 @@ namespace Client
         private void DisableDrag(object sender, MouseEventArgs e)
         {
             _dragable = false;
+        }
+        
+        private void IncreaseProgressBar(float progress)
+        {
+            SendProgressBar.Value = (int)progress;
         }
     }
 }

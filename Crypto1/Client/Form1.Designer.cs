@@ -33,7 +33,6 @@ namespace Client
             this.ConnectionButton = new System.Windows.Forms.Button();
             this.DownloadButton = new System.Windows.Forms.Button();
             this.SendButton = new System.Windows.Forms.Button();
-            this.DownloadProgressBar = new System.Windows.Forms.ProgressBar();
             this.RefreshButton = new System.Windows.Forms.Button();
             this.SendProgressBar = new System.Windows.Forms.ProgressBar();
             this.ServerCheckedListBox = new System.Windows.Forms.CheckedListBox();
@@ -81,13 +80,6 @@ namespace Client
             this.SendButton.UseVisualStyleBackColor = true;
             this.SendButton.Click += new System.EventHandler(this.SendButton_Click);
             // 
-            // DownloadProgressBar
-            // 
-            this.DownloadProgressBar.Location = new System.Drawing.Point(593, 442);
-            this.DownloadProgressBar.Name = "DownloadProgressBar";
-            this.DownloadProgressBar.Size = new System.Drawing.Size(204, 36);
-            this.DownloadProgressBar.TabIndex = 4;
-            // 
             // RefreshButton
             // 
             this.RefreshButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -102,9 +94,9 @@ namespace Client
             // 
             // SendProgressBar
             // 
-            this.SendProgressBar.Location = new System.Drawing.Point(593, 122);
+            this.SendProgressBar.Location = new System.Drawing.Point(12, 445);
             this.SendProgressBar.Name = "SendProgressBar";
-            this.SendProgressBar.Size = new System.Drawing.Size(204, 33);
+            this.SendProgressBar.Size = new System.Drawing.Size(785, 33);
             this.SendProgressBar.Step = 1;
             this.SendProgressBar.TabIndex = 7;
             // 
@@ -115,7 +107,7 @@ namespace Client
             this.ServerCheckedListBox.FormattingEnabled = true;
             this.ServerCheckedListBox.Location = new System.Drawing.Point(12, 122);
             this.ServerCheckedListBox.Name = "ServerCheckedListBox";
-            this.ServerCheckedListBox.Size = new System.Drawing.Size(563, 356);
+            this.ServerCheckedListBox.Size = new System.Drawing.Size(563, 312);
             this.ServerCheckedListBox.TabIndex = 8;
             // 
             // ModesComboBox
@@ -166,7 +158,7 @@ namespace Client
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.SystemColors.Window;
-            this.label2.Location = new System.Drawing.Point(12, 2);
+            this.label2.Location = new System.Drawing.Point(12, -3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(175, 38);
             this.label2.TabIndex = 2;
@@ -200,12 +192,12 @@ namespace Client
             // 
             this.logTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
             this.logTextBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.logTextBox.Location = new System.Drawing.Point(593, 161);
+            this.logTextBox.Location = new System.Drawing.Point(581, 55);
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
-            this.logTextBox.Size = new System.Drawing.Size(204, 275);
+            this.logTextBox.Size = new System.Drawing.Size(216, 379);
             this.logTextBox.TabIndex = 12;
-            this.logTextBox.Text = "Logs will be shown here";
+            this.logTextBox.Text = "";
             // 
             // Form1
             // 
@@ -220,7 +212,6 @@ namespace Client
             this.Controls.Add(this.ServerCheckedListBox);
             this.Controls.Add(this.SendProgressBar);
             this.Controls.Add(this.RefreshButton);
-            this.Controls.Add(this.DownloadProgressBar);
             this.Controls.Add(this.SendButton);
             this.Controls.Add(this.DownloadButton);
             this.Controls.Add(this.ConnectionButton);
@@ -237,7 +228,6 @@ namespace Client
         private System.Windows.Forms.Button ConnectionButton;
         private System.Windows.Forms.Button DownloadButton;
         private System.Windows.Forms.Button SendButton;
-        private System.Windows.Forms.ProgressBar DownloadProgressBar;
         private System.Windows.Forms.Button RefreshButton;
         private System.Windows.Forms.ProgressBar SendProgressBar;
         private System.Windows.Forms.CheckedListBox ServerCheckedListBox;

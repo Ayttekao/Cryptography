@@ -8,8 +8,6 @@ namespace CourseWork.Benaloh.Algorithm
     public sealed class BenalohImpl
     {
         private Keys _keys;
-        //private BigInteger _u;
-        //private BigInteger _a;
 
         public PublicKey GetPublicKey()
         {

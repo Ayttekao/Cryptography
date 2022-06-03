@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "5c0EcHhpDGOpCvtQH69Y3oPqBMPqt7+qJUnOVM7r+iMZdtgyiNV+4+jEZZunpcQtRzPpl335Vtzpw7GY+mSnYQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\Test\\Test.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ayttekao\\.nuget\\packages\\messagepack.annotations\\2.1.90\\messagepack.annotations.2.1.90.nupkg.sha512",
+    "C:\\Users\\Ayttekao\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+  ],
+  "logs": []
+}

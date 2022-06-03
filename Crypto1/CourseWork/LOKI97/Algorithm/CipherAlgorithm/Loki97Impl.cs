@@ -26,12 +26,10 @@ namespace CourseWork.LOKI97.Algorithm.CipherAlgorithm
         
         public Byte[] BlockEncrypt(Byte[] input, int inOffset)
         {
-            UInt64[] SK = (UInt64[]) _keys;    // local ref to session key
+            UInt64[] SK = (UInt64[]) _keys;
 
-            // pack input block into 2 longs: L and R
             var (L, R) = _blockPacker.PackBlock(input, inOffset);
 
-            // compute all rounds for this 1 block
             UInt32 k = 0;
             for (var i = 0; i < Rounds; i++)
             {
@@ -43,18 +41,15 @@ namespace CourseWork.LOKI97.Algorithm.CipherAlgorithm
 
             }
 
-            // unpack resulting L & R into out buffer
             return _blockPacker.UnpackBlock(L, R);
         }
 
         public Byte[] BlockDecrypt(Byte[] input, int inOffset)
         {
-            UInt64[] SK = (UInt64[]) _keys;    // local ref to session key
+            UInt64[] SK = (UInt64[]) _keys;
 
-            // pack input block into 2 longs: L and R
             var (L, R) = _blockPacker.PackBlock(input, inOffset);
 
-            // compute all rounds for this 1 block
             UInt32 k = NumSubKeys - 1;
             for (var i = 0; i < Rounds; i++)
             {
@@ -65,7 +60,6 @@ namespace CourseWork.LOKI97.Algorithm.CipherAlgorithm
                 L = nR;
             }
 
-            // unpack resulting L & R into out buffer
             return _blockPacker.UnpackBlock(L, R);
         }
 

@@ -16,11 +16,6 @@ namespace CourseWork.LOKI97.Algorithm.EncryptionTransformation
             var d = ((UInt64) ((Al & ~Br) | (Ar & Br)) << 32) |
                     ((UInt64) ((Ar & ~Br) | (Al & Br)) & 0xFFFFFFFFL);
     
-            // Compute e = P(Sa(d))
-            //    mask out each group of 12 bits for E
-            //    then compute first S-box column [S1,S2,S1,S2,S2,S1,S2,S1]
-            //    permuting output through P (with extra shift to build full P)
-    
             UInt64 e = P[S1[(Int32) ((d >> 56 | d << 8) & 0x1FFF)] & 0xFF] >> 7 |
                        P[S2[(Int32) ((d >> 48) & 0x7FF)] & 0xFF] >> 6 |
                        P[S1[(Int32) ((d >> 40) & 0x1FFF)] & 0xFF] >> 5 |
@@ -29,10 +24,6 @@ namespace CourseWork.LOKI97.Algorithm.EncryptionTransformation
                        P[S1[(Int32) ((d >> 16) & 0x1FFF)] & 0xFF] >> 2 |
                        P[S2[(Int32) ((d >> 8) & 0x7FF)] & 0xFF] >> 1 |
                        P[S1[(Int32) (d & 0x1FFF)] & 0xFF];
-    
-            // Compute f = Sb(e,B)
-            //    where the second S-box column is [S2,S2,S1,S1,S2,S2,S1,S1]
-            //    for each S, lower bits come from e, upper from upper half of B
     
             UInt64 f =
                     (UInt64)((S2[(UInt32) (((e >> 56) & 0xFF) | ((B >> 53) & 0x700))] & 0xFFL) << 56 |
