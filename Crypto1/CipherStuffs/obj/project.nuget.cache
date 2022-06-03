@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZjgFNkIGhTqdqA4mJ80upjcdSGxsRAdF4kavWVRgt2gw8MKE3Z3UE+Pq3EKXC102L4BFZmC8sOAPFcG6/hNEuA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Ayttekao\\.nuget\\packages\\messagepack.annotations\\2.1.90\\messagepack.annotations.2.1.90.nupkg.sha512"
+  ],
+  "logs": []
+}
