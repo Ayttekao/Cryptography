@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.SignalRClient;
@@ -10,6 +11,8 @@ namespace Client
     {
         private const String ServerUrl = "https://localhost:5001/chat";
         private SignalRClientImpl _signalRClient;
+        private Boolean dragable = false;
+        private Point startPosition;
 
         public Form1()
         {
@@ -66,11 +69,12 @@ namespace Client
         private async void DownloadButton_Click(object sender, EventArgs e)
         {
             var selectedItems = ServerCheckedListBox.CheckedItems;
+            var modeAsString = ModesComboBox.SelectedItem.ToString();
             foreach (var item in selectedItems)
             {
                 await Task.Run(async () =>
                 {
-                    await _signalRClient.SendFile(item.ToString());
+                    await _signalRClient.SendFile(item.ToString(), modeAsString);
                 });
             }
         }
@@ -89,6 +93,37 @@ namespace Client
             }
 
             return Task.CompletedTask;
+        }
+
+        private void HideForm_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void CloseForm_Click(object sender, EventArgs e)
+        {
+            Close();
+            Application.ExitThread();
+            Application.Exit();
+        }
+
+        private void MakeDragable(object sender, MouseEventArgs e)
+        {
+            dragable = true;
+            startPosition = e.Location;
+        }
+
+        private void DragForm(object sender, MouseEventArgs e)
+        {
+            if (dragable)
+            {
+                Location = new Point(Cursor.Position.X - startPosition.X, Cursor.Position.Y - startPosition.Y);
+            }
+        }
+
+        private void DisableDrag(object sender, MouseEventArgs e)
+        {
+            dragable = false;
         }
     }
 }

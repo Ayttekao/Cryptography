@@ -31,6 +31,32 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Authorization/5.0.17": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Metadata": "5.0.17",
+          "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
+          "Microsoft.Extensions.Options": "5.0.0"
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Authorization.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.1722.21507"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Components/5.0.17": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Authorization": "5.0.17",
+          "Microsoft.AspNetCore.Components.Analyzers": "5.0.17"
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Components.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.1722.21507"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Components.Analyzers/5.0.17": {},
       "Microsoft.AspNetCore.Connections.Abstractions/5.0.17": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Features": "5.0.17"
@@ -73,6 +99,14 @@
         },
         "runtime": {
           "lib/net5.0/Microsoft.AspNetCore.Http.Features.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.1722.21507"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Metadata/5.0.17": {
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Metadata.dll": {
             "assemblyVersion": "5.0.0.0",
             "fileVersion": "5.0.1722.21507"
           }
@@ -254,6 +288,27 @@
       "path": "messagepack.annotations/2.1.90",
       "hashPath": "messagepack.annotations.2.1.90.nupkg.sha512"
     },
+    "Microsoft.AspNetCore.Authorization/5.0.17": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-20Zo2tas/pHLHRe1iEWbtVJTKP8wuF8o5LmOa7U/8jJW6xUSclGOJgskTTkYX8UUSqkeNhNifNMKDI0i0+/GdA==",
+      "path": "microsoft.aspnetcore.authorization/5.0.17",
+      "hashPath": "microsoft.aspnetcore.authorization.5.0.17.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Components/5.0.17": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FBHoRXGoYcaw9vfYA7mUfqAuNX1AphsTwMPbVPmIk1KVYhthzVEajZ1+japPRJYDZyqV3EQ9+WI+7bHefVYh1Q==",
+      "path": "microsoft.aspnetcore.components/5.0.17",
+      "hashPath": "microsoft.aspnetcore.components.5.0.17.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Components.Analyzers/5.0.17": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pmgjFCIz2uEgRYRJ+ff0S7lqrxBidLG53cVu52nItSsmi6BIMQznWUslWR8aA5rEjMk/PM1q/bsTTZ0f7eNdbQ==",
+      "path": "microsoft.aspnetcore.components.analyzers/5.0.17",
+      "hashPath": "microsoft.aspnetcore.components.analyzers.5.0.17.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Connections.Abstractions/5.0.17": {
       "type": "package",
       "serviceable": true,
@@ -281,6 +336,13 @@
       "sha512": "sha512-3jG2xS+dx8DDCGV/F+STdPTg89lX3ao3dF/VEPvJaz3wzBIjuadipTtYNEXDIVuOPZwb6jdmhrX9jkzOIBm5cw==",
       "path": "microsoft.aspnetcore.http.features/5.0.17",
       "hashPath": "microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Metadata/5.0.17": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JnxFpuo9Niv5Y5f+F5PJ2++FT1hAMsh+VmpVGJrDV9KcDzYlBoQWnNQ9QOPK7vneZ90r8jRdOpYvrj7jMSHhVQ==",
+      "path": "microsoft.aspnetcore.metadata/5.0.17",
+      "hashPath": "microsoft.aspnetcore.metadata.5.0.17.nupkg.sha512"
     },
     "Microsoft.AspNetCore.SignalR.Client/5.0.17": {
       "type": "package",

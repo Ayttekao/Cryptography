@@ -56,12 +56,12 @@ namespace Server
             }
         }
 
-        public async Task SendFile(string fileName)
+        public async Task SendFile(string fileName, String modeAsString)
         {
             var fullPath = CurrentPath + "\\" + fileName;
             var file = await ReadFileAsync(fullPath);
             //зашифровать
-            await Clients.Caller.AcceptFile(file, fileName);
+            await Clients.Caller.AcceptFile(file, fileName, modeAsString);
         }
 
         private static async Task<Byte[]> ReadFileAsync(String path)

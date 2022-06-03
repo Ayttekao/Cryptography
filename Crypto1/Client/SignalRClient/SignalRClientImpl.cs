@@ -76,9 +76,9 @@ namespace Client.SignalRClient
         {
             await HubConnection.InvokeAsync("AcceptSessionKey", encryptedSessionKey, connectionId);
         }
-        public async Task SendFile(String filePath)
+        public async Task SendFile(String filePath, String modeAsString)
         {
-            await HubConnection.InvokeAsync(nameof(SendFile), filePath);
+            await HubConnection.InvokeAsync(nameof(SendFile), filePath, modeAsString);
         }
 
         public async Task BroadcastFile(String nameFile, String modeAsString)
@@ -99,7 +99,7 @@ namespace Client.SignalRClient
                 modeAsString);
         }
 
-        public async Task AcceptFile(Byte[] file, string filename)
+        public async Task AcceptFile(Byte[] file, String filename, String modeAsString)
         {
             if (_localStore == null || _localStore.GetFiles().All(x => x.Name != filename))
             {
@@ -127,9 +127,9 @@ namespace Client.SignalRClient
         {
             if (!Started)
             {
-                HubConnection.On<Byte[], string>("AcceptFile", async (file, filename) =>
+                HubConnection.On<Byte[], String, String>("AcceptFile", async (file, filename, modeAsString) =>
                 {
-                    await AcceptFile(file, filename);
+                    await AcceptFile(file, filename, modeAsString);
                 });
             }
             

@@ -8,7 +8,7 @@ namespace Server
         Task BroadCastPublicKey(Byte[] key);
         Task UnicastFilenames(ICollection filenames);
 
-        Task AcceptFile(Byte[] file, string filename);
+        Task AcceptFile(Byte[] file, String filename, String modeAsString);
 
         Task ReceivePublicKey(PublicKey publicKey);
 

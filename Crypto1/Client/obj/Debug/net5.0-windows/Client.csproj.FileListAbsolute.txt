@@ -138,3 +138,4 @@ C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Client\obj\Debug\net5.0-
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Client\obj\Debug\net5.0-windows\ref\Client.dll
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Client\bin\Debug\net5.0-windows\CipherStuffs.dll
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Client\bin\Debug\net5.0-windows\CipherStuffs.pdb
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Client\obj\Debug\net5.0-windows\Client.Properties.Resources.resources
