@@ -78,12 +78,12 @@ namespace Client.SignalRClient
         }
         public async Task SendFile(String filePath, String modeAsString)
         {
-            await HubConnection.InvokeAsync(nameof(SendFile), filePath, modeAsString);
+            await HubConnection.InvokeAsync(nameof(SendFile), filePath, modeAsString, HubConnection.ConnectionId);
         }
 
         public async Task BroadcastFile(String nameFile, String modeAsString)
         {
-            var mode = (EncryptionMode)Enum.Parse(typeof(EncryptionMode), modeAsString);
+            var mode = Utils.ParseEncryptionMode(modeAsString);
             var algorithm = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), _sessionKey);
             var iv = mode is EncryptionMode.RD or EncryptionMode.RDH 
                 ? Utils.GenerateIv(algorithm.GetBlockSize() * 2)
@@ -99,13 +99,17 @@ namespace Client.SignalRClient
                 modeAsString);
         }
 
-        public async Task AcceptFile(Byte[] file, String filename, String modeAsString)
+        public async Task AcceptFile(Byte[] file, String filename, String modeAsString, Byte[] iv)
         {
+            var mode = Utils.ParseEncryptionMode(modeAsString);
+            var algorithm = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), _sessionKey);
+            _cipherService = new CipherService(algorithm, iv);
+            
             if (_localStore == null || _localStore.GetFiles().All(x => x.Name != filename))
             {
+                Utils.RefreshStore(ref _localStore);
                 var fullPath = CurrentPath + "\\" + filename;
-                //расшифровать
-                await Utils.WriteTextAsync(fullPath, file);
+                await _cipherService.Decrypt(fullPath, file, mode);
                 Utils.RefreshStore(ref _localStore);
             }
         }
@@ -127,9 +131,9 @@ namespace Client.SignalRClient
         {
             if (!Started)
             {
-                HubConnection.On<Byte[], String, String>("AcceptFile", async (file, filename, modeAsString) =>
+                HubConnection.On<Byte[], String, String, Byte[]>("AcceptFile", async (file, filename, modeAsString, iv) =>
                 {
-                    await AcceptFile(file, filename, modeAsString);
+                    await AcceptFile(file, filename, modeAsString, iv);
                 });
             }
             

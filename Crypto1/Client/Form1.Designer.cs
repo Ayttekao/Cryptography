@@ -40,9 +40,9 @@ namespace Client
             this.ModesComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.closeForm = new System.Windows.Forms.Button();
             this.hideForm = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.topPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -140,9 +140,9 @@ namespace Client
             this.label1.ForeColor = System.Drawing.SystemColors.Window;
             this.label1.Location = new System.Drawing.Point(326, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 20);
+            this.label1.Size = new System.Drawing.Size(48, 20);
             this.label1.TabIndex = 10;
-            this.label1.Text = "Choose mode";
+            this.label1.Text = "Mode";
             // 
             // topPanel
             // 
@@ -154,9 +154,20 @@ namespace Client
             this.topPanel.Name = "topPanel";
             this.topPanel.Size = new System.Drawing.Size(811, 40);
             this.topPanel.TabIndex = 11;
-            this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MakeDragable);
+            this.topPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MakeDraggable);
             this.topPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DragForm);
             this.topPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DisableDrag);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.SystemColors.Window;
+            this.label2.Location = new System.Drawing.Point(12, 2);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(175, 38);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "CryptoDump";
             // 
             // closeForm
             // 
@@ -181,17 +192,6 @@ namespace Client
             this.hideForm.TabIndex = 0;
             this.hideForm.UseVisualStyleBackColor = true;
             this.hideForm.Click += new System.EventHandler(this.HideForm_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.SystemColors.Window;
-            this.label2.Location = new System.Drawing.Point(12, 2);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(175, 38);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "CryptoDump";
             // 
             // Form1
             // 

@@ -11,8 +11,8 @@ namespace Client
     {
         private const String ServerUrl = "https://localhost:5001/chat";
         private SignalRClientImpl _signalRClient;
-        private Boolean dragable = false;
-        private Point startPosition;
+        private Boolean _dragable = false;
+        private Point _startPosition;
 
         public Form1()
         {
@@ -81,7 +81,8 @@ namespace Client
 
         private async void RefreshButton_Click(object sender, EventArgs e)
         {
-
+            await _signalRClient.ScanFilesDir();
+            await RefreshListBox(_signalRClient.GetServerStore());
         }
 
         public Task RefreshListBox(ICollection<String> fileNames)
@@ -107,23 +108,23 @@ namespace Client
             Application.Exit();
         }
 
-        private void MakeDragable(object sender, MouseEventArgs e)
+        private void MakeDraggable(object sender, MouseEventArgs e)
         {
-            dragable = true;
-            startPosition = e.Location;
+            _dragable = true;
+            _startPosition = e.Location;
         }
 
         private void DragForm(object sender, MouseEventArgs e)
         {
-            if (dragable)
+            if (_dragable)
             {
-                Location = new Point(Cursor.Position.X - startPosition.X, Cursor.Position.Y - startPosition.Y);
+                Location = new Point(Cursor.Position.X - _startPosition.X, Cursor.Position.Y - _startPosition.Y);
             }
         }
 
         private void DisableDrag(object sender, MouseEventArgs e)
         {
-            dragable = false;
+            _dragable = false;
         }
     }
 }

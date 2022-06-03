@@ -42,7 +42,7 @@ namespace Server
 
         public async Task BroadcastFile(String fileName, Byte[] file, Byte[] iv, String connectionId, String modeAsString)
         {
-            var mode = (EncryptionMode)Enum.Parse(typeof(EncryptionMode), modeAsString);
+            var mode = Utils.ParseEncryptionMode(modeAsString);
             var sessionKey = _sessionKeys.First(x => x.Key == connectionId).Value;
             var algorithm = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), sessionKey);
             _cipherService = new CipherService(algorithm, iv);
@@ -56,26 +56,19 @@ namespace Server
             }
         }
 
-        public async Task SendFile(string fileName, String modeAsString)
+        public async Task SendFile(String fileName, String modeAsString, String connectionId)
         {
+            var mode = Utils.ParseEncryptionMode(modeAsString);
+            var sessionKey = _sessionKeys.First(x => x.Key == connectionId).Value;
+            var algorithm = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), sessionKey);
+            var iv = mode is EncryptionMode.RD or EncryptionMode.RDH 
+                ? Utils.GenerateIv(algorithm.GetBlockSize() * 2)
+                : Utils.GenerateIv(algorithm.GetBlockSize());
+            _cipherService = new CipherService(algorithm, iv);
+            
             var fullPath = CurrentPath + "\\" + fileName;
-            var file = await ReadFileAsync(fullPath);
-            //зашифровать
-            await Clients.Caller.AcceptFile(file, fileName, modeAsString);
-        }
-
-        private static async Task<Byte[]> ReadFileAsync(String path)
-        {
-            Byte[] result;
-            // filestream
-
-            await using (var sourceStream = File.Open(path, FileMode.Open))
-            {
-                result = new Byte[sourceStream.Length];
-                await sourceStream.ReadAsync(result, 0, (int)sourceStream.Length);
-            }
-
-            return result;
+            var file = await _cipherService.Encrypt(fullPath, mode);
+            await Clients.Caller.AcceptFile(file, fileName, modeAsString, iv);
         }
     }
 }
