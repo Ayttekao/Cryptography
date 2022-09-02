@@ -3,11 +3,12 @@ using System.Numerics;
 using CipherStuffs;
 using CipherStuffs.Handshake;
 using CourseWork.Benaloh.ProbabilisticSimplicityTest;
-using CourseWork.LOKI97.Algorithm.BlockPacker;
-using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
-using CourseWork.LOKI97.Algorithm.EncryptionTransformation;
-using CourseWork.LOKI97.Algorithm.KeyGen;
-using CourseWork.LOKI97.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm;
+using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm.BlockPacker;
+using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm.EncryptionTransformation;
+using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm.KeyGen;
+using CourseWork.SymmetricAlgorithms.TwoFish.Algorithm;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Server
@@ -44,7 +45,7 @@ namespace Server
         {
             var mode = Utils.ParseEncryptionMode(modeAsString);
             var sessionKey = _sessionKeys.First(x => x.Key == connectionId).Value;
-            var algorithm = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), sessionKey);
+            var algorithm = new TwoFishImpl(sessionKey);//new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), sessionKey);
             _cipherService = new CipherService(algorithm, iv);
             
             if (_localStore == null || _localStore.GetFiles().All(x => x.Name != fileName))
@@ -60,7 +61,7 @@ namespace Server
         {
             var mode = Utils.ParseEncryptionMode(modeAsString);
             var sessionKey = _sessionKeys.First(x => x.Key == connectionId).Value;
-            var algorithm = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), sessionKey);
+            var algorithm = new TwoFishImpl(sessionKey);//new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), sessionKey);
             var iv = mode is EncryptionMode.RD or EncryptionMode.RDH 
                 ? Utils.GenerateIv(algorithm.GetBlockSize() * 2)
                 : Utils.GenerateIv(algorithm.GetBlockSize());

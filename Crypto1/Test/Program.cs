@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 using CipherStuffs;
 using CipherStuffs.Handshake;
 using CourseWork.Benaloh.ProbabilisticSimplicityTest;
-using CourseWork.LOKI97.Algorithm.BlockPacker;
-using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
-using CourseWork.LOKI97.Algorithm.EncryptionTransformation;
-using CourseWork.LOKI97.Algorithm.KeyGen;
-using CourseWork.LOKI97.AlgorithmService.Modes;
 
 namespace Test
 {

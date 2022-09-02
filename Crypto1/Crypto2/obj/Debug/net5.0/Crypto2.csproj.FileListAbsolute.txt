@@ -13,4 +13,4 @@ C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\ref\Crypto2.dll
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\Crypto2.pdb
 C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\Crypto2.genruntimeconfig.cache
-C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\bin\Debug\net5.0\ref\Crypto2.dll
+C:\Users\Ayttekao\Documents\GitHub\Cryptography\Crypto1\Crypto2\obj\Debug\net5.0\refint\Crypto2.dll

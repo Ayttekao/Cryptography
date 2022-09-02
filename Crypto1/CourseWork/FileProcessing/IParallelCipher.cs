@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using CourseWork.LOKI97.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
 
 namespace CourseWork.FileProcessing
 {

@@ -27,7 +27,6 @@ namespace CourseWork.FileProcessing
             _fileStream?.Dispose();
         }
 
-        // async 
         public Task<List<Byte[]>> GetNextBlocks(Int32 numBlocks)
         {
             var blocksList = new List<Byte[]>();
@@ -38,22 +37,9 @@ namespace CourseWork.FileProcessing
             if (bufferSize != 0)
             {
                 var buffer = new Byte[bufferSize];
-                var iterations = 0;
                 _fileStream.Read(buffer, offset: 0, count: buffer.Length);
-                
-                for (var index = 0; index < numBlocks; index++)
-                {
-                    if (index * _blockSize < bufferSize)
-                    {
-                        iterations++;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
 
-                for (var index = 0; index < iterations; index++)
+                for (var index = 0; index * _blockSize < bufferSize; index++)
                 {
                     var length = (index + 1) * _blockSize < bufferSize
                         ? _blockSize 

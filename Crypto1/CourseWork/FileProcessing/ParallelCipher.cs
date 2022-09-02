@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
-using CourseWork.LOKI97.AlgorithmService.Modes;
-using CourseWork.LOKI97.AlgorithmService.Padding;
+using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.AlgorithmService.Padding;
+using CourseWork.SymmetricAlgorithms.CipherAlgorithm;
 using CourseWork.Template;
 
 namespace CourseWork.FileProcessing

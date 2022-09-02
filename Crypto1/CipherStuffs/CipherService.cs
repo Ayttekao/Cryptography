@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseWork.FileProcessing;
-using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
-using CourseWork.LOKI97.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.CipherAlgorithm;
 
 namespace CipherStuffs;
 

@@ -1,7 +1,7 @@
 using System;
 using System.Text;
-using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
-using CourseWork.LOKI97.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.CipherAlgorithm;
 
 namespace CourseWork.Template
 {

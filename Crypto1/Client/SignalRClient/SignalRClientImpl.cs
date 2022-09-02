@@ -8,11 +8,12 @@ using CipherStuffs;
 using CipherStuffs.Handshake;
 using CourseWork.Benaloh.Algorithm;
 using CourseWork.Benaloh.ProbabilisticSimplicityTest;
-using CourseWork.LOKI97.Algorithm.BlockPacker;
-using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
-using CourseWork.LOKI97.Algorithm.EncryptionTransformation;
-using CourseWork.LOKI97.Algorithm.KeyGen;
-using CourseWork.LOKI97.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm;
+using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm.BlockPacker;
+using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm.EncryptionTransformation;
+using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm.KeyGen;
+using CourseWork.SymmetricAlgorithms.TwoFish.Algorithm;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace Client.SignalRClient
@@ -84,7 +85,7 @@ namespace Client.SignalRClient
         public async Task BroadcastFile(String nameFile, String modeAsString)
         {
             var mode = Utils.ParseEncryptionMode(modeAsString);
-            var algorithm = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), _sessionKey);
+            var algorithm = new TwoFishImpl(_sessionKey);//new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), _sessionKey);
             var iv = mode is EncryptionMode.RD or EncryptionMode.RDH 
                 ? Utils.GenerateIv(algorithm.GetBlockSize() * 2)
                 : Utils.GenerateIv(algorithm.GetBlockSize());
@@ -102,7 +103,7 @@ namespace Client.SignalRClient
         public async Task AcceptFile(Byte[] file, String filename, String modeAsString, Byte[] iv)
         {
             var mode = Utils.ParseEncryptionMode(modeAsString);
-            var algorithm = new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), _sessionKey);
+            var algorithm = new TwoFishImpl(_sessionKey);//new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), _sessionKey);
             _cipherService = new CipherService(algorithm, iv);
             
             if (_localStore == null || _localStore.GetFiles().All(x => x.Name != filename))

@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
-using CourseWork.LOKI97.Algorithm.CipherAlgorithm;
 using CourseWork.Stuff;
+using CourseWork.SymmetricAlgorithms.CipherAlgorithm;
 
 namespace CourseWork.Template
 {
