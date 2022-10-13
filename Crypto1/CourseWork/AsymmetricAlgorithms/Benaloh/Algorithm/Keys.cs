@@ -5,17 +5,14 @@ namespace CourseWork.AsymmetricAlgorithms.Benaloh.Algorithm
 {
     public struct Keys
     {
-        // public key
         public PublicKey PublicKey { get; set; }
 
-        // private key
         public PrivateKey PrivateKey { get; set; }
     }
 
     [MessagePackObject]
     public struct PublicKey
     {
-        // p * q
         [Key(0)]
         public BigInteger n { get; set; }
         [Key(1)]
