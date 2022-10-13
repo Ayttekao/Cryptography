@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
-using CourseWork.Benaloh.Algorithm;
+using CourseWork.AsymmetricAlgorithms.Benaloh.Algorithm;
 
 namespace CipherStuffs.Handshake;
 

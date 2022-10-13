@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using CourseWork.FileProcessing;
 using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.E2.Algorithm;
+using CourseWork.SymmetricAlgorithms.Magenta.Algorithm;
 using CourseWork.SymmetricAlgorithms.TwoFish.Algorithm;
 
 namespace CourseWork
@@ -18,21 +20,27 @@ namespace CourseWork
 
             Byte[] input = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
 
-            const string filePath = @"C:\Users\Ayttekao\Downloads\4wAAAgCpBuA-1920.jpg";
+            var path = @"D:\MyDownloads\D2bdHXWiwZw.jpg";
+            var path2 = @"D:\MyDownloads\Decrypt.jpg";
             
-            /*var twoFish = new TwoFish(key);
+            var file = File.ReadAllBytes(path);
 
-            var encryptBlock = twoFish.EncryptBlock(input);
-            var decryptBlock = twoFish.DecryptBlock(encryptBlock);*/
+            var magenta = new MagentaImpl(key);
 
-            var aboba = File.ReadAllBytes(filePath);
-            var twoFishImpl = new TwoFishImpl(key);
-            var parallelCipher = new ParallelCipher(twoFishImpl, initializationVector);
-            var encrypt = parallelCipher.Encrypt(filePath, EncryptionMode.ECB).Result;
-            var decrypt = parallelCipher.Decrypt(encrypt, EncryptionMode.ECB).Result;
+            var e2 = new E2Impl(key);
+
+            var twoFish = new TwoFishImpl(key);
             
-            Console.WriteLine(aboba.SequenceEqual(decrypt));
+            var cipher = new ParallelCipher(magenta, initializationVector);
+
+            var encrypt = cipher.Encrypt(path, EncryptionMode.ECB).Result;
+
+            var decrypt = cipher.Decrypt(encrypt, EncryptionMode.ECB).Result;
             
+            Console.WriteLine(file.SequenceEqual(decrypt));
+            
+            File.WriteAllBytes(path2,decrypt);
+
             return Task.CompletedTask;
         }
     }

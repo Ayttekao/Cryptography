@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CipherStuffs", "CipherStuffs\CipherStuffs.csproj", "{FC02058B-D070-460A-9C43-6AE80C7BE1AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{7A56D235-112A-4C06-B131-FE0A55FE0A78}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,10 +55,6 @@ Global
 		{FC02058B-D070-460A-9C43-6AE80C7BE1AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC02058B-D070-460A-9C43-6AE80C7BE1AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC02058B-D070-460A-9C43-6AE80C7BE1AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A56D235-112A-4C06-B131-FE0A55FE0A78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A56D235-112A-4C06-B131-FE0A55FE0A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A56D235-112A-4C06-B131-FE0A55FE0A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A56D235-112A-4C06-B131-FE0A55FE0A78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,7 +67,6 @@ Global
 		{988D9B1E-CBAA-47E6-A433-E7684FD7CDC6} = {50D47108-B513-4E6F-B266-29CCCA5D5C5F}
 		{DA3FE049-77DE-4728-898B-6E2D5953FB07} = {50D47108-B513-4E6F-B266-29CCCA5D5C5F}
 		{FC02058B-D070-460A-9C43-6AE80C7BE1AD} = {50D47108-B513-4E6F-B266-29CCCA5D5C5F}
-		{7A56D235-112A-4C06-B131-FE0A55FE0A78} = {50D47108-B513-4E6F-B266-29CCCA5D5C5F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {128530F5-1ADB-4A24-BF7C-6196E705F708}

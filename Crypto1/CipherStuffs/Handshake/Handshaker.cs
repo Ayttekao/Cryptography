@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using CourseWork.Benaloh.Algorithm;
-using CourseWork.Benaloh.ProbabilisticSimplicityTest;
+using CourseWork.AsymmetricAlgorithms.Benaloh.Algorithm;
+using CourseWork.AsymmetricAlgorithms.Benaloh.ProbabilisticSimplicityTest;
 
 namespace CipherStuffs.Handshake;
 

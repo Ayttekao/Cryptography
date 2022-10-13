@@ -1,39 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\Client\\Client.csproj": {}
+    "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\Client\\Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj": {
+    "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj",
+        "projectUniqueName": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj",
         "projectName": "CipherStuffs",
-        "projectPath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj",
-        "packagesPath": "C:\\Users\\Ayttekao\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\obj\\",
+        "projectPath": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj",
+        "packagesPath": "C:\\Users\\Depis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Ayttekao\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Depis\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj": {
-                "projectPath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj"
+              "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj": {
+                "projectPath": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj"
               }
             }
           }
@@ -53,52 +47,61 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Depis\\.dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\Client\\Client.csproj": {
+    "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\Client\\Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\Client\\Client.csproj",
+        "projectUniqueName": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\Client\\Client.csproj",
         "projectName": "Client",
-        "projectPath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\Client\\Client.csproj",
-        "packagesPath": "C:\\Users\\Ayttekao\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\Client\\obj\\",
+        "projectPath": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\Client\\Client.csproj",
+        "packagesPath": "C:\\Users\\Depis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\Client\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Ayttekao\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Depis\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0-windows"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0-windows7.0": {
             "targetAlias": "net5.0-windows",
             "projectReferences": {
-              "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj": {
-                "projectPath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj"
+              "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj": {
+                "projectPath": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj"
               },
-              "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj": {
-                "projectPath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj"
+              "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj": {
+                "projectPath": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj"
               }
             }
           }
@@ -132,14 +135,27 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
           "downloadDependencies": [
             {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
               "name": "Microsoft.NETCore.App.Host.win-x64",
               "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
             }
           ],
           "frameworkReferences": {
@@ -150,32 +166,26 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Depis\\.dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj": {
+    "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj",
+        "projectUniqueName": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj",
         "projectName": "CourseWork",
-        "projectPath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj",
-        "packagesPath": "C:\\Users\\Ayttekao\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\obj\\",
+        "projectPath": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj",
+        "packagesPath": "C:\\Users\\Depis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Ayttekao\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Depis\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -205,14 +215,27 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
           "downloadDependencies": [
             {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
               "name": "Microsoft.NETCore.App.Host.win-x64",
               "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
             }
           ],
           "frameworkReferences": {
@@ -220,7 +243,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\Depis\\.dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

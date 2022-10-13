@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "BkUXmyndOhDeF9TGplDMroJJGDDXkel+rs/w2Z1oJ2Rh6qhtUH73ql4KvJy5CR1IU7MjfRpa6O2ZKk206o2bAQ==",
+  "dgSpecHash": "BYctTYWAcPofCZTvMEtBCd1M4Rs67mOEwq3MaVnHF/WKnNicOZQgcyPoXepYOAQsG6mNg81hYag5wXzoA84tNw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj",
+  "projectFilePath": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CourseWork\\CourseWork.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Ayttekao\\.nuget\\packages\\messagepack.annotations\\2.1.90\\messagepack.annotations.2.1.90.nupkg.sha512",
-    "C:\\Users\\Ayttekao\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+    "C:\\Users\\Depis\\.nuget\\packages\\messagepack.annotations\\2.1.90\\messagepack.annotations.2.1.90.nupkg.sha512",
+    "C:\\Users\\Depis\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Depis\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Depis\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Depis\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
   ],
   "logs": []
 }

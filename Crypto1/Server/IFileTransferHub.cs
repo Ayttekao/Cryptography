@@ -1,5 +1,5 @@
 using System.Collections;
-using CourseWork.Benaloh.Algorithm;
+using CourseWork.AsymmetricAlgorithms.Benaloh.Algorithm;
 
 namespace Server
 {

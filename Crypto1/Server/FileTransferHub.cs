@@ -2,7 +2,7 @@ using System.Collections.Concurrent;
 using System.Numerics;
 using CipherStuffs;
 using CipherStuffs.Handshake;
-using CourseWork.Benaloh.ProbabilisticSimplicityTest;
+using CourseWork.AsymmetricAlgorithms.Benaloh.ProbabilisticSimplicityTest;
 using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
 using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm;
 using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm.BlockPacker;

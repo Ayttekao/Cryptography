@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "6p24OpsVkZfNwspr+Buwf90W72JmgNUUUvpCRjWSewRSR1GXzBGB/MPAoGFna6toy9mmWJSbywPePd5mt0CMpw==",
+  "dgSpecHash": "9H1Ntha9KZ7cjNvPakzg9h08XBIFVx9NQQfE/lFCvuPFo7SFtw/QIShoS4qPouS0FvC7ZU0EG9TtEtFCWsVgsQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\Crypto2\\Crypto2.csproj",
+  "projectFilePath": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\Crypto2\\Crypto2.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Ayttekao\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+    "C:\\Users\\Depis\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Depis\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Depis\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Depis\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
   ],
   "logs": []
 }

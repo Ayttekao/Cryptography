@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "ZjgFNkIGhTqdqA4mJ80upjcdSGxsRAdF4kavWVRgt2gw8MKE3Z3UE+Pq3EKXC102L4BFZmC8sOAPFcG6/hNEuA==",
+  "dgSpecHash": "134D2sctbNWcDCVwf35XEkx0G98uDYfnla/7ogEYoG1+gSpAr14irwP/QXrf6VpAXkGeYIS5Y34Prx9W6f4QHg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ayttekao\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj",
+  "projectFilePath": "C:\\Users\\Depis\\Documents\\GitHub\\Cryptography\\Crypto1\\CipherStuffs\\CipherStuffs.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Ayttekao\\.nuget\\packages\\messagepack.annotations\\2.1.90\\messagepack.annotations.2.1.90.nupkg.sha512"
+    "C:\\Users\\Depis\\.nuget\\packages\\messagepack.annotations\\2.1.90\\messagepack.annotations.2.1.90.nupkg.sha512",
+    "C:\\Users\\Depis\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Depis\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Depis\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

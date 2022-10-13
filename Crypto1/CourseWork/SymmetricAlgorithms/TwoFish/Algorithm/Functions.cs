@@ -72,10 +72,9 @@ public static class Functions
 
     private static void MdsMult(in byte[] @in, out byte[] @out)
     {
-        int x;
         uint tmp = 0;
 
-        for (x = 0; x < 4; x++)
+        for (var x = 0; x < 4; x++)
         {
             tmp ^= MdsColumnMult(@in[x], x);
         }
@@ -85,17 +84,16 @@ public static class Functions
 
     public static void RsMult(in byte[] @in, out byte[] @out, int len)
     {
-        int x, y;
         @out = new byte[4];
 
-        for (x = 0; x < 4; x++)
+        for (var x = 0; x < 4; x++)
         {
-            for (y = 0; y < 8; y++)
+            for (var y = 0; y < 8; y++)
                 @out[x] ^= (byte)GfMult(@in[y + len * 8], Rs[x, y], RsPoly);
         }
     }
 
-    public static void h_func(in byte[] @in, out byte[] @out, ref byte[] m, int k, int offset)
+    public static void HFun(in byte[] @in, out byte[] @out, ref byte[] m, int k, int offset)
     {
         var y = (byte[])@in.Clone();
 
@@ -126,16 +124,15 @@ public static class Functions
         MdsMult(in y, out @out);
     }
 
-    public static uint g_func(uint x, byte[,] s, byte start)
+    public static uint GFun(uint x, byte[,] s, byte start)
     {
-        byte g, i, y, z;
         uint res = 0;
 
-        for (y = 0; y < 4; y++)
+        for (var y = 0; y < 4; y++)
         {
-            z = start;
-            g = (byte)SBoxesGeneration.Sbox(Qord[y, z++], (x >> (8 * y)) & 255);
-            i = 0;
+            var z = start;
+            var g = (byte)SBoxesGeneration.Sbox(Qord[y, z++], (x >> (8 * y)) & 255);
+            var i = 0;
 
             while (z != 5)
             {
