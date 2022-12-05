@@ -3,10 +3,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseWork.FileProcessing;
-using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
-using CourseWork.SymmetricAlgorithms.E2.Algorithm;
-using CourseWork.SymmetricAlgorithms.Magenta.Algorithm;
-using CourseWork.SymmetricAlgorithms.TwoFish.Algorithm;
+using CourseWork.SymmetricAlgorithms.CipherAlgorithm.E2.Algorithm;
+using CourseWork.SymmetricAlgorithms.CipherAlgorithm.Magenta.Algorithm;
+using CourseWork.SymmetricAlgorithms.CipherAlgorithm.TwoFish.Algorithm;
+using CourseWork.SymmetricAlgorithms.Modes;
 
 namespace CourseWork
 {

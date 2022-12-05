@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseWork.FileProcessing;
-using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
 using CourseWork.SymmetricAlgorithms.CipherAlgorithm;
+using CourseWork.SymmetricAlgorithms.Modes;
 
 namespace CipherStuffs;
 

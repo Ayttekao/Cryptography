@@ -3,7 +3,7 @@ using System.IO;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.Modes;
 
 namespace CipherStuffs;
 

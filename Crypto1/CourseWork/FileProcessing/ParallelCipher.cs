@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
-using CourseWork.SymmetricAlgorithms.AlgorithmService.Padding;
+using CourseWork.SymmetricAlgorithms.BlockCipherMode;
 using CourseWork.SymmetricAlgorithms.CipherAlgorithm;
-using CourseWork.Template;
+using CourseWork.SymmetricAlgorithms.Modes;
+using CourseWork.SymmetricAlgorithms.Padding;
 
 namespace CourseWork.FileProcessing
 {

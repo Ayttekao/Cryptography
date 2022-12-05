@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
+using CourseWork.SymmetricAlgorithms.Modes;
 
 namespace CourseWork.FileProcessing
 {

@@ -8,12 +8,8 @@ using CipherStuffs;
 using CipherStuffs.Handshake;
 using CourseWork.AsymmetricAlgorithms.Benaloh.Algorithm;
 using CourseWork.AsymmetricAlgorithms.Benaloh.ProbabilisticSimplicityTest;
-using CourseWork.SymmetricAlgorithms.AlgorithmService.Modes;
-using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm;
-using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm.BlockPacker;
-using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm.EncryptionTransformation;
-using CourseWork.SymmetricAlgorithms.LOKI97.Algorithm.KeyGen;
-using CourseWork.SymmetricAlgorithms.TwoFish.Algorithm;
+using CourseWork.SymmetricAlgorithms.CipherAlgorithm.TwoFish.Algorithm;
+using CourseWork.SymmetricAlgorithms.Modes;
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace Client.SignalRClient
