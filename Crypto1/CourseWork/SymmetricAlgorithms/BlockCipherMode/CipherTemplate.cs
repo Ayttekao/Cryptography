@@ -6,19 +6,29 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
 {
     public abstract class CipherTemplate
     {
-        public Byte[] Run(List<Byte[]> blocksList, ref Byte[] iv, Int32 currentBlockNumber, Boolean doEncrypt)
+        public Byte[] Encrypt(List<Byte[]> blocksList, ref Byte[] iv, Int32 currentBlockNumber)
         {
             var outputBuffer = new List<Byte[]>();
+
             if (currentBlockNumber == 0)
             {
-                outputBuffer = doEncrypt
-                    ? ModifyOnFirstStageEncrypt(ref blocksList, ref iv)
-                    : ModifyOnFirstStageDecrypt(ref blocksList, ref iv);
+                outputBuffer = ModifyOnFirstStageEncrypt(ref blocksList, ref iv);
             }
 
-            outputBuffer.Add(doEncrypt
-                ? EncryptBlocks(blocksList, ref iv)
-                : DecryptBlocks(blocksList, ref iv));
+            outputBuffer.Add(EncryptBlocks(blocksList, ref iv));
+            return outputBuffer.SelectMany(x => x).ToArray();
+        }
+
+        public Byte[] Decrypt(List<Byte[]> blocksList, ref Byte[] iv, Int32 currentBlockNumber)
+        {
+            var outputBuffer = new List<Byte[]>();
+
+            if (currentBlockNumber == 0)
+            {
+                outputBuffer = ModifyOnFirstStageDecrypt(ref blocksList, ref iv);
+            }
+
+            outputBuffer.Add(DecryptBlocks(blocksList, ref iv));
             return outputBuffer.SelectMany(x => x).ToArray();
         }
 

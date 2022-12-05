@@ -52,7 +52,7 @@ namespace CourseWork.FileProcessing
                     }
                 }
                 
-                outputBuffer[count] = _cipherTemplate.Run(blocks, ref _copyIvForEncrypt, count, true);
+                outputBuffer[count] = _cipherTemplate.Encrypt(blocks, ref _copyIvForEncrypt, count);
             }
 
             return outputBuffer.SelectMany(x => x).ToArray();
@@ -75,7 +75,7 @@ namespace CourseWork.FileProcessing
                     .Take(processorCount)
                     .ToList();
                 
-                outputBuffer[count] = _cipherTemplate.Run(currentBlock, ref _copyIvForDecrypt, count, false);
+                outputBuffer[count] = _cipherTemplate.Decrypt(currentBlock, ref _copyIvForDecrypt, count);
                 
                 if (count == outputBuffer.Count - 1)
                 {
@@ -103,7 +103,7 @@ namespace CourseWork.FileProcessing
                     .Take(processorCount)
                     .ToList();
                 
-                var decryptBlock = _cipherTemplate.Run(currentBlock, ref _copyIvForDecrypt, count, false);
+                var decryptBlock = _cipherTemplate.Decrypt(currentBlock, ref _copyIvForDecrypt, count);
                 
                 if (count == iterations - 1)
                 {
