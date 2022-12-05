@@ -7,7 +7,7 @@ using CourseWork.SymmetricAlgorithms.CipherAlgorithm.TwoFish.Algorithm;
 using CourseWork.SymmetricAlgorithms.Modes;
 using Microsoft.AspNetCore.SignalR;
 
-namespace Server
+namespace Server.TransferHub
 {
     public class FileTransferHub : Hub<IFileTransferHub>
     {
@@ -30,20 +30,21 @@ namespace Server
             Console.WriteLine("Accepted session key {0}", String.Join(", ", sessionKey));
             _sessionKeys.TryAdd(connectionId, sessionKey);
         }
-        
+
         public async Task ScanFilesDir()
         {
             _localStore = Utils.LoadStore(CurrentPath);
             await Clients.Caller.UnicastFilenames(_localStore.GetFiles().Select(x => x.Name).ToList());
         }
 
-        public async Task BroadcastFile(String fileName, Byte[] file, Byte[] iv, String connectionId, String modeAsString)
+        public async Task BroadcastFile(String fileName, Byte[] file, Byte[] iv, String connectionId,
+            String modeAsString)
         {
             var mode = Utils.ParseEncryptionMode(modeAsString);
             var sessionKey = _sessionKeys.First(x => x.Key == connectionId).Value;
-            var algorithm = new TwoFishImpl(sessionKey);//new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), sessionKey);
+            var algorithm = new TwoFishImpl(sessionKey);
             _cipherService = new CipherService(algorithm, iv);
-            
+
             if (_localStore == null || _localStore.GetFiles().All(x => x.Name != fileName))
             {
                 var fullPath = CurrentPath + "\\" + fileName;
@@ -57,12 +58,13 @@ namespace Server
         {
             var mode = Utils.ParseEncryptionMode(modeAsString);
             var sessionKey = _sessionKeys.First(x => x.Key == connectionId).Value;
-            var algorithm = new TwoFishImpl(sessionKey);//new Loki97Impl(new Encryption(), new BlockPacker(), new KeyGen(), sessionKey);
-            var iv = mode is EncryptionMode.RD or EncryptionMode.RDH 
+            var algorithm =
+                new TwoFishImpl(sessionKey);
+            var iv = mode is EncryptionMode.RD or EncryptionMode.RDH
                 ? Utils.GenerateIv(algorithm.GetBlockSize() * 2)
                 : Utils.GenerateIv(algorithm.GetBlockSize());
             _cipherService = new CipherService(algorithm, iv);
-            
+
             var fullPath = CurrentPath + "\\" + fileName;
             var file = await _cipherService.Encrypt(fullPath, mode);
             await Clients.Caller.AcceptFile(file, fileName, modeAsString, iv);

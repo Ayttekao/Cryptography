@@ -1,7 +1,7 @@
 using System.Collections;
 using CourseWork.AsymmetricAlgorithms.Benaloh.Algorithm;
 
-namespace Server
+namespace Server.TransferHub
 {
     public interface IFileTransferHub
     {
