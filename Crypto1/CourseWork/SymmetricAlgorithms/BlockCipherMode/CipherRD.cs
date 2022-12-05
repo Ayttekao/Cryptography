@@ -14,15 +14,14 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
         public CipherRD(ICipherAlgorithm cipherAlgorithm)
         {
             _cipherAlgorithm = cipherAlgorithm;
-
         }
-        
+
         protected override Byte[] EncryptBlocks(List<Byte[]> blocksList, ref Byte[] iv)
         {
             var blockSize = _cipherAlgorithm.GetBlockSize();
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
             var counterList = GetCounterListV2(iv, blocksList.Count, blockSize);
-            
+
             Array.Copy(sourceArray: counterList.Last(),
                 sourceIndex: 0,
                 destinationArray: iv,
@@ -30,10 +29,9 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
                 length: counterList.Last().Length);
 
             Parallel.For(0, blocksList.Count, count =>
-                    
-                outputBuffer[count] = _cipherAlgorithm.BlockEncrypt(Utils.Xor(counterList[count], blocksList[count]), 0) 
+                outputBuffer[count] = _cipherAlgorithm.BlockEncrypt(Utils.Xor(counterList[count], blocksList[count]), 0)
             );
-            
+
             return outputBuffer.SelectMany(x => x).ToArray();
         }
 
@@ -41,7 +39,7 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
         {
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
             var counterList = GetCounterListV2(iv, blocksList.Count, _cipherAlgorithm.GetBlockSize());
-            
+
             Array.Copy(sourceArray: counterList.Last(),
                 sourceIndex: 0,
                 destinationArray: iv,
@@ -49,10 +47,9 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
                 length: counterList.Last().Length);
 
             Parallel.For(0, blocksList.Count, count =>
-                    
-                outputBuffer[count] = Utils.Xor(_cipherAlgorithm.BlockDecrypt(blocksList[count], 0), counterList[count]) 
+                outputBuffer[count] = Utils.Xor(_cipherAlgorithm.BlockDecrypt(blocksList[count], 0), counterList[count])
             );
-            
+
             return outputBuffer.SelectMany(x => x).ToArray();
         }
 
@@ -64,10 +61,10 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
             var firstBlock =
                 _cipherAlgorithm.BlockEncrypt(
                     Utils.Xor(
-                        Utils.GetInitial(iv, _cipherAlgorithm.GetBlockSize()), 
+                        Utils.GetInitial(iv, _cipherAlgorithm.GetBlockSize()),
                         blocksList.First()), 0);
             blocksList.Remove(blocksList.First());
-            
+
             outputBuffer.Add(initial);
             outputBuffer.Add(firstBlock);
 
@@ -82,7 +79,7 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
             blocksList.Remove(blocksList.First());
             var firstBlock = Utils.Xor(initial, _cipherAlgorithm.BlockDecrypt(blocksList.First(), 0));
             blocksList.Remove(blocksList.First());
-            
+
             outputBuffer.Add(firstBlock);
 
             return outputBuffer;
@@ -93,7 +90,7 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
             var delta = Utils.GetDeltaAsBiginteger(iv, blockSize);
             var initializationVector = Utils.GetInitialAsBiginteger(iv, blockSize);
             var counterList = Enumerable.Repeat(default(Byte[]), size).ToList();
-            
+
             for (var count = 0; count < counterList.Count; count++)
             {
                 initializationVector += delta % 2;

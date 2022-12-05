@@ -10,12 +10,12 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
     public sealed class CipherCFB : CipherTemplate
     {
         private ICipherAlgorithm _cipherAlgorithm;
-        
+
         public CipherCFB(ICipherAlgorithm cipherAlgorithm)
         {
             _cipherAlgorithm = cipherAlgorithm;
         }
-        
+
         protected override Byte[] EncryptBlocks(List<Byte[]> blocksList, ref Byte[] iv)
         {
             var blockSize = _cipherAlgorithm.GetBlockSize();
@@ -30,7 +30,7 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
 
                 Array.Copy(iv, 0, outputBuffer, (step++) * blockSize, blockSize);
             }
-            
+
             return outputBuffer;
         }
 
@@ -41,8 +41,8 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
             var inputBuffer = new List<Byte[]>(blocksList);
 
             Parallel.For(0, outputBuffer.Count, index =>
-                    
-                outputBuffer[index] = Utils.Xor(_cipherAlgorithm.BlockEncrypt(inputBuffer[index], 0), inputBuffer[index + 1])
+                outputBuffer[index] = Utils.Xor(_cipherAlgorithm.BlockEncrypt(inputBuffer[index], 0),
+                    inputBuffer[index + 1])
             );
 
             iv = blocksList.Last();

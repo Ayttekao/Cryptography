@@ -10,12 +10,12 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
     public sealed class CipherCTR : CipherTemplate
     {
         private ICipherAlgorithm _cipherAlgorithm;
-        
+
         public CipherCTR(ICipherAlgorithm cipherAlgorithm)
         {
             _cipherAlgorithm = cipherAlgorithm;
         }
-        
+
         protected override Byte[] EncryptBlocks(List<Byte[]> blocksList, ref Byte[] iv)
         {
             var blockSize = _cipherAlgorithm.GetBlockSize();

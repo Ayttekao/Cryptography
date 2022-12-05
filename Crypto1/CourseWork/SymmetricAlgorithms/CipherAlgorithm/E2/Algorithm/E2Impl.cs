@@ -68,7 +68,7 @@ public class E2Impl : ICipherAlgorithm
         var L = Functions.BytesToULong(M.Take(8).ToArray());
         var R = Functions.BytesToULong(M.Skip(8).Take(8).ToArray());
         var currentKey = new ulong[2];
-        
+
         for (var i = 0; i < 11; ++i)
         {
             currentKey[0] = Functions.BytesToULong(roundKeys[i].Take(8).ToArray());
@@ -89,11 +89,12 @@ public class E2Impl : ICipherAlgorithm
     private byte[] IT(byte[] x, byte[] a, byte[] b)
     {
         var tempM = new byte[BlockSize];
-        
+
         for (var i = 0; i < KeyBytes; i++)
         {
             tempM[i] = (byte)(x[i] ^ a[i]);
         }
+
         tempM = Functions.BinarX(tempM, b);
 
         return Functions.BP(tempM);

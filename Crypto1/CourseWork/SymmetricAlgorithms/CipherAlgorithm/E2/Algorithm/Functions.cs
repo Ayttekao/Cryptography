@@ -218,7 +218,7 @@ public class Functions
         }
 
         L[0] = Y[0] ^ P(S(U));
-        
+
         for (var j = 1; j < 4; ++j)
         {
             L[j] = P(S(L[j - 1])) ^ Y[j];

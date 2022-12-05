@@ -10,7 +10,7 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
     public sealed class CipherRDH : CipherRD
     {
         private Byte[] _valueForHash;
-        
+
         public CipherRDH(ICipherAlgorithm cipherAlgorithm, Byte[] valueForHash) : base(cipherAlgorithm)
         {
             _valueForHash = valueForHash;
@@ -28,7 +28,7 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
             var firstBlock =
                 _cipherAlgorithm.BlockEncrypt(
                     Utils.Xor(
-                        Utils.GetInitial(iv, _cipherAlgorithm.GetBlockSize()), 
+                        Utils.GetInitial(iv, _cipherAlgorithm.GetBlockSize()),
                         blocksList.First()), 0);
 
             blocksList.Remove(blocksList.First());
@@ -47,7 +47,8 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
             }
 
             var outputBuffer = new List<Byte[]>();
-            var firstBlock = Utils.Xor(Utils.GetInitial(iv, _cipherAlgorithm.GetBlockSize()), _cipherAlgorithm.BlockDecrypt(blocksList[2], 0));
+            var firstBlock = Utils.Xor(Utils.GetInitial(iv, _cipherAlgorithm.GetBlockSize()),
+                _cipherAlgorithm.BlockDecrypt(blocksList[2], 0));
             blocksList.RemoveRange(0, 3);
             outputBuffer.Add(firstBlock);
 

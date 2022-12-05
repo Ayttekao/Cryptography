@@ -12,7 +12,6 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
         public CipherOFB(ICipherAlgorithm cipherAlgorithm)
         {
             _cipherAlgorithm = cipherAlgorithm;
-
         }
 
         protected override Byte[] EncryptBlocks(List<Byte[]> blocksList, ref Byte[] iv)

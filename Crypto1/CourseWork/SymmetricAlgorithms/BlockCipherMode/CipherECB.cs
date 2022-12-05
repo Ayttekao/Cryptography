@@ -9,18 +9,17 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
     public sealed class CipherECB : CipherTemplate
     {
         private ICipherAlgorithm _cipherAlgorithm;
-        
+
         public CipherECB(ICipherAlgorithm cipherAlgorithm)
         {
             _cipherAlgorithm = cipherAlgorithm;
         }
-        
+
         protected override Byte[] EncryptBlocks(List<Byte[]> blocksList, ref Byte[] iv)
         {
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
 
             Parallel.For(0, outputBuffer.Count, counter =>
-                
                 outputBuffer[counter] = _cipherAlgorithm.BlockEncrypt(blocksList[counter], 0)
             );
 
@@ -32,7 +31,6 @@ namespace CourseWork.SymmetricAlgorithms.BlockCipherMode
             var outputBuffer = Enumerable.Repeat(default(Byte[]), blocksList.Count).ToList();
 
             Parallel.For(0, outputBuffer.Count, counter =>
-                
                 outputBuffer[counter] = _cipherAlgorithm.BlockDecrypt(blocksList[counter], 0)
             );
 

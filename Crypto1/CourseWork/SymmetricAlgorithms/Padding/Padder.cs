@@ -13,25 +13,25 @@ namespace CourseWork.SymmetricAlgorithms.Padding
             _paddingType = paddingType;
             _blockSize = blockSize;
         }
-        
-        private Byte[] PadBuffer(Byte[] buf, Int32 padFrom, Int32 padTo) 
+
+        private Byte[] PadBuffer(Byte[] buf, Int32 padFrom, Int32 padTo)
         {
             if (padTo < buf.Length || padTo - padFrom > Byte.MaxValue || _paddingType == PaddingType.NONE)
             {
                 return buf;
             }
-            
+
             var b = new Byte[padTo];
             Buffer.BlockCopy(buf, 0, b, 0, padFrom);
-            
-            for (var count = padFrom; count < padTo; count++) 
+
+            for (var count = padFrom; count < padTo; count++)
             {
                 if (count < padTo - 1)
                 {
                     switch (_paddingType)
                     {
                         case PaddingType.PKCS7:
-                            b[count] = (Byte) (padTo - padFrom);
+                            b[count] = (Byte)(padTo - padFrom);
                             break;
                         case PaddingType.ISO_10126:
                             b[count] = (Byte)RandomNumberGenerator.GetInt32(Byte.MaxValue);
@@ -50,6 +50,7 @@ namespace CourseWork.SymmetricAlgorithms.Padding
                     b[count] = (Byte)(padTo - padFrom);
                 }
             }
+
             return b;
         }
 
@@ -59,11 +60,12 @@ namespace CourseWork.SymmetricAlgorithms.Padding
             return PadBuffer(buffer, 0, _blockSize);
         }
 
-        public Byte[] PadBuffer(Byte[] buf) {
+        public Byte[] PadBuffer(Byte[] buf)
+        {
             var extraBlock = (buf.Length % _blockSize == 0) && _paddingType == PaddingType.NONE ? 0 : 1;
             return PadBuffer(buf, buf.Length, ((buf.Length / _blockSize) + extraBlock) * _blockSize);
         }
-        
+
         public Byte[] RemovePadding(Byte[] blocks)
         {
             var extraBlocks = blocks[^1];
