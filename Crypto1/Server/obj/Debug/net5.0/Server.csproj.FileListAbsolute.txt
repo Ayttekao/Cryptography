@@ -78,3 +78,8 @@ C:\Users\Depis\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\ref
 C:\Users\Depis\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\Server.pdb
 C:\Users\Depis\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\Server.genruntimeconfig.cache
 C:\Users\Depis\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\ref\Server.dll
+C:\Users\Depis\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\staticwebassets\Server.StaticWebAssets.Pack.cache
+C:\Users\Depis\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\staticwebassets\msbuild.Server.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Depis\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\staticwebassets\msbuild.build.Server.props
+C:\Users\Depis\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\staticwebassets\msbuild.buildMultiTargeting.Server.props
+C:\Users\Depis\Documents\GitHub\Cryptography\Crypto1\Server\obj\Debug\net5.0\staticwebassets\msbuild.buildTransitive.Server.props
