@@ -20,7 +20,7 @@ namespace CourseWork
 
             Byte[] input = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
 
-            var path = @"D:\MyDownloads\D2bdHXWiwZw.jpg";
+            var path = @"D:\MyDownloads\images.png";
             var path2 = @"D:\MyDownloads\Decrypt.jpg";
             
             var file = File.ReadAllBytes(path);
