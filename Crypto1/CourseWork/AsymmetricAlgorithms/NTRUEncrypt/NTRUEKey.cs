@@ -3,14 +3,14 @@ using MessagePack;
 namespace CourseWork.AsymmetricAlgorithms.NTRUEncrypt;
 
 [MessagePackObject]
-public struct NTRUEKeys
+public struct NTRUEKey
 {
     [Key(0)]
-    public int[] _coef;
+    public int[] Coefficient;
     [Key(1)]
-    public int _degree;
+    public int Degree;
     [Key(2)]
-    public int _q;
+    public int Q;
     [Key(3)]
-    public int _N;
+    public int N;
 }

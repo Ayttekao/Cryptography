@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography;
@@ -9,19 +8,6 @@ namespace CourseWork.Stuff
 {
     internal class Utils
     {
-        public static Byte[] Trim(Byte[] source, Int32 sourceStartIndex, Int32 destinationLength,
-            Int32 destinationStartIndex)
-        {
-            var destination = new Byte[destinationLength];
-            Array.Copy(sourceArray: source,
-                sourceIndex: sourceStartIndex,
-                destinationArray: destination,
-                destinationIndex: destinationStartIndex,
-                length: destinationLength);
-
-            return destination;
-        }
-
         public static Byte[] Xor(Byte[] a, Byte[] b)
         {
             Byte[] res = new Byte[a.Length];
@@ -47,21 +33,6 @@ namespace CourseWork.Stuff
             }
 
             return tmp;
-        }
-
-        public static List<Byte[]> GetCounterList(Byte[] iv, Int32 size, Int32 blockSize)
-        {
-            var delta = GetDeltaAsBiginteger(iv, blockSize);
-            var initializationVector = GetInitialAsBiginteger(iv, blockSize);
-
-            var counterList = new List<Byte[]>();
-            for (var count = 0; count < size; count++)
-            {
-                counterList.Add(initializationVector.ToByteArray());
-                initializationVector += delta;
-            }
-
-            return counterList;
         }
 
         public static Boolean IsWrongInit(ICipherAlgorithm cipherAlgorithm, Byte[] iv, Byte[] valueForHash,
